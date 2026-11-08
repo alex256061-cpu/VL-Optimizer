@@ -1,0 +1,45 @@
+name: Problema no teste
+description: Relate uma falha ao testar o VL Optimizer.
+title: "[Teste] "
+body:
+  - type: markdown
+    attributes:
+      value: "Revise capturas e arquivos antes de anexar. O relato é público: remova dados pessoais, caminhos privados e credenciais."
+  - type: input
+    id: version
+    attributes:
+      label: Versão do VL Optimizer
+      placeholder: "0.3.0"
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Versão e build do Windows
+      placeholder: "Windows 11 x64, build ..."
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Como reproduzir
+      description: Informe a tela, os cliques e a mensagem apresentada.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: O que você esperava
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: O que aconteceu
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Capturas ou informações adicionais
+      description: Opcional. Remova dados pessoais antes de anexar.

@@ -1,0 +1,1029 @@
+{
+  "executedAt": "2026-11-08T13:53:58.6934322-03:00",
+  "passed": 204,
+  "failed": 0,
+  "total": 204,
+  "isolatedFakesOnly": true,
+  "results": [
+    {
+      "name": "A an\u00E1lise apenas l\u00EA e preserva startup e energia",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "A pr\u00E9via n\u00E3o modifica configura\u00E7\u00F5es",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Desativa\u00E7\u00E3o salva estado e verifica aus\u00EAncia",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Restaura\u00E7\u00E3o reconstitui startup com tipo e valor",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Reabrir backend preserva hist\u00F3rico e permite restaura\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Startup alterado depois da pr\u00E9via n\u00E3o \u00E9 removido",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Restaura\u00E7\u00E3o n\u00E3o sobrescreve valor recriado por outro app",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Falha ao remover startup n\u00E3o \u00E9 sucesso",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Escrita startup sem efeito falha na verifica\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Falha depois da remo\u00E7\u00E3o mant\u00E9m registro recuper\u00E1vel",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Altera\u00E7\u00E3o de energia usa plano existente e verifica",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Energia reverte ao plano exato anterior",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Plano ativo j\u00E1 correto \u00E9 ignorado sem escrita",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Plano removido entre pr\u00E9via e aplica\u00E7\u00E3o n\u00E3o \u00E9 escolhido",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Pol\u00EDtica de energia recusada retorna falha e preserva plano",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Energia sem efeito n\u00E3o \u00E9 marcada conclu\u00EDda",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Energia modificada por outro programa n\u00E3o \u00E9 sobrescrita no undo",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sistema fora do alvo bloqueia muta\u00E7\u00F5es",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Origem HKLM n\u00E3o \u00E9 aceita para modifica\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Plano com GUID inv\u00E1lido \u00E9 recusado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Pr\u00E9via fabricada n\u00E3o autoriza a\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Pr\u00E9via aprovada de outra inst\u00E2ncia n\u00E3o autoriza execu\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Cancelamento anterior \u00E0 aplica\u00E7\u00E3o preserva estado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Nome de startup com espa\u00E7os e acentos \u00E9 preservado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Item desconhecido sem sele\u00E7\u00E3o n\u00E3o sofre altera\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Cat\u00E1logo n\u00E3o promete ganho de FPS nem limpeza de RAM",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Journal interrompido fica n\u00E3o verificado na pr\u00F3xima abertura",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Journal inv\u00E1lido impede escrita no sistema",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Pr\u00E9via n\u00E3o pode ser reaplicada para executar novamente",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Inicializa\u00E7\u00E3o essencial conhecida permanece protegida",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Aprova\u00E7\u00E3o consumida n\u00E3o pode reaplicar ap\u00F3s restaura\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Hist\u00F3rico separado n\u00E3o interfere entre m\u00E1quinas de teste",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Dois executores preservam registros no mesmo journal",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Cat\u00E1logo cobre os 33 tweaks sem identificadores duplicados",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: pr\u00E9via consulta sem muta\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: valor e chave ausentes s\u00E3o restaurados ap\u00F3s cria\u00E7\u00E3o de chave compartilhada",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: revers\u00E3o de valor ausente preserva chave preexistente",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: restaura\u00E7\u00E3o n\u00E3o remove chave com valores de outro programa",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: registro preserva tipos bin\u00E1rio multi-string QWord e expand-string",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: altera\u00E7\u00E3o posterior \u00E0 pr\u00E9via bloqueia todas as escritas",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: snapshot de outra op\u00E7\u00E3o n\u00E3o escreve fora do cat\u00E1logo",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: c\u00F3pia ou replay de pr\u00E9via n\u00E3o autoriza altera\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: undo preserva mudan\u00E7a posterior de outro aplicativo",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: falha parcial guarda snapshot de todos os alvos",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: falha depois da escrita continua recuper\u00E1vel",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: escrita ignorada falha na releitura",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: inspe\u00E7\u00E3o distingue before desired diverg\u00EAncia e consulta negada",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: snapshot pending \u00E9 suficiente para recupera\u00E7\u00E3o depois de rein\u00EDcio",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: servi\u00E7o preserva manual parado e inicializa\u00E7\u00E3o autom\u00E1tica atrasada",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: sem admin permite HKCU e bloqueia HKLM antes de escrever",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: perda de privil\u00E9gio ap\u00F3s pr\u00E9via bloqueia escrita",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: OS build e X3D bloqueiam combina\u00E7\u00F5es incompat\u00EDveis",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: GPU NIC e plano indispon\u00EDveis n\u00E3o criam alvos sint\u00E9ticos",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: depend\u00EAncias ausentes ficam indispon\u00EDveis com motivo",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: desligar usa defaults declarados e undo restaura o valor real anterior",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: falha de atualiza\u00E7\u00E3o da sess\u00E3o retorna parcial com snapshot",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: valores j\u00E1 corretos n\u00E3o geram pr\u00E9via aplic\u00E1vel",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Steam VDF: edi\u00E7\u00E3o preserva coment\u00E1rios Unicode e campos alheios byte a byte",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Steam VDF: cria\u00E7\u00E3o e remo\u00E7\u00E3o do bloco system preservam outras op\u00E7\u00F5es",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Steam VDF: valor ausente em system preexistente n\u00E3o remove bloco e op\u00E7\u00F5es",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Steam VDF: preserva BOM UTF16 e rejeita chave duplicada ou texto malformado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "NVIDIA DRS: codec corresponde ao layout V1 p\u00FAblico pack4",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "NVIDIA DRS: defaults s\u00E3o aus\u00EAncia de override e DWORD preserva bits",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "NVIDIA DRS: codec rejeita outros IDs tipos e vers\u00F5es",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "NVIDIA DRS: fluxo fake aplica dois IDs e restaura defaults sem criar overrides",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: cat\u00E1logo inclui pagefile servi\u00E7os OBS DNS e resolu\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Pagefile: autom\u00E1tico preserva estado manual e tipo MultiString para undo",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "DNS: provedores usam o mesmo recurso por GUID e recuperam modo anterior",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "V\u00EDdeo: codec preserva frequ\u00EAncia posi\u00E7\u00E3o negativa rota\u00E7\u00E3o e profundidade",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "V\u00EDdeo: 720p permite usu\u00E1rio comum e restaura modo original exato",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Servi\u00E7o: altera\u00E7\u00E3o intermedi\u00E1ria observada permite restaura\u00E7\u00E3o parcial sem sobrescrever terceiros",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: cancelamento entre alvos preserva antes e depois para recupera\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Configura\u00E7\u00E3o: snapshot adulterado com estado composto ou ObservedAfter inconsistente \u00E9 bloqueado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FPS usa inverso da m\u00E9dia de frametimes e lows lentos",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FPS 100 frames n\u00E3o calcula percentil como low",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FPS descarta NaN infinito zero e dura\u00E7\u00F5es fora do limite",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit CSV respeita aspas separa PID e sinaliza m\u00FAltiplas swapchains",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit CSV CPUFrameTime \u00E9 aceito com sua proced\u00EAncia",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit CSV sem coluna de frame \u00E9 recusado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit CSV descarta linha gigante sem acumul\u00E1-la em mem\u00F3ria",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit compara\u00E7\u00E3o A/B preserva percentuais e n\u00E3o inventa zero",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FPS incremental aguarda cabe\u00E7alho e linha completos",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FPS incremental aceita CPUFrameTime e filtra PID escolhido",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FPS incremental s\u00F3 finaliza \u00FAltima linha ap\u00F3s writer terminar",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FPS incremental limita linha e rejeita cabe\u00E7alho inv\u00E1lido",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FPS incremental cancelado n\u00E3o incorpora fragmentos",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FPS tail l\u00EA writer compartilhado e mant\u00E9m UTF8 parcial",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FPS tail cancela sem varrer outros CSV e sem publicar ap\u00F3s cancel",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FPS tail rejeita CSV inv\u00E1lido de fixture sem executar coletor",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit limpeza pr\u00E9via apenas l\u00EA e filtra idade por arquivo",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit limpeza exclui apenas arquivos listados e mant\u00E9m raiz",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit limpeza preserva arquivo alterado depois da pr\u00E9via",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit limpeza valida identidade mesmo com tamanho e datas restaurados",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit limpeza recusa pr\u00E9via fabricada e reutilizada",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit limpeza cancelada preserva arquivos selecionados",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit limpeza preserva arquivo somente leitura",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit limpeza usa filtro cloud offline tamb\u00E9m ao aplicar",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit limpeza preserva arquivo aberto para escrita sem falso sucesso",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit limpeza recusa categoria desconhecida e raiz do volume",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit scanner agrega descendentes e maiores arquivos sem exclus\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FiveM pr\u00E9via XML n\u00E3o escreve e interpreta ordem de atributos",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FiveM aplica verifica e restaura bytes ap\u00F3s reabrir servi\u00E7o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FiveM bloqueia mudan\u00E7a concorrente ap\u00F3s pr\u00E9via",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FiveM undo n\u00E3o sobrescreve edi\u00E7\u00E3o posterior",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FiveM backups s\u00E3o vinculados a cada caminho",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FiveM perfis sobrepostos restauram em ordem sem perder original",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FiveM bloqueia jogo aberto e XML com DTD ou tags amb\u00EDguas",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit FiveM corrup\u00E7\u00E3o de backup bloqueia restore",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit Steam e Epic descobrem bibliotecas usando manifests de fixture",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit Epic recusa LaunchExecutable que escapa da instala\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit gargalo usa m\u00E9dia de CPU e pico de RAM sem inventar GPU",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit gargalo ignora amostras sem foco",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Toolkit scheduler de RAM permanece desligado ao criar",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o inicia desligada e leitura n\u00E3o altera prioridades/energia",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o persiste originais antes da primeira altera\u00E7\u00E3o e verifica aplica\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o restaura prioridade ORIGINAL e plano exato ap\u00F3s reabrir servi\u00E7o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o preserva prioridade e energia alteradas por outro programa",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o n\u00E3o altera PID reutilizado com outro starttime",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o preserva decis\u00E3o externa tomada antes da primeira aplica\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o sem jogo conhecido e sistema incompat\u00EDvel n\u00E3o modifica Windows",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o interrompida depois de mudan\u00E7a mant\u00E9m backup e restaura",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o duplicada \u00E9 bloqueada e encerramento repetido n\u00E3o escreve",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o n\u00E3o sobrescreve plano original que foi removido",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o cancelada antes de Begin n\u00E3o altera sistema",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o com journal corrompido bloqueia primeira altera\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o exige caminhos distintos para jogo e app reduzido",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o watcher expl\u00EDcito restaura em cancelamento sem processos reais",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o watcher restaura se cancelada durante Begin com journal preparado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Aplicativos pr\u00E9via de desinstala\u00E7\u00E3o apenas l\u00EA e mant\u00E9m argumentos estruturados",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Aplicativos uninstall persiste antes de abrir e confirma sa\u00EDda mais aus\u00EAncia de entrada",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Aplicativos launch zero com entrada ainda presente fica n\u00E3o verificado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Aplicativos c\u00F3digo de falha nunca vira desinstala\u00E7\u00E3o comprovada",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Aplicativos desinstalador ou metadados alterados invalidam pr\u00E9via",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Aplicativos pr\u00E9via fabricada consumida ou de outra inst\u00E2ncia \u00E9 recusada",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Aplicativos scripts interpretadores e caminhos relativos s\u00E3o bloqueados",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Aplicativos MSI usa produto exato com /x e n\u00E3o reinicia automaticamente",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Aplicativos sobras exigem prova e excluem s\u00F3 arquivos espec\u00EDficos aprovados",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Aplicativos reinstalado ap\u00F3s pr\u00E9via de sobras \u00E9 preservado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Aplicativos cancelamento da espera n\u00E3o afirma conclus\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Processos encerramento exige identidade e apenas processo selecionado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Processos PID reutilizado e processo cr\u00EDtico s\u00E3o protegidos",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Aplicativos plataforma incompat\u00EDvel bloqueia uninstall e kill",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o pr\u00E9via apenas consulta ambiente",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o bloqueia privil\u00E9gio insuficiente",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o bloqueia plataforma incompat\u00EDvel",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o recusa enum fora do cat\u00E1logo",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o rejeita c\u00F3pia e pr\u00E9via de outra inst\u00E2ncia",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o consome aprova\u00E7\u00E3o apenas uma vez",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o expira aprova\u00E7\u00E3o ap\u00F3s dez minutos",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o revalida privil\u00E9gios no in\u00EDcio",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o reset exige rein\u00EDcio e respeita ordem",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o n\u00E3o chama SFC se DISM falhou",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o preserva falha parcial por etapa",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o n\u00E3o conclui sa\u00FAde somente por exitcode SFC",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o timeout n\u00E3o anuncia sucesso",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o respeita cancelamento antes de iniciar",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o cancela entre etapas com resultado parcial",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Manuten\u00E7\u00E3o exce\u00E7\u00E3o da ferramenta vira resultado sem etapa seguinte",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "UWP: cat\u00E1logo fechado cont\u00E9m dez pacotes e busca oficial sem promessa de restaura\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "UWP: invent\u00E1rio e pr\u00E9via s\u00F3 consultam pacotes do cat\u00E1logo",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "UWP: remove identidade exata e confere aus\u00EAncia sem oferecer undo",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "UWP: pacote protegido framework ou recurso fica bloqueado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "UWP: X3D com dois CCDs preserva Game Bar e TCUI",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "UWP: mudan\u00E7a de identidade propriedades ou usu\u00E1rio bloqueia antes de remover",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "UWP: identidade com inje\u00E7\u00E3o publisher desconhecido ou fam\u00EDlia divergente fica bloqueada",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "UWP: c\u00F3pia replay e pr\u00E9via expirada n\u00E3o autorizam remo\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "UWP: c\u00F3digo zero sem aus\u00EAncia verificada \u00E9 falha",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "UWP: erro de implanta\u00E7\u00E3o ou timeout nunca \u00E9 sucesso",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "UWP: falha na releitura posterior preserva resultado n\u00E3o verificado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "UWP: cancelamento antes de executar n\u00E3o remove pacotes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "UWP: deadline continua valendo ap\u00F3s processo encerrar com pipe aberto",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "UWP: cancelamento de invent\u00E1rio observa a espera dos pipes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Hardware: falha de uma fonte preserva demais grupos e proveni\u00EAncia",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Hardware: dados ausentes n\u00E3o viram prova de perfil de mem\u00F3ria desligado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Hardware: compara\u00E7\u00E3o de velocidades informa limite da infer\u00EAncia",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Hardware: cancelamento anterior evita consultas",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Mouse: estima eventos da janela sem converter pouca amostra em taxa",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "GPU jogo: mescla prefer\u00EAncia preservando tokens alheios",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "GPU jogo: pr\u00E9via s\u00F3 l\u00EA e journal precede primeira escrita",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "GPU jogo: undo restaura texto exato e preserva edi\u00E7\u00F5es externas",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "GPU jogo: altera\u00E7\u00E3o do PE ou do Registro invalida pr\u00E9via",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "GPU jogo: c\u00F3pia e replay n\u00E3o autorizam escrita",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "GPU jogo: falha ap\u00F3s escrita mant\u00E9m recupera\u00E7\u00E3o e falso sucesso \u00E9 recusado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "GPU jogo: journal inv\u00E1lido impede primeira escrita",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Journal integrado: snapshot dur\u00E1vel antes do primeiro ajuste",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Revis\u00E3o em lote: ajustes sobrepostos s\u00E3o bloqueados antes de escrever",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Revis\u00E3o em lote: plano legado e cat\u00E1logo compartilham recurso",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Journal integrado: restaurar recupera valor real e n\u00E3o padr\u00E3o desligado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Journal integrado: falha parcial continua restaur\u00E1vel ap\u00F3s reabrir",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Journal integrado: pr\u00E9via configur\u00E1vel \u00E9 de uso \u00FAnico",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Journal integrado: restaura\u00E7\u00E3o protege a\u00E7\u00E3o composta posterior",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Journal integrado: cruzamento cat\u00E1logo e plano legado respeita ordem",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Journal integrado: falha de persist\u00EAncia aborta ajustes",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Journal unificado registra atividade sem oferecer desfazer exclus\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Scaling: roundtrip de perfis, exporta\u00E7\u00E3o e aus\u00EAncia de motor",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Scaling: limites e NaN s\u00E3o recusados no servi\u00E7o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Scaling: dois servi\u00E7os preservam altera\u00E7\u00F5es de perfis distintos",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Scaling: arquivo corrompido \u00E9 preservado sem regravar padr\u00F5es",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "OptiScaler: instala\u00E7\u00E3o local e restaura\u00E7\u00E3o preservam DLL anterior",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "OptiScaler: pacote alterado ap\u00F3s pr\u00E9via n\u00E3o toca jogo",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "OptiScaler: restaura\u00E7\u00E3o n\u00E3o remove arquivo editado pelo usu\u00E1rio",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "OptiScaler: pr\u00E9via n\u00E3o pode ser utilizada novamente",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "OptiScaler: refer\u00EAncia de backup corrompida bloqueia toda restaura\u00E7\u00E3o antes de excluir",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "OptiScaler: anticheat identificado e pacote inv\u00E1lido ficam bloqueados",
+      "passed": true,
+      "error": null
+    }
+  ]
+}

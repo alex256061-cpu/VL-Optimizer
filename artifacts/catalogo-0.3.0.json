@@ -1,0 +1,2475 @@
+{
+  "Version": "0.3.0",
+  "Definitions": [
+    {
+      "Id": "game-mode",
+      "Title": "Modo de Jogo do Windows",
+      "Category": "jogo",
+      "Description": "Configura os dois sinalizadores de Modo Jogo do Windows. O efeito depende do jogo e da vers\u00E3o do sistema.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3264",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\SOFTWARE\\Microsoft\\GameBar",
+            "Name": "AllowAutoGameMode",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\GAMEBAR:ALLOWAUTOGAMEMODE"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\SOFTWARE\\Microsoft\\GameBar",
+            "Name": "AutoGameModeEnabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\GAMEBAR:AUTOGAMEMODEENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "delivery",
+      "Title": "Sem upload de atualiza\u00E7\u00F5es para outros PCs",
+      "Category": "jogo",
+      "Description": "Define a pol\u00EDtica de Delivery Optimization para evitar compartilhamento de atualiza\u00E7\u00F5es entre PCs.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3273",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+            "Name": "DODownloadMode",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\POLICIES\\MICROSOFT\\WINDOWS\\DELIVERYOPTIMIZATION:DODOWNLOADMODE"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "edge-bg",
+      "Title": "Edge fechado de verdade",
+      "Category": "jogo",
+      "Description": "Desativa por pol\u00EDtica o Startup Boost e a perman\u00EAncia do Edge em segundo plano.",
+      "Warning": "O Edge pode exibir a indica\u00E7\u00E3o Gerenciado pela sua organiza\u00E7\u00E3o enquanto esta pol\u00EDtica estiver definida.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3281",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+            "Name": "StartupBoostEnabled",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\POLICIES\\MICROSOFT\\EDGE:STARTUPBOOSTENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge",
+            "Name": "BackgroundModeEnabled",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\POLICIES\\MICROSOFT\\EDGE:BACKGROUNDMODEENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "bg-apps",
+      "Title": "Sem apps da Loja rodando escondidos",
+      "Category": "jogo",
+      "Description": "Configura as permiss\u00F5es globais de execu\u00E7\u00E3o em segundo plano para aplicativos compat\u00EDveis da Store.",
+      "Warning": "Aplicativos podem deixar de receber notifica\u00E7\u00F5es em segundo plano.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3290",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications",
+            "Name": "GlobalUserDisabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\BACKGROUNDACCESSAPPLICATIONS:GLOBALUSERDISABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+            "Name": "BackgroundAppGlobalToggle",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\SEARCH:BACKGROUNDAPPGLOBALTOGGLE"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "hibernate",
+      "Title": "Desligar de verdade (sem hiberna\u00E7\u00E3o)",
+      "Category": "jogo",
+      "Description": "Desativa hiberna\u00E7\u00E3o pelo powercfg e preserva tipo e tamanho configurados para restaura\u00E7\u00E3o.",
+      "Warning": "O arquivo de hiberna\u00E7\u00E3o pode ser removido; seu conte\u00FAdo n\u00E3o \u00E9 recuper\u00E1vel. O tipo e o tamanho configurados s\u00E3o preservados.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3298",
+      "MinimumBuild": 19041,
+      "Capability": "hibernate",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "mpo",
+      "Title": "Corre\u00E7\u00E3o de tela piscando (MPO)",
+      "Category": "jogo",
+      "Description": "Desativa overlays por configura\u00E7\u00E3o gr\u00E1fica, como diagn\u00F3stico de flicker. N\u00E3o \u00E9 uma recomenda\u00E7\u00E3o universal.",
+      "Warning": "Pode afetar reprodu\u00E7\u00E3o de v\u00EDdeo, consumo de energia e composi\u00E7\u00E3o gr\u00E1fica. Use somente para diagn\u00F3stico.",
+      "Restart": "reboot",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3309",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm",
+            "Name": "OverlayTestMode",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\MICROSOFT\\WINDOWS\\DWM:OVERLAYTESTMODE"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "5",
+            "KeyExists": true,
+            "Display": "5"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+            "Name": "DisableOverlays",
+            "ResourceId": "Registry:HKLM\\SYSTEM\\CURRENTCONTROLSET\\CONTROL\\GRAPHICSDRIVERS:DISABLEOVERLAYS"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "gpu-msi",
+      "Title": "Placa de v\u00EDdeo com interrup\u00E7\u00E3o MSI e prioridade alta",
+      "Category": "jogo",
+      "Description": "Configura MSI e prioridade de interrup\u00E7\u00E3o apenas em dispositivos de v\u00EDdeo PCI NVIDIA/AMD detectados.",
+      "Warning": "Mudan\u00E7as de interrup\u00E7\u00E3o podem causar instabilidade de driver; salve o trabalho e mantenha uma forma de restaurar a configura\u00E7\u00E3o.",
+      "Restart": "reboot",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3318",
+      "MinimumBuild": 19041,
+      "Capability": "gpu-msi",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "dlss-rec",
+      "Title": "DLSS no modelo recomendado pela NVIDIA",
+      "Category": "jogo",
+      "Description": "Ativa a substitui\u00E7\u00E3o DLSS-SR e seleciona o preset mais recente anunciado pelo driver NVIDIA por dois ajustes DRS oficiais. N\u00E3o altera arquivos do jogo.",
+      "Warning": "O suporte depende de GPU, driver, jogo e perfil NVIDIA.",
+      "Restart": "",
+      "SourceUrl": "https://github.com/NVIDIA/nvapi/blob/main/NvApiDriverSettings.h",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3328",
+      "MinimumBuild": 19041,
+      "Capability": "dlss-rec",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "steam-overlay",
+      "Title": "Sobreposi\u00E7\u00E3o do Steam (Shift\u002BTab) desligada",
+      "Category": "jogo",
+      "Description": "Configura\u00E7\u00E3o EnableGameOverlay no localconfig.vdf de cada conta Steam.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3337",
+      "MinimumBuild": 19041,
+      "Capability": "steam-overlay",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "lso",
+      "Title": "LSO da placa de rede desligado",
+      "Category": "rede",
+      "Description": "Desativa as propriedades LSO IPv4/IPv6 anunciadas pelo driver de rede. Pode elevar utiliza\u00E7\u00E3o de CPU.",
+      "Warning": "",
+      "Restart": "rede",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3348",
+      "MinimumBuild": 19041,
+      "Capability": "lso",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "eee",
+      "Title": "Economia de energia da placa de rede desligada (EEE)",
+      "Category": "rede",
+      "Description": "Desativa as propriedades EEE e Green Ethernet anunciadas pelo driver. Use para investigar instabilidade de Ethernet.",
+      "Warning": "",
+      "Restart": "rede",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3360",
+      "MinimumBuild": 19041,
+      "Capability": "eee",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "nic-intmod",
+      "Title": "Placa de rede sem modera\u00E7\u00E3o de interrup\u00E7\u00E3o",
+      "Category": "rede",
+      "Description": "Desativa a propriedade de modera\u00E7\u00E3o de interrup\u00E7\u00F5es da placa de rede; pode elevar uso de CPU.",
+      "Warning": "Pode aumentar a carga de CPU durante tr\u00E1fego intenso.",
+      "Restart": "rede",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3372",
+      "MinimumBuild": 19041,
+      "Capability": "nic-intmod",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "mouse-accel",
+      "Title": "Mira sem acelera\u00E7\u00E3o do mouse",
+      "Category": "entrada",
+      "Description": "Configura a acelera\u00E7\u00E3o do mouse e solicita atualiza\u00E7\u00E3o \u00E0 sess\u00E3o por SystemParametersInfo.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3384",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 1,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Control Panel\\Mouse",
+            "Name": "MouseSpeed",
+            "ResourceId": "Registry:HKCU\\CONTROL PANEL\\MOUSE:MOUSESPEED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u00220\u0022",
+            "KeyExists": true,
+            "Display": "\u00220\u0022"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u00221\u0022",
+            "KeyExists": true,
+            "Display": "\u00221\u0022"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Control Panel\\Mouse",
+            "Name": "MouseThreshold1",
+            "ResourceId": "Registry:HKCU\\CONTROL PANEL\\MOUSE:MOUSETHRESHOLD1"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u00220\u0022",
+            "KeyExists": true,
+            "Display": "\u00220\u0022"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u00226\u0022",
+            "KeyExists": true,
+            "Display": "\u00226\u0022"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Control Panel\\Mouse",
+            "Name": "MouseThreshold2",
+            "ResourceId": "Registry:HKCU\\CONTROL PANEL\\MOUSE:MOUSETHRESHOLD2"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u00220\u0022",
+            "KeyExists": true,
+            "Display": "\u00220\u0022"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u002210\u0022",
+            "KeyExists": true,
+            "Display": "\u002210\u0022"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "sticky",
+      "Title": "Sem janelas de acessibilidade no meio do jogo",
+      "Category": "entrada",
+      "Description": "Desativa os atalhos de ativa\u00E7\u00E3o de Teclas de Ader\u00EAncia, Altern\u00E2ncia e Filtragem por seus sinalizadores.",
+      "Warning": "Usu\u00E1rios que dependem de recursos de acessibilidade devem revisar os valores antes de aplicar.",
+      "Restart": "explorer",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3394",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Control Panel\\Accessibility\\StickyKeys",
+            "Name": "Flags",
+            "ResourceId": "Registry:HKCU\\CONTROL PANEL\\ACCESSIBILITY\\STICKYKEYS:FLAGS"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u0022506\u0022",
+            "KeyExists": true,
+            "Display": "\u0022506\u0022"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u0022510\u0022",
+            "KeyExists": true,
+            "Display": "\u0022510\u0022"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Control Panel\\Accessibility\\ToggleKeys",
+            "Name": "Flags",
+            "ResourceId": "Registry:HKCU\\CONTROL PANEL\\ACCESSIBILITY\\TOGGLEKEYS:FLAGS"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u002258\u0022",
+            "KeyExists": true,
+            "Display": "\u002258\u0022"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u002262\u0022",
+            "KeyExists": true,
+            "Display": "\u002262\u0022"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Control Panel\\Accessibility\\Keyboard Response",
+            "Name": "Flags",
+            "ResourceId": "Registry:HKCU\\CONTROL PANEL\\ACCESSIBILITY\\KEYBOARD RESPONSE:FLAGS"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u0022122\u0022",
+            "KeyExists": true,
+            "Display": "\u0022122\u0022"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u0022126\u0022",
+            "KeyExists": true,
+            "Display": "\u0022126\u0022"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "numlock",
+      "Title": "Num Lock ligado ao iniciar",
+      "Category": "entrada",
+      "Description": "Configura Num Lock no usu\u00E1rio atual e na \u00E1rea de login padr\u00E3o.",
+      "Warning": "",
+      "Restart": "reboot",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3403",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Control Panel\\Keyboard",
+            "Name": "InitialKeyboardIndicators",
+            "ResourceId": "Registry:HKCU\\CONTROL PANEL\\KEYBOARD:INITIALKEYBOARDINDICATORS"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u00222\u0022",
+            "KeyExists": true,
+            "Display": "\u00222\u0022"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u00220\u0022",
+            "KeyExists": true,
+            "Display": "\u00220\u0022"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKU\\.DEFAULT\\Control Panel\\Keyboard",
+            "Name": "InitialKeyboardIndicators",
+            "ResourceId": "Registry:HKU\\.DEFAULT\\CONTROL PANEL\\KEYBOARD:INITIALKEYBOARDINDICATORS"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u00222\u0022",
+            "KeyExists": true,
+            "Display": "\u00222\u0022"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u00222147483648\u0022",
+            "KeyExists": true,
+            "Display": "\u00222147483648\u0022"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "kbd-repeat",
+      "Title": "Teclado repetindo na velocidade m\u00E1xima",
+      "Category": "entrada",
+      "Description": "Configura atraso e velocidade de repeti\u00E7\u00E3o do teclado e solicita atualiza\u00E7\u00E3o da sess\u00E3o.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3411",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 2,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Control Panel\\Keyboard",
+            "Name": "KeyboardDelay",
+            "ResourceId": "Registry:HKCU\\CONTROL PANEL\\KEYBOARD:KEYBOARDDELAY"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u00220\u0022",
+            "KeyExists": true,
+            "Display": "\u00220\u0022"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u00221\u0022",
+            "KeyExists": true,
+            "Display": "\u00221\u0022"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Control Panel\\Keyboard",
+            "Name": "KeyboardSpeed",
+            "ResourceId": "Registry:HKCU\\CONTROL PANEL\\KEYBOARD:KEYBOARDSPEED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u002231\u0022",
+            "KeyExists": true,
+            "Display": "\u002231\u0022"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u002231\u0022",
+            "KeyExists": true,
+            "Display": "\u002231\u0022"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "telemetry",
+      "Title": "Telemetria e an\u00FAncios personalizados",
+      "Category": "privacidade",
+      "Description": "Configura pol\u00EDticas de diagn\u00F3stico/publicidade e interrompe o servi\u00E7o DiagTrack; pol\u00EDticas variam por edi\u00E7\u00E3o do Windows.",
+      "Warning": "AllowTelemetry=0 n\u00E3o elimina todos os dados de diagn\u00F3stico em todas as edi\u00E7\u00F5es do Windows.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3422",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+            "Name": "AllowTelemetry",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\POLICIES\\MICROSOFT\\WINDOWS\\DATACOLLECTION:ALLOWTELEMETRY"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo",
+            "Name": "Enabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\ADVERTISINGINFO:ENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Privacy",
+            "Name": "TailoredExperiencesWithDiagnosticDataEnabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\PRIVACY:TAILOREDEXPERIENCESWITHDIAGNOSTICDATAENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Siuf\\Rules",
+            "Name": "NumberOfSIUFInPeriod",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\SIUF\\RULES:NUMBEROFSIUFINPERIOD"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 1,
+            "Path": "DiagTrack",
+            "Name": "",
+            "ResourceId": "Service:DIAGTRACK:"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 0,
+            "Json": "{\u0022StartType\u0022:4,\u0022Running\u0022:false,\u0022DelayedAutoStart\u0022:false}",
+            "KeyExists": true,
+            "Display": "{\u0022StartType\u0022:4,\u0022Running\u0022:false,\u0022DelayedAutoStart\u0022:false}"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 0,
+            "Json": "{\u0022StartType\u0022:2,\u0022Running\u0022:true,\u0022DelayedAutoStart\u0022:false}",
+            "KeyExists": true,
+            "Display": "{\u0022StartType\u0022:2,\u0022Running\u0022:true,\u0022DelayedAutoStart\u0022:false}"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "suggestions",
+      "Title": "Sem sugest\u00F5es, dicas e apps instalados sozinhos",
+      "Category": "privacidade",
+      "Description": "Desativa os sinalizadores de sugest\u00F5es e conte\u00FAdo promocional listados na pr\u00E9via.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3433",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+            "Name": "SilentInstalledAppsEnabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\CONTENTDELIVERYMANAGER:SILENTINSTALLEDAPPSENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+            "Name": "SystemPaneSuggestionsEnabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\CONTENTDELIVERYMANAGER:SYSTEMPANESUGGESTIONSENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+            "Name": "SoftLandingEnabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\CONTENTDELIVERYMANAGER:SOFTLANDINGENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+            "Name": "SubscribedContent-338388Enabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\CONTENTDELIVERYMANAGER:SUBSCRIBEDCONTENT-338388ENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+            "Name": "SubscribedContent-338389Enabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\CONTENTDELIVERYMANAGER:SUBSCRIBEDCONTENT-338389ENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+            "Name": "SubscribedContent-353694Enabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\CONTENTDELIVERYMANAGER:SUBSCRIBEDCONTENT-353694ENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+            "Name": "SubscribedContent-353696Enabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\CONTENTDELIVERYMANAGER:SUBSCRIBEDCONTENT-353696ENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager",
+            "Name": "SubscribedContent-310093Enabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\CONTENTDELIVERYMANAGER:SUBSCRIBEDCONTENT-310093ENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+            "Name": "DisableWindowsConsumerFeatures",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\POLICIES\\MICROSOFT\\WINDOWS\\CLOUDCONTENT:DISABLEWINDOWSCONSUMERFEATURES"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "bing",
+      "Title": "Pesquisa do Iniciar sem Bing",
+      "Category": "privacidade",
+      "Description": "Configura pesquisa local e pol\u00EDtica de sugest\u00F5es na caixa de busca. A sess\u00E3o deve ser renovada para o Explorer atualizar.",
+      "Warning": "",
+      "Restart": "explorer",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3441",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+            "Name": "BingSearchEnabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\SEARCH:BINGSEARCHENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer",
+            "Name": "DisableSearchBoxSuggestions",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\POLICIES\\MICROSOFT\\WINDOWS\\EXPLORER:DISABLESEARCHBOXSUGGESTIONS"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "activity",
+      "Title": "Sem hist\u00F3rico de atividades",
+      "Category": "privacidade",
+      "Description": "Configura tr\u00EAs pol\u00EDticas relacionadas ao hist\u00F3rico e publica\u00E7\u00E3o de atividades.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3452",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+            "Name": "EnableActivityFeed",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\POLICIES\\MICROSOFT\\WINDOWS\\SYSTEM:ENABLEACTIVITYFEED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+            "Name": "PublishUserActivities",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\POLICIES\\MICROSOFT\\WINDOWS\\SYSTEM:PUBLISHUSERACTIVITIES"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+            "Name": "UploadUserActivities",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\POLICIES\\MICROSOFT\\WINDOWS\\SYSTEM:UPLOADUSERACTIVITIES"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "widgets",
+      "Title": "Sem Widgets (not\u00EDcias e clima)",
+      "Category": "privacidade",
+      "Description": "Configura as pol\u00EDticas de Widgets e Windows Feeds. Mudan\u00E7a de sess\u00E3o pode ser necess\u00E1ria.",
+      "Warning": "",
+      "Restart": "reboot",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3460",
+      "MinimumBuild": 22000,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh",
+            "Name": "AllowNewsAndInterests",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\POLICIES\\MICROSOFT\\DSH:ALLOWNEWSANDINTERESTS"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Feeds",
+            "Name": "EnableFeeds",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\POLICIES\\MICROSOFT\\WINDOWS\\WINDOWS FEEDS:ENABLEFEEDS"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "location",
+      "Title": "Localiza\u00E7\u00E3o desligada",
+      "Category": "privacidade",
+      "Description": "Configura a permiss\u00E3o global de localiza\u00E7\u00E3o para Deny. Aplicativos e fun\u00E7\u00F5es dependentes podem parar de receber localiza\u00E7\u00E3o.",
+      "Warning": "Pode afetar localiza\u00E7\u00E3o do dispositivo, aplicativos de clima e ajuste autom\u00E1tico de fuso hor\u00E1rio.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3470",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location",
+            "Name": "Value",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\CAPABILITYACCESSMANAGER\\CONSENTSTORE\\LOCATION:VALUE"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u0022Deny\u0022",
+            "KeyExists": true,
+            "Display": "\u0022Deny\u0022"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u0022Allow\u0022",
+            "KeyExists": true,
+            "Display": "\u0022Allow\u0022"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "end-task",
+      "Title": "Finalizar tarefa pela barra de tarefas",
+      "Category": "aparencia",
+      "Description": "Exibe a op\u00E7\u00E3o Finalizar tarefa no menu da barra de tarefas em vers\u00F5es compat\u00EDveis.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3478",
+      "MinimumBuild": 22631,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings",
+            "Name": "TaskbarEndTask",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\EXPLORER\\ADVANCED\\TASKBARDEVELOPERSETTINGS:TASKBARENDTASK"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "file-ext",
+      "Title": "Mostrar a extens\u00E3o dos arquivos",
+      "Category": "aparencia",
+      "Description": "Exibe extens\u00F5es de arquivos no Explorer.",
+      "Warning": "",
+      "Restart": "explorer",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3487",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+            "Name": "HideFileExt",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\EXPLORER\\ADVANCED:HIDEFILEEXT"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "hidden-files",
+      "Title": "Mostrar arquivos ocultos",
+      "Category": "aparencia",
+      "Description": "Exibe arquivos ocultos no Explorer; arquivos protegidos do sistema mant\u00EAm configura\u00E7\u00E3o independente.",
+      "Warning": "",
+      "Restart": "explorer",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3495",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+            "Name": "Hidden",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\EXPLORER\\ADVANCED:HIDDEN"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "2",
+            "KeyExists": true,
+            "Display": "2"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "this-pc",
+      "Title": "Explorador abre em \u0022Este Computador\u0022",
+      "Category": "aparencia",
+      "Description": "Configura o Explorer para abrir em Este Computador.",
+      "Warning": "",
+      "Restart": "explorer",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3502",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+            "Name": "LaunchTo",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\EXPLORER\\ADVANCED:LAUNCHTO"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "classic-menu",
+      "Title": "Menu do bot\u00E3o direito completo",
+      "Category": "aparencia",
+      "Description": "Configura o registro de compatibilidade do menu de contexto; vers\u00F5es novas do Windows podem ignor\u00E1-lo.",
+      "Warning": "",
+      "Restart": "explorer",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3509",
+      "MinimumBuild": 22000,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32",
+            "Name": "",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\CLASSES\\CLSID\\{86CA1AA0-34AA-4E8B-A509-50C905BAE2A2}\\INPROCSERVER32:"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 1,
+            "Json": "\u0022\u0022",
+            "KeyExists": true,
+            "Display": "\u0022\u0022"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "dark",
+      "Title": "Tema escuro",
+      "Category": "aparencia",
+      "Description": "Configura o tema escuro de aplicativos compat\u00EDveis e do sistema.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3520",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 3,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+            "Name": "AppsUseLightTheme",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\THEMES\\PERSONALIZE:APPSUSELIGHTTHEME"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+            "Name": "SystemUsesLightTheme",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\THEMES\\PERSONALIZE:SYSTEMUSESLIGHTTHEME"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "transparency",
+      "Title": "Sem transpar\u00EAncia nas janelas",
+      "Category": "aparencia",
+      "Description": "Desativa transpar\u00EAncia em componentes compat\u00EDveis e notifica a sess\u00E3o.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3527",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 3,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize",
+            "Name": "EnableTransparency",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\THEMES\\PERSONALIZE:ENABLETRANSPARENCY"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "taskbar-left",
+      "Title": "Barra de tarefas \u00E0 esquerda",
+      "Category": "aparencia",
+      "Description": "Alinha os \u00EDcones da barra de tarefas \u00E0 esquerda.",
+      "Warning": "",
+      "Restart": "explorer",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3537",
+      "MinimumBuild": 22000,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+            "Name": "TaskbarAl",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\EXPLORER\\ADVANCED:TASKBARAL"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "task-view",
+      "Title": "Esconder o bot\u00E3o Vis\u00E3o de Tarefas",
+      "Category": "aparencia",
+      "Description": "Oculta o bot\u00E3o Vis\u00E3o de Tarefas, preservando a fun\u00E7\u00E3o e seus atalhos.",
+      "Warning": "",
+      "Restart": "explorer",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3545",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+            "Name": "ShowTaskViewButton",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\EXPLORER\\ADVANCED:SHOWTASKVIEWBUTTON"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "search-icon",
+      "Title": "Pesquisa da barra s\u00F3 como \u00EDcone",
+      "Category": "aparencia",
+      "Description": "Configura a apresenta\u00E7\u00E3o da pesquisa como \u00EDcone na barra de tarefas.",
+      "Warning": "",
+      "Restart": "explorer",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3552",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Search",
+            "Name": "SearchboxTaskbarMode",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\SEARCH:SEARCHBOXTASKBARMODE"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "2",
+            "KeyExists": true,
+            "Display": "2"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "bsod-detail",
+      "Title": "Tela azul com detalhes do erro",
+      "Category": "aparencia",
+      "Description": "Configura apresenta\u00E7\u00E3o dos par\u00E2metros de parada e oculta\u00E7\u00E3o do emoticon na tela de erro.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md; refer\u00EAncia est\u00E1tica, linha 3559",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+            "Name": "DisplayParameters",
+            "ResourceId": "Registry:HKLM\\SYSTEM\\CURRENTCONTROLSET\\CONTROL\\CRASHCONTROL:DISPLAYPARAMETERS"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+            "Name": "DisableEmoticon",
+            "ResourceId": "Registry:HKLM\\SYSTEM\\CURRENTCONTROLSET\\CONTROL\\CRASHCONTROL:DISABLEEMOTICON"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "dvr-off",
+      "Title": "Desativar captura e DVR",
+      "Category": "jogo",
+      "Description": "Desativa captura de aplicativos e Game DVR; n\u00E3o remove a Xbox Game Bar.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\GameDVR",
+            "Name": "AppCaptureEnabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\GAMEDVR:APPCAPTUREENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\System\\GameConfigStore",
+            "Name": "GameDVR_Enabled",
+            "ResourceId": "Registry:HKCU\\SYSTEM\\GAMECONFIGSTORE:GAMEDVR_ENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "gamebar-off",
+      "Title": "Desativar Game Bar e DVR",
+      "Category": "jogo",
+      "Description": "Desativa captura/DVR, atalho Nexus e pol\u00EDtica Game DVR.",
+      "Warning": "Pode prejudicar recursos Xbox. Bloqueado em processadores X3D com dois CCDs.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\GameDVR",
+            "Name": "AppCaptureEnabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\GAMEDVR:APPCAPTUREENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\System\\GameConfigStore",
+            "Name": "GameDVR_Enabled",
+            "ResourceId": "Registry:HKCU\\SYSTEM\\GAMECONFIGSTORE:GAMEDVR_ENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\SOFTWARE\\Microsoft\\GameBar",
+            "Name": "UseNexusForGameBarEnabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\GAMEBAR:USENEXUSFORGAMEBARENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR",
+            "Name": "AllowGameDVR",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\POLICIES\\MICROSOFT\\WINDOWS\\GAMEDVR:ALLOWGAMEDVR"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "notifications-off",
+      "Title": "Desativar notifica\u00E7\u00F5es do usu\u00E1rio",
+      "Category": "sistema",
+      "Description": "Configura ToastEnabled no usu\u00E1rio atual; pode afetar alertas importantes.",
+      "Warning": "",
+      "Restart": "explorer",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+            "Name": "ToastEnabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\PUSHNOTIFICATIONS:TOASTENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "updates-no-reboot",
+      "Title": "Evitar rein\u00EDcio autom\u00E1tico com sess\u00E3o aberta",
+      "Category": "sistema",
+      "Description": "Define a pol\u00EDtica NoAutoRebootWithLoggedOnUsers. A pol\u00EDtica \u00E9 interpretada pelo Windows Update e pode variar com a pol\u00EDtica da organiza\u00E7\u00E3o.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+            "Name": "NoAutoRebootWithLoggedOnUsers",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\POLICIES\\MICROSOFT\\WINDOWS\\WINDOWSUPDATE\\AU:NOAUTOREBOOTWITHLOGGEDONUSERS"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "sysmain-off",
+      "Title": "Desativar SysMain",
+      "Category": "desempenho",
+      "Description": "Para o servi\u00E7o SysMain e altera sua inicializa\u00E7\u00E3o para Desativado.",
+      "Warning": "Pode piorar abertura de programas; n\u00E3o \u00E9 um ganho universal.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 1,
+            "Path": "SysMain",
+            "Name": "",
+            "ResourceId": "Service:SYSMAIN:"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 0,
+            "Json": "{\u0022StartType\u0022:4,\u0022Running\u0022:false,\u0022DelayedAutoStart\u0022:false}",
+            "KeyExists": true,
+            "Display": "{\u0022StartType\u0022:4,\u0022Running\u0022:false,\u0022DelayedAutoStart\u0022:false}"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 0,
+            "Json": "{\u0022StartType\u0022:2,\u0022Running\u0022:true,\u0022DelayedAutoStart\u0022:false}",
+            "KeyExists": true,
+            "Display": "{\u0022StartType\u0022:2,\u0022Running\u0022:true,\u0022DelayedAutoStart\u0022:false}"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "indexing-off",
+      "Title": "Desativar indexa\u00E7\u00E3o do Windows",
+      "Category": "sistema",
+      "Description": "Para o servi\u00E7o WSearch e desativa sua inicializa\u00E7\u00E3o.",
+      "Warning": "A pesquisa de arquivos e e-mails pode ficar mais lenta ou incompleta.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 1,
+            "Path": "WSearch",
+            "Name": "",
+            "ResourceId": "Service:WSEARCH:"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 0,
+            "Json": "{\u0022StartType\u0022:4,\u0022Running\u0022:false,\u0022DelayedAutoStart\u0022:false}",
+            "KeyExists": true,
+            "Display": "{\u0022StartType\u0022:4,\u0022Running\u0022:false,\u0022DelayedAutoStart\u0022:false}"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 0,
+            "Json": "{\u0022StartType\u0022:2,\u0022Running\u0022:true,\u0022DelayedAutoStart\u0022:true}",
+            "KeyExists": true,
+            "Display": "{\u0022StartType\u0022:2,\u0022Running\u0022:true,\u0022DelayedAutoStart\u0022:true}"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "xbox-services-off",
+      "Title": "Desativar os tr\u00EAs servi\u00E7os Xbox",
+      "Category": "jogo",
+      "Description": "Desativa XblAuthManager, XblGameSave e XboxNetApiSvc quando presentes.",
+      "Warning": "Login, salvamento na nuvem e fun\u00E7\u00F5es Xbox podem deixar de funcionar.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "",
+      "MinimumBuild": 19041,
+      "Capability": "xbox-services",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "hags",
+      "Title": "Agendamento de GPU por hardware",
+      "Category": "jogo",
+      "Description": "Define HwSchMode=2. O efeito depende do suporte da GPU e do driver.",
+      "Warning": "O registro n\u00E3o comprova que o recurso esteja ativo no driver; compare estabilidade e lat\u00EAncia.",
+      "Restart": "reboot",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "",
+      "MinimumBuild": 19041,
+      "Capability": "hags",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "visual-effects-off",
+      "Title": "Reduzir efeitos visuais",
+      "Category": "aparencia",
+      "Description": "Define VisualFXSetting=2 e a m\u00E1scara de prefer\u00EAncias visuais indicada na pr\u00E9via.",
+      "Warning": "",
+      "Restart": "explorer",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "",
+      "MinimumBuild": 19041,
+      "Capability": null,
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects",
+            "Name": "VisualFXSetting",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\WINDOWS\\CURRENTVERSION\\EXPLORER\\VISUALEFFECTS:VISUALFXSETTING"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "2",
+            "KeyExists": true,
+            "Display": "2"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\Control Panel\\Desktop",
+            "Name": "UserPreferencesMask",
+            "ResourceId": "Registry:HKCU\\CONTROL PANEL\\DESKTOP:USERPREFERENCESMASK"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 3,
+            "Json": "\u0022kBIDgBAAAAA=\u0022",
+            "KeyExists": true,
+            "Display": "Bin\u00E1rio: \u0022kBIDgBAAAAA=\u0022"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 3,
+            "Json": "\u0022nh4HgBIAAAA=\u0022",
+            "KeyExists": true,
+            "Display": "Bin\u00E1rio: \u0022nh4HgBIAAAA=\u0022"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "windowed-games",
+      "Title": "Otimiza\u00E7\u00F5es para jogos em janela",
+      "Category": "jogo",
+      "Description": "Atualiza somente o token SwapEffectUpgradeEnable na configura\u00E7\u00E3o DirectX global, preservando outras op\u00E7\u00F5es.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "",
+      "MinimumBuild": 22000,
+      "Capability": "windowed-games",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "power-balanced",
+      "Title": "Plano Equilibrado",
+      "Category": "desempenho",
+      "Description": "Seleciona o plano Equilibrado j\u00E1 instalado; o plano anterior \u00E9 salvo para restaura\u00E7\u00E3o.",
+      "Warning": "",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/api/powrprof/nf-powrprof-powersetactivescheme",
+      "SourceEvidence": "",
+      "MinimumBuild": 19041,
+      "Capability": "power-balanced",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "power-high",
+      "Title": "Plano Alto Desempenho",
+      "Category": "desempenho",
+      "Description": "Seleciona o plano Alto Desempenho somente quando est\u00E1 instalado e dispon\u00EDvel.",
+      "Warning": "Pode aumentar consumo de energia, ru\u00EDdo e temperatura.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/api/powrprof/nf-powrprof-powersetactivescheme",
+      "SourceEvidence": "",
+      "MinimumBuild": 19041,
+      "Capability": "power-high",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "power-ultimate",
+      "Title": "Plano Desempenho M\u00E1ximo",
+      "Category": "desempenho",
+      "Description": "Seleciona o plano Desempenho M\u00E1ximo somente quando est\u00E1 instalado e dispon\u00EDvel.",
+      "Warning": "Pode aumentar consumo de energia, ru\u00EDdo e temperatura. Equipamentos com Modern Standby podem n\u00E3o oferecer esse plano.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/api/powrprof/nf-powrprof-powersetactivescheme",
+      "SourceEvidence": "",
+      "MinimumBuild": 19041,
+      "Capability": "power-ultimate",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "x3d-mode",
+      "Title": "Configura\u00E7\u00E3o para X3D com dois CCDs",
+      "Category": "jogo",
+      "Description": "Seleciona Equilibrado, liga Modo Jogo e Nexus e remove a pol\u00EDtica de bloqueio Game DVR. N\u00E3o instala drivers AMD nem pacotes Xbox.",
+      "Warning": "Requer Xbox Game Bar e driver de chipset AMD com suporte a 3D V-Cache para o comportamento esperado.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/sysinfo/registry",
+      "SourceEvidence": "",
+      "MinimumBuild": 19041,
+      "Capability": "power-balanced",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": [
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\SOFTWARE\\Microsoft\\GameBar",
+            "Name": "AllowAutoGameMode",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\GAMEBAR:ALLOWAUTOGAMEMODE"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\SOFTWARE\\Microsoft\\GameBar",
+            "Name": "AutoGameModeEnabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\GAMEBAR:AUTOGAMEMODEENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKCU\\SOFTWARE\\Microsoft\\GameBar",
+            "Name": "UseNexusForGameBarEnabled",
+            "ResourceId": "Registry:HKCU\\SOFTWARE\\MICROSOFT\\GAMEBAR:USENEXUSFORGAMEBARENABLED"
+          },
+          "On": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "1",
+            "KeyExists": true,
+            "Display": "1"
+          },
+          "Off": {
+            "Exists": true,
+            "Kind": 4,
+            "Json": "0",
+            "KeyExists": true,
+            "Display": "0"
+          }
+        },
+        {
+          "Target": {
+            "Kind": 0,
+            "Path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR",
+            "Name": "AllowGameDVR",
+            "ResourceId": "Registry:HKLM\\SOFTWARE\\POLICIES\\MICROSOFT\\WINDOWS\\GAMEDVR:ALLOWGAMEDVR"
+          },
+          "On": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          },
+          "Off": {
+            "Exists": false,
+            "Kind": 0,
+            "Json": "null",
+            "KeyExists": false,
+            "Display": "Ausente"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "pagefile-auto",
+      "Title": "Arquivo de pagina\u00E7\u00E3o autom\u00E1tico",
+      "Category": "memoria",
+      "Description": "Ativa AutomaticManagedPagefile por WMI. O estado manual anterior e PagingFiles com tipo/aus\u00EAncia s\u00E3o preservados no hist\u00F3rico.",
+      "Warning": "A aloca\u00E7\u00E3o em uso s\u00F3 muda ap\u00F3s reiniciar. A pr\u00E9via n\u00E3o estima o tamanho futuro nem promete ganho de FPS.",
+      "Restart": "reboot",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/cimwin32prov/win32-computersystem",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md: Pagefile Autom\u00E1tico; BACKUP-01",
+      "MinimumBuild": 19041,
+      "Capability": "pagefile-auto",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": false,
+      "Changes": []
+    },
+    {
+      "Id": "unused-services-off",
+      "Title": "Desativar cinco servi\u00E7os opcionais",
+      "Category": "sistema",
+      "Description": "Para e desativa somente Spooler, Fax, RemoteRegistry, MapsBroker e WbioSrvc que estiverem instalados; cada servi\u00E7o tem estado anterior pr\u00F3prio.",
+      "Warning": "Pode interromper impress\u00E3o, fax, Registro remoto, mapas offline e biometria/Windows Hello. Revise os cinco alvos e mantenha outra forma de login.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/services/service-startup",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md: Servi\u00E7os Desativados, backend linha 1873",
+      "MinimumBuild": 19041,
+      "Capability": "unused-services",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "obs-priority",
+      "Title": "OBS com eleva\u00E7\u00E3o e sem power throttling",
+      "Category": "jogo",
+      "Description": "Acrescenta RUNASADMIN ao Layers do OBS e cria a exce\u00E7\u00E3o de power throttling para obs64.exe. N\u00E3o altera a classe de prioridade do processo.",
+      "Warning": "O pr\u00F3ximo in\u00EDcio do OBS pode solicitar UAC. O hist\u00F3rico preserva os tokens Layers anteriores e se j\u00E1 existia exce\u00E7\u00E3o de limita\u00E7\u00E3o de energia.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows-hardware/design/device-experiences/powercfg-command-line-options",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md: OBS Priorit\u00E1rio, backend linha 1899",
+      "MinimumBuild": 19041,
+      "Capability": "obs-priority",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "dns-cloudflare",
+      "Title": "DNS IPv4: Cloudflare",
+      "Category": "rede",
+      "Description": "Configura DNS IPv4 por GUID nas interfaces Ethernet/Wi-Fi f\u00EDsicas detectadas. O hist\u00F3rico preserva o modo autom\u00E1tico ou a lista est\u00E1tica de cada interface.",
+      "Warning": "Pode afetar nomes internos de empresas e acesso \u00E0 rede. N\u00E3o altera IPv6, proxies, NRPT nem pol\u00EDticas DoH; nenhum ganho de ping \u00E9 presumido. Desativar seleciona modo autom\u00E1tico; Restaurar recupera a configura\u00E7\u00E3o anterior.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-setinterfacednssettings",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md: provedores DNS e BACKUP-03",
+      "MinimumBuild": 19041,
+      "Capability": "dns-cloudflare",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "dns-google",
+      "Title": "DNS IPv4: Google",
+      "Category": "rede",
+      "Description": "Configura DNS IPv4 por GUID nas interfaces Ethernet/Wi-Fi f\u00EDsicas detectadas. O hist\u00F3rico preserva o modo autom\u00E1tico ou a lista est\u00E1tica de cada interface.",
+      "Warning": "Pode afetar nomes internos de empresas e acesso \u00E0 rede. N\u00E3o altera IPv6, proxies, NRPT nem pol\u00EDticas DoH; nenhum ganho de ping \u00E9 presumido. Desativar seleciona modo autom\u00E1tico; Restaurar recupera a configura\u00E7\u00E3o anterior.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-setinterfacednssettings",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md: provedores DNS e BACKUP-03",
+      "MinimumBuild": 19041,
+      "Capability": "dns-google",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "dns-quad9",
+      "Title": "DNS IPv4: Quad9",
+      "Category": "rede",
+      "Description": "Configura DNS IPv4 por GUID nas interfaces Ethernet/Wi-Fi f\u00EDsicas detectadas. O hist\u00F3rico preserva o modo autom\u00E1tico ou a lista est\u00E1tica de cada interface.",
+      "Warning": "Pode afetar nomes internos de empresas e acesso \u00E0 rede. N\u00E3o altera IPv6, proxies, NRPT nem pol\u00EDticas DoH; nenhum ganho de ping \u00E9 presumido. Desativar seleciona modo autom\u00E1tico; Restaurar recupera a configura\u00E7\u00E3o anterior.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-setinterfacednssettings",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md: provedores DNS e BACKUP-03",
+      "MinimumBuild": 19041,
+      "Capability": "dns-quad9",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "dns-adguard",
+      "Title": "DNS IPv4: AdGuard",
+      "Category": "rede",
+      "Description": "Configura DNS IPv4 por GUID nas interfaces Ethernet/Wi-Fi f\u00EDsicas detectadas. O hist\u00F3rico preserva o modo autom\u00E1tico ou a lista est\u00E1tica de cada interface.",
+      "Warning": "Pode afetar nomes internos de empresas e acesso \u00E0 rede. N\u00E3o altera IPv6, proxies, NRPT nem pol\u00EDticas DoH; nenhum ganho de ping \u00E9 presumido. Desativar seleciona modo autom\u00E1tico; Restaurar recupera a configura\u00E7\u00E3o anterior.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-setinterfacednssettings",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md: provedores DNS e BACKUP-03",
+      "MinimumBuild": 19041,
+      "Capability": "dns-adguard",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "dns-auto",
+      "Title": "DNS IPv4: Autom\u00E1tico (DHCP)",
+      "Category": "rede",
+      "Description": "Configura DNS IPv4 por GUID nas interfaces Ethernet/Wi-Fi f\u00EDsicas detectadas. O hist\u00F3rico preserva o modo autom\u00E1tico ou a lista est\u00E1tica de cada interface.",
+      "Warning": "Pode afetar nomes internos de empresas e acesso \u00E0 rede. N\u00E3o altera IPv6, proxies, NRPT nem pol\u00EDticas DoH; nenhum ganho de ping \u00E9 presumido. Desativar seleciona modo autom\u00E1tico; Restaurar recupera a configura\u00E7\u00E3o anterior.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-setinterfacednssettings",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md: provedores DNS e BACKUP-03",
+      "MinimumBuild": 19041,
+      "Capability": "dns-auto",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": true,
+      "Changes": []
+    },
+    {
+      "Id": "resolution-720p",
+      "Title": "Resolu\u00E7\u00E3o 1280 \u00D7 720 na sess\u00E3o",
+      "Category": "jogo",
+      "Description": "Seleciona 1280\u00D7720 no monitor prim\u00E1rio somente quando o driver anuncia o modo com a frequ\u00EAncia e profundidade atuais. O hist\u00F3rico salva frequ\u00EAncia, rota\u00E7\u00E3o, posi\u00E7\u00E3o e resolu\u00E7\u00E3o para restaura\u00E7\u00E3o.",
+      "Warning": "A imagem e o tamanho das janelas podem mudar imediatamente. A altera\u00E7\u00E3o usa a sess\u00E3o atual e n\u00E3o grava um novo modo permanente no perfil do Windows.",
+      "Restart": "",
+      "SourceUrl": "https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-changedisplaysettingsexw",
+      "SourceEvidence": "GDZ-OPERACOES-IMPLEMENTAVEIS.md: 720p Boost Ativo, backend linha 1890; implementa\u00E7\u00E3o pr\u00F3pria amplia snapshot e verifica DISP_CHANGE",
+      "MinimumBuild": 19041,
+      "Capability": "resolution-720p",
+      "UnsupportedReason": null,
+      "Refresh": 0,
+      "AllowDisable": false,
+      "Changes": []
+    }
+  ]
+}

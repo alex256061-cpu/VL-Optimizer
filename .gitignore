@@ -1,0 +1,24 @@
+.tools/
+**/bin/
+**/obj/
+artifacts/private/
+artifacts/publish/
+*.user
+**/__pycache__/
+*.pyc
+*.pyo
+.vs/
+.env
+.env.*
+*.pfx
+*.p12
+*.key
+# Executáveis e ZIPs são distribuídos nos Releases do GitHub.
+/release/
+# Publicar apenas evidências resumidas e a prévia do próprio VL.
+artifacts/*
+!artifacts/test-results.json
+!artifacts/smoke-summary.json
+!artifacts/catalogo-0.3.0.json
+!artifacts/release-validation-0.3.0.json
+!artifacts/VL-Optimizer-preview.png

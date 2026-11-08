@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>VLOptimizer</AssemblyName>
+    <ApplicationIcon Condition="Exists('Assets/app.ico')">Assets/app.ico</ApplicationIcon>
+    <Version>0.3.0</Version>
+    <Company>VL</Company>
+    <Product>VL Optimizer</Product>
+    <Description>Diagnóstico local e ajustes verificáveis para Windows.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../VLOptimizer.Core/VLOptimizer.Core.csproj" />
+    <Resource Include="Assets/logo.png" Condition="Exists('Assets/logo.png')" />
+    <Resource Include="Assets/Fonts/*" />
+  </ItemGroup>
+</Project>
