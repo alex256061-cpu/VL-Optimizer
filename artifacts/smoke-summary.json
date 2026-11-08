@@ -1,44 +1,57 @@
 {
-  "version": "0.3.0",
-  "at": "2026-11-08T13:56:46.5480604-03:00",
+  "version": "0.4.0",
+  "at": "2026-11-08T15:03:59.849509-03:00",
   "success": true,
   "readOnly": true,
   "navigationSucceeded": true,
   "pages": [
+    "hardware",
+    "history",
+    "settings",
     "overview",
+    "performance",
+    "input",
+    "memory",
+    "storage",
+    "applications",
+    "network",
+    "windows",
+    "startup",
+    "games",
+    "graphics",
+    "scaling",
+    "fps"
+  ],
+  "auxiliaryPages": [
     "catalog",
     "power",
-    "startup",
-    "storage",
-    "games",
     "measurements",
-    "scaling",
-    "processes",
-    "history",
-    "settings"
+    "processes"
   ],
+  "areaTabs": 22,
   "measurementTabs": 7,
   "gameTabs": 3,
-  "renderedPngs": 26,
+  "renderedPngs": 57,
   "sizes": [
     "1366x768",
     "1536x884",
     "683x384"
   ],
   "motionReduced": true,
+  "overlayWin32StylesVerified": true,
   "visibleIdle": {
-    "ObservationSeconds": 3.0004513,
-    "WorkingSetBytes": 231501824,
-    "PrivateMemoryBytes": 212602880,
-    "NormalizedCpuPercent": 0.3905662458177542,
-    "LogicalProcessors": 16
-  },
-  "minimizedIdle": {
-    "ObservationSeconds": 3.0004243,
-    "WorkingSetBytes": 218476544,
-    "PrivateMemoryBytes": 199610368,
+    "ObservationSeconds": 2.9996524,
+    "WorkingSetBytes": 245874688,
+    "PrivateMemoryBytes": 260583424,
     "NormalizedCpuPercent": 0,
     "LogicalProcessors": 16
   },
-  "note": "Render em DIPs e amostras curtas; não validam toda a matriz de DPI/acessibilidade, FPS ou consumo em outras máquinas."
+  "minimizedIdle": {
+    "ObservationSeconds": 3.0004771,
+    "WorkingSetBytes": 228782080,
+    "PrivateMemoryBytes": 243687424,
+    "NormalizedCpuPercent": 0,
+    "LogicalProcessors": 16
+  },
+  "note": "Render em DIPs e amostras curtas; não validam toda a matriz de DPI/acessibilidade, captura em jogo ou consumo em outras máquinas."
 }

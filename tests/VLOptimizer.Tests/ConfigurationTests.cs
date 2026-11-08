@@ -294,7 +294,7 @@ public static class ConfigurationTests
         });
         test("Configuração: catálogo inclui pagefile serviços OBS DNS e resolução", () =>
         {
-            Check(OptimizationCatalog.All.Count == 56, "Quantidade inesperada de ajustes.");
+            Check(OptimizationCatalog.All.Count == 57, "Quantidade inesperada de ajustes.");
             foreach (var id in new[] { "pagefile-auto", "unused-services-off", "obs-priority", "dns-cloudflare", "dns-google", "dns-quad9", "dns-adguard", "dns-auto", "resolution-720p" }) Check(OptimizationCatalog.Find(id)?.SourceEvidence.Length > 0, "Contrato/fonte ausente: " + id);
             return Task.CompletedTask;
         });

@@ -15,11 +15,11 @@ public sealed partial class MainWindow
     private MaintenanceResult? _maintenanceResult;
     private bool _maintenanceRunning;
 
-    private UIElement BuildMaintenanceTool()
+    private UIElement BuildMaintenanceTool(IReadOnlyList<MaintenanceKind>? scope = null)
     {
         var root = Stack(); root.Children.Add(InlineNote("Manutenção com resultado por ferramenta.", "Reparos e resets são ações explícitas. Leia os efeitos, confira os privilégios e revise a saída do Windows. Estas ferramentas não possuem reversão automática no VL.", "\uE90F"));
         if (_snapshot?.IsAdministrator == false) root.Children.Add(FeatureButton("Reabrir como administrador", RelaunchAsAdministrator));
-        foreach (var definition in Maintenance.GetDefinitions())
+        foreach (var definition in Maintenance.GetDefinitions().Where(d => scope == null || scope.Contains(d.Kind)))
         {
             var content = Stack(); content.Children.Add(Text(definition.Title, 18, weight: FontWeights.SemiBold)); content.Children.Add(Text(definition.Description, 13, Muted, margin: new Thickness(0, 8, 0, 10)));
             content.Children.Add(Text(definition.Warning, 12, AccentSoft, margin: new Thickness(0, 0, 0, 13)));

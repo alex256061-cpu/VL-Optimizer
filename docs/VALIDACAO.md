@@ -1,17 +1,22 @@
-# Validação — VL Optimizer 0.3.0
+> Revisão 0.4.0: veja [funções do menu](FUNCOES-DO-MENU-0.4.0.md). São 13 entradas principais, três atalhos inferiores e quatro páginas auxiliares preservadas. Os detalhes históricos 0.3.0 estão em `historico/0.3.0`.
+
+# Validação — VL Optimizer 0.4.0
 
 Revisão de 08/11/2026. Esta validação não aplicou ajustes, limpeza, purga, kill, desinstalação ou manutenção reais ao computador de desenvolvimento.
 
 ## Executado
 
 - Build Release da solução, sem avisos e sem erros.
-- Suíte executável com cenários isolados e arquivos de fixture. 204/204 passaram; detalhes em `artifacts/test-results.json`.
-- Configurações: os 33 tweaks e 23 definições adicionais, snapshots tipados, ausência de chave/valor, estado composto inválido, prévia forjada/replay, privilégio/build, dependências, falha parcial e reabertura/undo.
+- Suíte executável com cenários isolados e arquivos de fixture. 218/218 passaram; detalhes em `artifacts/test-results.json`.
+- Configurações: os 33 tweaks e 24 definições adicionais, snapshots tipados, ausência de chave/valor, estado composto inválido, prévia forjada/replay, privilégio/build, dependências, falha parcial e reabertura/undo.
 - Serviços: CSV/frames/lows, leitura incremental e cancelamento, limpeza e identidade de arquivo, XML FiveM, manifests Steam/Epic, diagnóstico, sessões/PID reutilizado, uninstall/sobras, processos protegidos e pacotes UWP.
 - Integração: journal antes da escrita, sobreposição e planos legados, persistência corrompida, perfis scaling e pacote OptiScaler sintético/restore/conflito. As fixtures PE não contêm programa executado.
 - Hardware/GPU por jogo: falha parcial de fonte, origem/limites, estatística de eventos, mesclagem de tokens, hash do executável, estado anterior e restauração após falha.
 - Smoke nativo somente leitura Windows 10 Pro x64 build 19045: análise, RAM/standby PDH, CPU/núcleo/GPU 3D, DNS, modo de vídeo, pagefile WMI e sete grupos de hardware WMI. Não chama setters.
-- Smoke visual com bloqueio de mutação: onze páginas, sete abas de medições, três de jogos, busca e comparação, em três dimensões de janela. Não executa recursos externos nem abre diálogos de arquivo para simular sucesso.
+- Smoke do EXE portátil final com bloqueio de mutação: 16 destinos do menu, quatro páginas auxiliares, 22 subabas das áreas, sete abas de medições, três de jogos, busca e comparação; 57 PNGs em três dimensões. Não executa recursos externos nem abre diálogos de arquivo para simular sucesso.
+- Editor OptiScaler: UTF-8/UTF-16, comentários, chaves desconhecidas, valores fechados, rejeição de ambiguidades, prévia sem escrita, replay, conflito, hash do jogo, restauração em ordem e backup corrompido. Pacotes de teste não executam DLLs.
+- Overlay: estilos Win32 de passagem de cliques, janela de ferramenta e não ativação relidos no HWND próprio. A renderização de uma janela invisível não comprova compatibilidade com jogos, tela cheia exclusiva ou anticheat.
+- Instalador: CAB extraído sem executar a instalação; cinco arquivos, manifesto conferido e executável idêntico ao portátil. Sete scripts analisados pelo parser do Windows PowerShell 5.1, sem erros.
 
 Os resultados detalhados de máquina, caminhos, processos e screenshots completos ficam em `artifacts/private`, excluídos dos fontes distribuídos. O resumo público contém contagens/estados, sem inventário completo.
 
@@ -34,7 +39,7 @@ A captura PresentMon não foi executada contra um jogo. Os parsers e o tail incr
 7. DPI real 100/125/150/200%, troca de monitor, leitor de tela e navegação completa somente por teclado.
 8. Sessões longas, consumo e responsividade sob carga. Não há benchmark comparativo contra GDZ nem medição de ganho de FPS.
 
-A revisão 0.2.0 tinha ensaios temporais de animação próprios; foram preservados em `docs/historico/0.2.0` e não são reapresentados como novas medições da versão 0.3.0. Movimento, pausa e retomada existentes foram mantidos. Três dimensões de render não comprovam toda a matriz de acessibilidade/DPI.
+A revisão 0.2.0 tinha ensaios temporais de animação próprios; foram preservados em `docs/historico/0.2.0` e não são reapresentados como novas medições da versão 0.4.0. Movimento, pausa e retomada existentes foram mantidos. Três dimensões de render não comprovam toda a matriz de acessibilidade/DPI.
 
 ## Reproduzir
 

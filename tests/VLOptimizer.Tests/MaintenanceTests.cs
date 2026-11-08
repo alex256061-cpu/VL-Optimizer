@@ -4,6 +4,20 @@ public static class MaintenanceTests
 {
     public static void Register(Action<string, Func<Task>> test)
     {
+        test("Recuperação: Defender e Proteção do Sistema possuem etapas fechadas", async () =>
+        {
+            foreach (var (kind, expected) in new[] { (MaintenanceKind.EnableDefender, MaintenanceStageKind.EnableDefender), (MaintenanceKind.EnableSystemRestore, MaintenanceStageKind.EnableSystemRestore) })
+            {
+                var fake = new FakeMaintenance(); var service = new MaintenanceService(fake); var preview = await service.PreviewAsync(kind);
+                if (preview.Stages.Count != 1 || preview.Stages[0] != expected || fake.Executed.Count != 0) throw new InvalidOperationException("Plano ou prévia inválidos.");
+                await service.ExecuteAsync(preview); if (fake.Executed.Count != 1 || fake.Executed[0] != expected) throw new InvalidOperationException("Etapa inesperada.");
+            }
+        });
+        test("Recuperação: reativação exige administrador antes de executar", async () =>
+        {
+            var fake = new FakeMaintenance { Admin = false }; var service = new MaintenanceService(fake);
+            if ((await service.PreviewAsync(MaintenanceKind.EnableDefender)).CanApply || (await service.PreviewAsync(MaintenanceKind.EnableSystemRestore)).CanApply || fake.Executed.Count != 0) throw new InvalidOperationException("Privilégio ignorado.");
+        });
         void Check(bool ok, string message) { if (!ok) throw new InvalidOperationException(message); }
         test("Manutenção prévia apenas consulta ambiente", async () => { var fake = new FakeMaintenance(); var service = new MaintenanceService(fake); var preview = await service.PreviewAsync(MaintenanceKind.ResetNetwork); Check(preview.CanApply && fake.Executed.Count == 0 && preview.Stages.Count == 2, "Prévia executou comandos"); });
         test("Manutenção bloqueia privilégio insuficiente", async () => { var fake = new FakeMaintenance { Admin = false }; var service = new MaintenanceService(fake); var preview = await service.PreviewAsync(MaintenanceKind.RepairWindows); Check(!preview.CanApply && (await service.ExecuteAsync(preview)).Status == OperationStatus.Conflict && fake.Executed.Count == 0, "Privilégio ignorado"); });

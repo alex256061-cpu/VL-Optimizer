@@ -1,0 +1,905 @@
+{
+  "Version": "0.4.0",
+  "OriginalCatalogEntries": 78,
+  "NavigationPages": [
+    {
+      "Id": "overview",
+      "Title": "Painel",
+      "Section": "PRINCIPAL",
+      "Glyph": "",
+      "Description": "Diagnóstico, recomendações e últimas atividades.",
+      "ConfigurationIds": []
+    },
+    {
+      "Id": "performance",
+      "Title": "Desempenho",
+      "Section": "OTIMIZAR",
+      "Glyph": "",
+      "Description": "Energia, gráficos e tarefas de fundo, com efeitos e limites de cada ajuste.",
+      "ConfigurationIds": [
+        "power-balanced",
+        "power-high",
+        "power-ultimate",
+        "x3d-mode",
+        "game-mode",
+        "dvr-off",
+        "gamebar-off",
+        "steam-overlay",
+        "updates-no-reboot",
+        "notifications-off",
+        "bg-apps",
+        "edge-bg",
+        "hags",
+        "windowed-games",
+        "dlss-rec",
+        "gpu-msi",
+        "mpo",
+        "visual-effects-off",
+        "transparency",
+        "sysmain-off",
+        "indexing-off",
+        "unused-services-off",
+        "xbox-services-off",
+        "resolution-720p"
+      ]
+    },
+    {
+      "Id": "input",
+      "Title": "Mouse e teclado",
+      "Section": "OTIMIZAR",
+      "Glyph": "",
+      "Description": "Aceleração, repetição, atalhos de acessibilidade, Num Lock e eventos do mouse.",
+      "ConfigurationIds": [
+        "mouse-accel",
+        "kbd-repeat",
+        "sticky",
+        "numlock"
+      ]
+    },
+    {
+      "Id": "memory",
+      "Title": "Memória",
+      "Section": "OTIMIZAR",
+      "Glyph": "",
+      "Description": "RAM, commit, standby, processos e paginação automática.",
+      "ConfigurationIds": [
+        "pagefile-auto"
+      ]
+    },
+    {
+      "Id": "storage",
+      "Title": "Limpeza",
+      "Section": "OTIMIZAR",
+      "Glyph": "",
+      "Description": "Caches, temporários, Lixeira, componentes e espaço ocupado.",
+      "ConfigurationIds": [
+        "hibernate"
+      ]
+    },
+    {
+      "Id": "applications",
+      "Title": "Programas",
+      "Section": "OTIMIZAR",
+      "Glyph": "",
+      "Description": "Inventário, desinstalação, sobras e pacotes opcionais do Windows.",
+      "ConfigurationIds": []
+    },
+    {
+      "Id": "network",
+      "Title": "Internet e live",
+      "Section": "OTIMIZAR",
+      "Glyph": "",
+      "Description": "DNS, propriedades do driver, reparo de rede e preparação do OBS.",
+      "ConfigurationIds": [
+        "dns-auto",
+        "dns-cloudflare",
+        "dns-google",
+        "dns-quad9",
+        "dns-adguard",
+        "delivery",
+        "lso",
+        "eee",
+        "nic-intmod",
+        "obs-priority"
+      ]
+    },
+    {
+      "Id": "windows",
+      "Title": "Windows",
+      "Section": "OTIMIZAR",
+      "Glyph": "",
+      "Description": "Privacidade, Explorador, aparência, manutenção e recuperação.",
+      "ConfigurationIds": [
+        "telemetry",
+        "suggestions",
+        "bing",
+        "activity",
+        "widgets",
+        "location",
+        "end-task",
+        "file-ext",
+        "hidden-files",
+        "this-pc",
+        "classic-menu",
+        "dark",
+        "taskbar-left",
+        "task-view",
+        "search-icon",
+        "bsod-detail",
+        "windows-update-services"
+      ]
+    },
+    {
+      "Id": "startup",
+      "Title": "Inicialização",
+      "Section": "OTIMIZAR",
+      "Glyph": "",
+      "Description": "Entradas de inicialização e reativação pelo backup do VL.",
+      "ConfigurationIds": []
+    },
+    {
+      "Id": "games",
+      "Title": "Meus jogos",
+      "Section": "JOGOS",
+      "Glyph": "",
+      "Description": "Bibliotecas, perfis, GPU, sessões e FiveM.",
+      "ConfigurationIds": []
+    },
+    {
+      "Id": "graphics",
+      "Title": "DLSS / FSR",
+      "Section": "JOGOS",
+      "Glyph": "",
+      "Description": "Perfil NVIDIA, tecnologias de imagem e integração local OptiScaler.",
+      "ConfigurationIds": [
+        "dlss-rec"
+      ]
+    },
+    {
+      "Id": "scaling",
+      "Title": "VL Scaling",
+      "Section": "JOGOS",
+      "Glyph": "",
+      "Description": "Perfis de escala, captura, cursor e geração de quadros desejada. Motor gráfico externo.",
+      "ConfigurationIds": []
+    },
+    {
+      "Id": "fps",
+      "Title": "Medidor de FPS",
+      "Section": "DIAGNÓSTICO",
+      "Glyph": "",
+      "Description": "Frametimes, captura, comparação e sobreposição externa opcional.",
+      "ConfigurationIds": []
+    },
+    {
+      "Id": "hardware",
+      "Title": "Verificar hardware",
+      "Section": "DIAGNÓSTICO",
+      "Glyph": "",
+      "Description": "CPU, RAM, BIOS, GPUs e discos com origem dos dados.",
+      "ConfigurationIds": []
+    },
+    {
+      "Id": "history",
+      "Title": "Histórico e restauração",
+      "Section": "FERRAMENTAS",
+      "Glyph": "",
+      "Description": "Operações, estado anterior e restauração condicional.",
+      "ConfigurationIds": []
+    },
+    {
+      "Id": "settings",
+      "Title": "Configurações",
+      "Section": "FERRAMENTAS",
+      "Glyph": "",
+      "Description": "Movimento, economia, privacidade e versão.",
+      "ConfigurationIds": []
+    }
+  ],
+  "WindowsDefinitions": 57,
+  "OptiEditableFields": 10,
+  "Mappings": [
+    {
+      "OriginalNumber": 1,
+      "Title": "Plano de energia Alto Desempenho",
+      "OriginalKey": "act:Plano de Alta Performance",
+      "OriginalMechanism": "powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c; se falha tenta /duplicatescheme com esse GUID, depois /setactive novamente. Emite GDZ_ERRO se rejeitado.",
+      "Area": "performance",
+      "ConfigurationId": "power-high",
+      "VLImplementation": "Seleciona o plano Alto Desempenho somente quando está instalado e disponível. ID: power-high"
+    },
+    {
+      "OriginalNumber": 2,
+      "Title": "Plano de energia Desempenho Máximo",
+      "OriginalKey": "act:Modo Máximo Desempenho",
+      "OriginalMechanism": "Mesmo procedimento com o GUID e9a42b02-d5df-448d-aa00-03f14749eb61 (Ultimate Performance).",
+      "Area": "performance",
+      "ConfigurationId": "power-ultimate",
+      "VLImplementation": "Seleciona o plano Desempenho Máximo somente quando está instalado e disponível. ID: power-ultimate"
+    },
+    {
+      "OriginalNumber": 3,
+      "Title": "Modo certo para Ryzen X3D",
+      "OriginalKey": "act:Modo X3D Correto",
+      "OriginalMechanism": "Ativa plano Equilibrado 381b4222-f694-41f0-9685-ff5bb260df2e; liga AllowAutoGameMode/AutoGameModeEnabled/UseNexusForGameBarEnabled; remove política AllowGameDVR. Se Game Bar falta, abre sua página na Store; se amd3dvcacheSvc falta, apenas avisa instalar chipset AMD.",
+      "Area": "performance",
+      "ConfigurationId": "x3d-mode",
+      "VLImplementation": "Seleciona Equilibrado, liga Modo Jogo e Nexus e remove a política de bloqueio Game DVR. Não instala drivers AMD nem pacotes Xbox. ID: x3d-mode"
+    },
+    {
+      "OriginalNumber": 4,
+      "Title": "Modo de Jogo do Windows",
+      "OriginalKey": "tweak:game-mode",
+      "OriginalMechanism": "Grava AllowAutoGameMode=1 e AutoGameModeEnabled=1 em HKCU\\SOFTWARE\\Microsoft\\GameBar.",
+      "Area": "performance",
+      "ConfigurationId": "game-mode",
+      "VLImplementation": "Configura os dois sinalizadores de Modo Jogo do Windows. O efeito depende do jogo e da versão do sistema. ID: game-mode"
+    },
+    {
+      "OriginalNumber": 5,
+      "Title": "Sem gravação em segundo plano",
+      "OriginalKey": "act:DVR Desativado",
+      "OriginalMechanism": "DVR_OFF: AppCaptureEnabled=0 em GameDVR e GameDVR_Enabled=0 em GameConfigStore (HKCU).",
+      "Area": "performance",
+      "ConfigurationId": "dvr-off",
+      "VLImplementation": "Desativa captura de aplicativos e Game DVR; não remove a Xbox Game Bar. ID: dvr-off"
+    },
+    {
+      "OriginalNumber": 6,
+      "Title": "Game Bar (Win+G) desligada",
+      "OriginalKey": "act:Game Bar Desativado",
+      "OriginalMechanism": "Executa o bloco GAMEBAR_OFF: políticas/valores do Game Bar e DVR, parada de processos; difere da remoção do pacote Appx.",
+      "Area": "performance",
+      "ConfigurationId": "gamebar-off",
+      "VLImplementation": "Desativa captura/DVR, atalho Nexus e política Game DVR. ID: gamebar-off"
+    },
+    {
+      "OriginalNumber": 7,
+      "Title": "Sobreposição do Steam (Shift+Tab) desligada",
+      "OriginalKey": "tweak:steam-overlay",
+      "OriginalMechanism": "Usa helper de leitura/escrita VDF para a opção da sobreposição: valor 0 ao aplicar e 1 ao desfazer. Recusa se há jogo Steam aberto; pede shutdown da Steam, espera até 40×500 ms, altera VDF e reabre se estava aberta.",
+      "Area": "performance",
+      "ConfigurationId": "steam-overlay",
+      "VLImplementation": "Configuração EnableGameOverlay no localconfig.vdf de cada conta Steam. ID: steam-overlay"
+    },
+    {
+      "OriginalNumber": 8,
+      "Title": "Dica: a sobreposição da NVIDIA se desliga na NVIDIA App",
+      "OriginalKey": "tip:Dica: a sobreposição da NVIDIA se desliga na NVIDIA App",
+      "OriginalMechanism": "Apresenta a recomendação escrita pelo produto; desempenho e compatibilidade não foram confirmados nesta análise.",
+      "Area": "performance",
+      "ConfigurationId": null,
+      "VLImplementation": "Guia da sobreposição NVIDIA; configuração manual no aplicativo do fabricante."
+    },
+    {
+      "OriginalNumber": 9,
+      "Title": "Dica: a sobreposição do Discord se desliga dentro do Discord",
+      "OriginalKey": "tip:Dica: a sobreposição do Discord se desliga dentro do Discord",
+      "OriginalMechanism": "Apresenta a recomendação escrita pelo produto; desempenho e compatibilidade não foram confirmados nesta análise.",
+      "Area": "performance",
+      "ConfigurationId": null,
+      "VLImplementation": "Guia da sobreposição Discord; sem encerrar ou editar arquivos internos do aplicativo."
+    },
+    {
+      "OriginalNumber": 10,
+      "Title": "Windows não reinicia sozinho",
+      "OriginalKey": "act:Sem Reinício Durante o Jogo",
+      "OriginalMechanism": "Grava NoAutoRebootWithLoggedOnUsers=1 em HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU. A existência de uma política não prova impedir todos os tipos de reinício.",
+      "Area": "performance",
+      "ConfigurationId": "updates-no-reboot",
+      "VLImplementation": "Define a política NoAutoRebootWithLoggedOnUsers. A política é interpretada pelo Windows Update e pode variar com a política da organização. ID: updates-no-reboot"
+    },
+    {
+      "OriginalNumber": 11,
+      "Title": "Sem notificações do Windows",
+      "OriginalKey": "act:Desativar Notificações",
+      "OriginalMechanism": "Grava ToastEnabled=0 em HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PushNotifications.",
+      "Area": "performance",
+      "ConfigurationId": "notifications-off",
+      "VLImplementation": "Configura ToastEnabled no usuário atual; pode afetar alertas importantes. ID: notifications-off"
+    },
+    {
+      "OriginalNumber": 12,
+      "Title": "Sem apps da Loja rodando escondidos",
+      "OriginalKey": "tweak:bg-apps",
+      "OriginalMechanism": "Grava GlobalUserDisabled=1 em BackgroundAccessApplications e BackgroundAppGlobalToggle=0 em Search (HKCU).",
+      "Area": "performance",
+      "ConfigurationId": "bg-apps",
+      "VLImplementation": "Configura as permissões globais de execução em segundo plano para aplicativos compatíveis da Store. ID: bg-apps"
+    },
+    {
+      "OriginalNumber": 13,
+      "Title": "Edge fechado de verdade",
+      "OriginalKey": "tweak:edge-bg",
+      "OriginalMechanism": "Grava StartupBoostEnabled=0 e BackgroundModeEnabled=0 nas políticas do Microsoft Edge no HKLM.",
+      "Area": "performance",
+      "ConfigurationId": "edge-bg",
+      "VLImplementation": "Desativa por política o Startup Boost e a permanência do Edge em segundo plano. ID: edge-bg"
+    },
+    {
+      "OriginalNumber": 14,
+      "Title": "Agendamento de GPU por hardware (HAGS)",
+      "OriginalKey": "act:HAGS Ativo",
+      "OriginalMechanism": "Grava HwSchMode=2 em HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers; reinício indicado na UI.",
+      "Area": "performance",
+      "ConfigurationId": "hags",
+      "VLImplementation": "Define HwSchMode=2. O efeito depende do suporte da GPU e do driver. ID: hags"
+    },
+    {
+      "OriginalNumber": 15,
+      "Title": "Jogos em janela e sem bordas otimizados",
+      "OriginalKey": "act:Jogos em Janela Otimizados",
+      "OriginalMechanism": "No valor String DirectXUserGlobalSettings de HKCU\\Software\\Microsoft\\DirectX\\UserGpuPreferences, remove SwapEffectUpgradeEnable=\\d; existente e acrescenta SwapEffectUpgradeEnable=1;.",
+      "Area": "performance",
+      "ConfigurationId": "windowed-games",
+      "VLImplementation": "Atualiza somente o token SwapEffectUpgradeEnable na configuração DirectX global, preservando outras opções. ID: windowed-games"
+    },
+    {
+      "OriginalNumber": 16,
+      "Title": "DLSS no modelo recomendado pela NVIDIA",
+      "OriginalKey": "tweak:dlss-rec",
+      "OriginalMechanism": "Usa NVAPI DRS: IDs 283385345 (DLSS_SR_OVERRIDE)=1 e 283385331 (DLSS_SR_PRESET)=16777215 (recomendado). Não modifica DLLs do jogo neste ajuste.",
+      "Area": "performance",
+      "ConfigurationId": "dlss-rec",
+      "VLImplementation": "Ativa a substituição DLSS-SR e seleciona o preset mais recente anunciado pelo driver NVIDIA por dois ajustes DRS oficiais. Não altera arquivos do jogo. ID: dlss-rec"
+    },
+    {
+      "OriginalNumber": 17,
+      "Title": "Placa de vídeo com interrupção MSI e prioridade alta",
+      "OriginalKey": "tweak:gpu-msi",
+      "OriginalMechanism": "Para a GPU detectada em caps.gpuIrq, grava MSISupported=1 em MessageSignaledInterruptProperties e DevicePriority=3 em Affinity Policy. Caminho depende da GPU; exige reinício.",
+      "Area": "performance",
+      "ConfigurationId": "gpu-msi",
+      "VLImplementation": "Configura MSI e prioridade de interrupção apenas em dispositivos de vídeo PCI NVIDIA/AMD detectados. ID: gpu-msi"
+    },
+    {
+      "OriginalNumber": 18,
+      "Title": "Correção de tela piscando (MPO)",
+      "OriginalKey": "tweak:mpo",
+      "OriginalMechanism": "Grava OverlayTestMode=5 no Dwm e DisableOverlays=1 em GraphicsDrivers (HKLM); exige reinício segundo o contrato.",
+      "Area": "performance",
+      "ConfigurationId": "mpo",
+      "VLImplementation": "Desativa overlays por configuração gráfica, como diagnóstico de flicker. Não é uma recomendação universal. ID: mpo"
+    },
+    {
+      "OriginalNumber": 19,
+      "Title": "Sem efeitos visuais do Windows",
+      "OriginalKey": "act:Efeitos Visuais Off",
+      "OriginalMechanism": "Grava VisualFXSetting=2 em Explorer\\VisualEffects e UserPreferencesMask=bytes [90,12,03,80,10,00,00,00] hex em HKCU\\Control Panel\\Desktop.",
+      "Area": "performance",
+      "ConfigurationId": "visual-effects-off",
+      "VLImplementation": "Define VisualFXSetting=2 e a máscara de preferências visuais indicada na prévia. ID: visual-effects-off"
+    },
+    {
+      "OriginalNumber": 20,
+      "Title": "Sem transparência nas janelas",
+      "OriginalKey": "tweak:transparency",
+      "OriginalMechanism": "Grava EnableTransparency=0 em Themes\\Personalize (HKCU) e transmite WM_SETTINGCHANGE/ImmersiveColorSet por SendMessageTimeout para atualizar aparência.",
+      "Area": "performance",
+      "ConfigurationId": "transparency",
+      "VLImplementation": "Desativa transparência em componentes compatíveis e notifica a sessão. ID: transparency"
+    },
+    {
+      "OriginalNumber": 21,
+      "Title": "SysMain (Superfetch) desligado",
+      "OriginalKey": "act:SysMain Desativado",
+      "OriginalMechanism": "Stop-Service SysMain e Set-Service SysMain -StartupType Disabled.",
+      "Area": "performance",
+      "ConfigurationId": "sysmain-off",
+      "VLImplementation": "Para o serviço SysMain e altera sua inicialização para Desativado. ID: sysmain-off"
+    },
+    {
+      "OriginalNumber": 22,
+      "Title": "Indexação de arquivos desligada",
+      "OriginalKey": "act:Indexação Off",
+      "OriginalMechanism": "Stop-Service WSearch e Set-Service WSearch -StartupType Disabled.",
+      "Area": "performance",
+      "ConfigurationId": "indexing-off",
+      "VLImplementation": "Para o serviço WSearch e desativa sua inicialização. ID: indexing-off"
+    },
+    {
+      "OriginalNumber": 23,
+      "Title": "Serviços pouco usados desligados",
+      "OriginalKey": "act:Serviços Desativados",
+      "OriginalMechanism": "Para e define Disabled para Spooler, Fax, RemoteRegistry, MapsBroker e WbioSrvc: impressão, fax, registro remoto, mapas e biometria.",
+      "Area": "performance",
+      "ConfigurationId": "unused-services-off",
+      "VLImplementation": "Para e desativa somente Spooler, Fax, RemoteRegistry, MapsBroker e WbioSrvc que estiverem instalados; cada serviço tem estado anterior próprio. ID: unused-services-off"
+    },
+    {
+      "OriginalNumber": 24,
+      "Title": "Serviços do Xbox desligados",
+      "OriginalKey": "act:Serviços Xbox Desativados",
+      "OriginalMechanism": "Para e define Disabled para XblAuthManager, XblGameSave e XboxNetApiSvc.",
+      "Area": "performance",
+      "ConfigurationId": "xbox-services-off",
+      "VLImplementation": "Desativa XblAuthManager, XblGameSave e XboxNetApiSvc quando presentes. ID: xbox-services-off"
+    },
+    {
+      "OriginalNumber": 25,
+      "Title": "Xbox Game Bar desinstalado",
+      "OriginalKey": "act:Game Bar Removido",
+      "OriginalMechanism": "Desliga DVR/Game Bar, encerra GameBar/GameBarFTServer/GameBarPresenceWriter e remove Microsoft.XboxGamingOverlay com Remove-AppxPackage. Sem o pacote, cria handlers ms-gamebar/ms-gamebarservices/ms-gamingoverlay apontando para systray.exe. A reversão extra usa GAMEBAR_REINSTALL.",
+      "Area": "performance",
+      "ConfigurationId": null,
+      "VLImplementation": "Catálogo UWP: remoção individual XboxGamingOverlay, protegida em X3D; sem protocolos substitutos."
+    },
+    {
+      "OriginalNumber": 26,
+      "Title": "Tela em 720p (emergência)",
+      "OriginalKey": "act:720p Boost Ativo",
+      "OriginalMechanism": "Lê PrimaryScreen.Bounds e grava PrevResW/PrevResH em HKCU\\Software\\GDZ; DEVMODE recebe 1280×720 e dmFields=0x180000; user32 ChangeDisplaySettings(ref m,0), sem CDS_UPDATEREGISTRY neste script.",
+      "Area": "performance",
+      "ConfigurationId": "resolution-720p",
+      "VLImplementation": "Seleciona 1280×720 no monitor primário somente quando o driver anuncia o modo com a frequência e profundidade atuais. O histórico salva frequência, rotação, posição e resolução para restauração. ID: resolution-720p"
+    },
+    {
+      "OriginalNumber": 27,
+      "Title": "Remover apps que vêm com o Windows",
+      "OriginalKey": "once:UWP Removidos",
+      "OriginalMechanism": "Remove por Get-AppxPackage/Remove-AppxPackage uma lista fixa: Xbox.TCUI, XboxApp, XboxGamingOverlay, Cortana, BingWeather, GetHelp, People, WindowsMaps, ZuneMusic e ZuneVideo; em X3D de dois CCDs preserva TCUI e XboxGamingOverlay. A descrição menciona outros apps, mas a lista é que delimita a ação.",
+      "Area": "performance",
+      "ConfigurationId": null,
+      "VLImplementation": "Catálogo fechado de dez pacotes UWP; prévia individual, verificação e sem undo fictício."
+    },
+    {
+      "OriginalNumber": 28,
+      "Title": "Chrome e Discord em prioridade baixa",
+      "OriginalKey": "once:Chrome/Discord Limitados",
+      "OriginalMechanism": "Define PriorityClass=BelowNormal para processos chrome/Discord em execução; não fixa porcentagem de CPU/RAM.",
+      "Area": "performance",
+      "ConfigurationId": null,
+      "VLImplementation": "Sessões opt-in com prioridades originais e identidade dos processos. BelowNormal não é limite de RAM/CPU."
+    },
+    {
+      "OriginalNumber": 29,
+      "Title": "Fechar OneDrive, Dropbox e Google Drive",
+      "OriginalKey": "once:Apps de Sincronização Fechados",
+      "OriginalMechanism": "Stop-Process -Force para OneDrive, Dropbox, GoogleDriveFS e BackgroundTransferHost; não remove autostart.",
+      "Area": "performance",
+      "ConfigurationId": null,
+      "VLImplementation": "Processos: encerramento individual revalidando PID, início e caminho; sem fechar sincronizadores automaticamente."
+    },
+    {
+      "OriginalNumber": 30,
+      "Title": "Mira sem aceleração do mouse",
+      "OriginalKey": "tweak:mouse-accel",
+      "OriginalMechanism": "Grava MouseSpeed, MouseThreshold1 e MouseThreshold2 como String 0 em HKCU\\Control Panel\\Mouse e aplica SystemParametersInfo(4,0,[0,0,0],2). Desfazer reaplica os valores do Registro.",
+      "Area": "input",
+      "ConfigurationId": "mouse-accel",
+      "VLImplementation": "Configura a aceleração do mouse e solicita atualização à sessão por SystemParametersInfo. ID: mouse-accel"
+    },
+    {
+      "OriginalNumber": 31,
+      "Title": "Teclado repetindo na velocidade máxima",
+      "OriginalKey": "tweak:kbd-repeat",
+      "OriginalMechanism": "Grava KeyboardDelay=String 0 e KeyboardSpeed=String 31 em HKCU\\Control Panel\\Keyboard; usa KBD_APPLY_FROM_REG para aplicar e desfazer.",
+      "Area": "input",
+      "ConfigurationId": "kbd-repeat",
+      "VLImplementation": "Configura atraso e velocidade de repetição do teclado e solicita atualização da sessão. ID: kbd-repeat"
+    },
+    {
+      "OriginalNumber": 32,
+      "Title": "Sem janelas de acessibilidade no meio do jogo",
+      "OriginalKey": "tweak:sticky",
+      "OriginalMechanism": "Grava Flags=String 506 em StickyKeys, 58 em ToggleKeys e 122 em Keyboard Response (HKCU\\Control Panel\\Accessibility). O probe verifica o bit 4; desativa atalhos, sem remover os recursos.",
+      "Area": "input",
+      "ConfigurationId": "sticky",
+      "VLImplementation": "Desativa os atalhos de ativação de Teclas de Aderência, Alternância e Filtragem por seus sinalizadores. ID: sticky"
+    },
+    {
+      "OriginalNumber": 33,
+      "Title": "Num Lock ligado ao iniciar",
+      "OriginalKey": "tweak:numlock",
+      "OriginalMechanism": "Grava InitialKeyboardIndicators=String 2 em HKCU e HKEY_USERS\\.DEFAULT\\Control Panel\\Keyboard; os padrões de fallback são 0 e 2147483648.",
+      "Area": "input",
+      "ConfigurationId": "numlock",
+      "VLImplementation": "Configura Num Lock no usuário atual e na área de login padrão. ID: numlock"
+    },
+    {
+      "OriginalNumber": 34,
+      "Title": "Memória virtual gerenciada pelo Windows",
+      "OriginalKey": "act:Pagefile Automático",
+      "OriginalMechanism": "Lê Win32_ComputerSystem; se já automático emite aviso; caso contrário Set-CimInstance -Property @{AutomaticManagedPagefile=$true}. Não escreve diretamente um tamanho fixo.",
+      "Area": "memory",
+      "ConfigurationId": "pagefile-auto",
+      "VLImplementation": "Ativa AutomaticManagedPagefile por WMI. O estado manual anterior e PagingFiles com tipo/ausência são preservados no histórico. ID: pagefile-auto"
+    },
+    {
+      "OriginalNumber": 35,
+      "Title": "Limpar sobras do Windows Update",
+      "OriginalKey": "tool:update-cleanup",
+      "OriginalMechanism": "Mede espaço livre do disco do sistema; Dism.exe /Online /Cleanup-Image /StartComponentCleanup /NoRestart. Confere LASTEXITCODE; mede diferença e informa GB se >0,05. Timeout 2400000 ms (40 min). Não usa ResetBase neste script.",
+      "Area": "storage",
+      "ConfigurationId": null,
+      "VLImplementation": "CleanupWindowsUpdate: DISM StartComponentCleanup, sem ResetBase."
+    },
+    {
+      "OriginalNumber": 36,
+      "Title": "Desligar de verdade (sem hibernação)",
+      "OriginalKey": "tweak:hibernate",
+      "OriginalMechanism": "Grava HibernateEnabled=0 e chama powercfg /hibernate off. Ao desligar, powercfg /hibernate on só é chamado se o Registro restaurado indicar 1.",
+      "Area": "storage",
+      "ConfigurationId": "hibernate",
+      "VLImplementation": "Desativa hibernação pelo powercfg e preserva tipo e tamanho configurados para restauração. ID: hibernate"
+    },
+    {
+      "OriginalNumber": 37,
+      "Title": "Servidor DNS",
+      "OriginalKey": "dns",
+      "OriginalMechanism": "Nos adaptadores com Status Up, Set-DnsClientServerAddress recebe os dois IPv4 do provedor e Clear-DnsClientCache limpa cache. Cria snapshot sob Tweak: dns antes da primeira troca. Automático tenta reverter snapshot e, se ainda não reconhecido como auto, usa ResetServerAddresses.",
+      "Area": "network",
+      "ConfigurationId": null,
+      "VLImplementation": "Cinco opções DNS: DHCP e quatro provedores, snapshot por GUID de NIC física."
+    },
+    {
+      "OriginalNumber": 38,
+      "Title": "Sem upload de atualizações para outros PCs",
+      "OriginalKey": "tweak:delivery",
+      "OriginalMechanism": "Grava DODownloadMode=0 em política DeliveryOptimization do HKLM.",
+      "Area": "network",
+      "ConfigurationId": "delivery",
+      "VLImplementation": "Define a política de Delivery Optimization para evitar compartilhamento de atualizações entre PCs. ID: delivery"
+    },
+    {
+      "OriginalNumber": 39,
+      "Title": "LSO da placa de rede desligado",
+      "OriginalKey": "tweak:lso",
+      "OriginalMechanism": "Nos adaptadores físicos detectados, grava *LsoV2IPv4=String 0 e, quando existe, *LsoV2IPv6=String 0 sob a classe de rede {4d36e972-e325-11ce-bfc1-08002be10318}; reinicia adaptador. Valor padrão listado é 1, sujeito ao backup.",
+      "Area": "network",
+      "ConfigurationId": "lso",
+      "VLImplementation": "Desativa as propriedades LSO IPv4/IPv6 anunciadas pelo driver de rede. Pode elevar utilização de CPU. ID: lso"
+    },
+    {
+      "OriginalNumber": 40,
+      "Title": "Economia de energia da placa de rede desligada (EEE)",
+      "OriginalKey": "tweak:eee",
+      "OriginalMechanism": "Para palavras de driver detectadas (*EEE, EEE, AdvancedEEE, EEELinkAdvertisement, EnableGreenEthernet), grava String 0 sob a classe de rede. O fallback de reversão vem do default declarado pelo driver em Ndi\\Params; reinicia adaptador.",
+      "Area": "network",
+      "ConfigurationId": "eee",
+      "VLImplementation": "Desativa as propriedades EEE e Green Ethernet anunciadas pelo driver. Use para investigar instabilidade de Ethernet. ID: eee"
+    },
+    {
+      "OriginalNumber": 41,
+      "Title": "Placa de rede sem moderação de interrupção",
+      "OriginalKey": "tweak:nic-intmod",
+      "OriginalMechanism": "Para *InterruptModeration detectado no driver, grava String 0 sob a classe de rede, depois reinicia adaptador; fallback de reversão é o default obtido no driver.",
+      "Area": "network",
+      "ConfigurationId": "nic-intmod",
+      "VLImplementation": "Desativa a propriedade de moderação de interrupções da placa de rede; pode elevar uso de CPU. ID: nic-intmod"
+    },
+    {
+      "OriginalNumber": 42,
+      "Title": "Limpar cache de DNS",
+      "OriginalKey": "tool:flush-dns",
+      "OriginalMechanism": "Clear-DnsClientCache e ipconfig /flushdns. Timeout 30000 ms. Saída do ipconfig é descartada e a mensagem de sucesso é escrita pelo script.",
+      "Area": "network",
+      "ConfigurationId": null,
+      "VLImplementation": "FlushDns: API local, sem mudar o provedor DNS."
+    },
+    {
+      "OriginalNumber": 43,
+      "Title": "Resetar a rede",
+      "OriginalKey": "tool:net-reset",
+      "OriginalMechanism": "ipconfig /flushdns; netsh winsock reset; netsh int ip reset. Timeout 120000 ms. Escreve aviso de reiniciar; não há verificação explícita de todos os códigos de saída nesta string.",
+      "Area": "network",
+      "ConfigurationId": null,
+      "VLImplementation": "ResetNetwork: Winsock/TCP-IP com revisão, saída por etapa e aviso de reinício."
+    },
+    {
+      "OriginalNumber": 44,
+      "Title": "OBS com prioridade",
+      "OriginalKey": "act:OBS Prioritário",
+      "OriginalMechanism": "Para caps.obsExe, preserva flags existentes e acrescenta RUNASADMIN em AppCompatFlags\\Layers (HKCU); executa powercfg /powerthrottling disable /path exe. Desfazer extra usa /powerthrottling reset; pode provocar UAC toda abertura.",
+      "Area": "network",
+      "ConfigurationId": "obs-priority",
+      "VLImplementation": "Acrescenta RUNASADMIN ao Layers do OBS e cria a exceção de power throttling para obs64.exe. Não altera a classe de prioridade do processo. ID: obs-priority"
+    },
+    {
+      "OriginalNumber": 45,
+      "Title": "Configuração ideal do OBS",
+      "OriginalKey": "check:encoder",
+      "OriginalMechanism": "Retorna recomendações fixas por capacidade: NVIDIA→NVENC H.264 Twitch/AV1 ou HEVC YouTube, P5/P6; AMD→AMF e AV1 citado RX7000+; Intel→QSV; nenhum→x264 veryfast 720p. CBR/keyframe 2 s; Twitch 6000 kbps 1080p60 ou 4500 kbps 720p60. Informa se OBS foi detectado. Não configura OBS nem mede upload.",
+      "Area": "network",
+      "ConfigurationId": null,
+      "VLImplementation": "Assistente oficial do OBS e guia da plataforma. Não grava bitrate ou chave de transmissão arbitrariamente."
+    },
+    {
+      "OriginalNumber": 46,
+      "Title": "Telemetria e anúncios personalizados",
+      "OriginalKey": "tweak:telemetry",
+      "OriginalMechanism": "Grava AllowTelemetry=0, AdvertisingInfo\\Enabled=0, TailoredExperiencesWithDiagnosticDataEnabled=0 e NumberOfSIUFInPeriod=0; desativa e para DiagTrack. Desfazer tenta iniciar o serviço se ele não estiver Disabled.",
+      "Area": "windows",
+      "ConfigurationId": "telemetry",
+      "VLImplementation": "Configura políticas de diagnóstico/publicidade e interrompe o serviço DiagTrack; políticas variam por edição do Windows. ID: telemetry"
+    },
+    {
+      "OriginalNumber": 47,
+      "Title": "Sem sugestões, dicas e apps instalados sozinhos",
+      "OriginalKey": "tweak:suggestions",
+      "OriginalMechanism": "Grava 0 nos oito indicadores do ContentDeliveryManager (SilentInstalledAppsEnabled, SystemPaneSuggestionsEnabled, SoftLandingEnabled e cinco SubscribedContent-*Enabled) e DisableWindowsConsumerFeatures=1 em CloudContent.",
+      "Area": "windows",
+      "ConfigurationId": "suggestions",
+      "VLImplementation": "Desativa os sinalizadores de sugestões e conteúdo promocional listados na prévia. ID: suggestions"
+    },
+    {
+      "OriginalNumber": 48,
+      "Title": "Pesquisa do Iniciar sem Bing",
+      "OriginalKey": "tweak:bing",
+      "OriginalMechanism": "Grava BingSearchEnabled=0 e DisableSearchBoxSuggestions=1; encerra SearchHost/SearchApp e reinicia Explorer ao aplicar e ao desfazer.",
+      "Area": "windows",
+      "ConfigurationId": "bing",
+      "VLImplementation": "Configura pesquisa local e política de sugestões na caixa de busca. A sessão deve ser renovada para o Explorer atualizar. ID: bing"
+    },
+    {
+      "OriginalNumber": 49,
+      "Title": "Sem histórico de atividades",
+      "OriginalKey": "tweak:activity",
+      "OriginalMechanism": "Grava EnableActivityFeed=0, PublishUserActivities=0 e UploadUserActivities=0 em política HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System.",
+      "Area": "windows",
+      "ConfigurationId": "activity",
+      "VLImplementation": "Configura três políticas relacionadas ao histórico e publicação de atividades. ID: activity"
+    },
+    {
+      "OriginalNumber": 50,
+      "Title": "Sem Widgets (notícias e clima)",
+      "OriginalKey": "tweak:widgets",
+      "OriginalMechanism": "Grava AllowNewsAndInterests=0 em política Dsh e EnableFeeds=0 em Windows Feeds; encerra Widgets/WidgetService. Reinício indicado.",
+      "Area": "windows",
+      "ConfigurationId": "widgets",
+      "VLImplementation": "Configura as políticas de Widgets e Windows Feeds. Mudança de sessão pode ser necessária. ID: widgets"
+    },
+    {
+      "OriginalNumber": 51,
+      "Title": "Localização desligada",
+      "OriginalKey": "tweak:location",
+      "OriginalMechanism": "Grava Value=String Deny em ConsentStore\\location (HKLM); fallback desligado Allow. Não é prova de impedir toda inferência de localização por qualquer programa.",
+      "Area": "windows",
+      "ConfigurationId": "location",
+      "VLImplementation": "Configura a permissão global de localização para Deny. Aplicativos e funções dependentes podem parar de receber localização. ID: location"
+    },
+    {
+      "OriginalNumber": 52,
+      "Title": "Finalizar tarefa pela barra de tarefas",
+      "OriginalKey": "tweak:end-task",
+      "OriginalMechanism": "Grava TaskbarEndTask=1 em Explorer\\Advanced\\TaskbarDeveloperSettings (HKCU); bloqueado abaixo do build 22631 quando build é conhecido.",
+      "Area": "windows",
+      "ConfigurationId": "end-task",
+      "VLImplementation": "Exibe a opção Finalizar tarefa no menu da barra de tarefas em versões compatíveis. ID: end-task"
+    },
+    {
+      "OriginalNumber": 53,
+      "Title": "Mostrar a extensão dos arquivos",
+      "OriginalKey": "tweak:file-ext",
+      "OriginalMechanism": "Grava HideFileExt=0 em Explorer\\Advanced (HKCU).",
+      "Area": "windows",
+      "ConfigurationId": "file-ext",
+      "VLImplementation": "Exibe extensões de arquivos no Explorer. ID: file-ext"
+    },
+    {
+      "OriginalNumber": 54,
+      "Title": "Mostrar arquivos ocultos",
+      "OriginalKey": "tweak:hidden-files",
+      "OriginalMechanism": "Grava Hidden=1 em Explorer\\Advanced (HKCU). Não altera ShowSuperHidden nesta declaração.",
+      "Area": "windows",
+      "ConfigurationId": "hidden-files",
+      "VLImplementation": "Exibe arquivos ocultos no Explorer; arquivos protegidos do sistema mantêm configuração independente. ID: hidden-files"
+    },
+    {
+      "OriginalNumber": 55,
+      "Title": "Explorador abre em \"Este Computador\"",
+      "OriginalKey": "tweak:this-pc",
+      "OriginalMechanism": "Grava LaunchTo=1 em Explorer\\Advanced (HKCU), abrindo em Este Computador.",
+      "Area": "windows",
+      "ConfigurationId": "this-pc",
+      "VLImplementation": "Configura o Explorer para abrir em Este Computador. ID: this-pc"
+    },
+    {
+      "OriginalNumber": 56,
+      "Title": "Menu do botão direito completo",
+      "OriginalKey": "tweak:classic-menu",
+      "OriginalMechanism": "Cria HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32 com valor padrão vazio e reinicia Explorer. Ao desfazer remove recursivamente a chave CLSID deste truque; só Windows 11.",
+      "Area": "windows",
+      "ConfigurationId": "classic-menu",
+      "VLImplementation": "Configura o registro de compatibilidade do menu de contexto; versões novas do Windows podem ignorá-lo. ID: classic-menu"
+    },
+    {
+      "OriginalNumber": 57,
+      "Title": "Tema escuro",
+      "OriginalKey": "tweak:dark",
+      "OriginalMechanism": "Grava AppsUseLightTheme=0 e SystemUsesLightTheme=0 em Themes\\Personalize (HKCU).",
+      "Area": "windows",
+      "ConfigurationId": "dark",
+      "VLImplementation": "Configura o tema escuro de aplicativos compatíveis e do sistema. ID: dark"
+    },
+    {
+      "OriginalNumber": 58,
+      "Title": "Barra de tarefas à esquerda",
+      "OriginalKey": "tweak:taskbar-left",
+      "OriginalMechanism": "Grava TaskbarAl=0 em Explorer\\Advanced (HKCU), bloqueado fora do Windows 11.",
+      "Area": "windows",
+      "ConfigurationId": "taskbar-left",
+      "VLImplementation": "Alinha os ícones da barra de tarefas à esquerda. ID: taskbar-left"
+    },
+    {
+      "OriginalNumber": 59,
+      "Title": "Esconder o botão Visão de Tarefas",
+      "OriginalKey": "tweak:task-view",
+      "OriginalMechanism": "Grava ShowTaskViewButton=0 em Explorer\\Advanced; Win+Tab continua disponível segundo a descrição.",
+      "Area": "windows",
+      "ConfigurationId": "task-view",
+      "VLImplementation": "Oculta o botão Visão de Tarefas, preservando a função e seus atalhos. ID: task-view"
+    },
+    {
+      "OriginalNumber": 60,
+      "Title": "Pesquisa da barra só como ícone",
+      "OriginalKey": "tweak:search-icon",
+      "OriginalMechanism": "Grava SearchboxTaskbarMode=1 em HKCU\\...\\Search; o fallback é 2.",
+      "Area": "windows",
+      "ConfigurationId": "search-icon",
+      "VLImplementation": "Configura a apresentação da pesquisa como ícone na barra de tarefas. ID: search-icon"
+    },
+    {
+      "OriginalNumber": 61,
+      "Title": "Tela azul com detalhes do erro",
+      "OriginalKey": "tweak:bsod-detail",
+      "OriginalMechanism": "Grava DisplayParameters=1 e DisableEmoticon=1 em HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl.",
+      "Area": "windows",
+      "ConfigurationId": "bsod-detail",
+      "VLImplementation": "Configura apresentação dos parâmetros de parada e ocultação do emoticon na tela de erro. ID: bsod-detail"
+    },
+    {
+      "OriginalNumber": 62,
+      "Title": "Criar ponto de restauração",
+      "OriginalKey": "tool:restore-point",
+      "OriginalMechanism": "Temporariamente grava SystemRestorePointCreationFrequency=0 em HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\SystemRestore; Enable-ComputerRestore no disco do sistema e Checkpoint-Computer -Description GDZ Optimizer -RestorePointType MODIFY_SETTINGS; finally restaura/remove o valor anterior. Timeout 300000 ms (5 min).",
+      "Area": "windows",
+      "ConfigurationId": null,
+      "VLImplementation": "CreateRestorePoint: confere nova sequência; depende da Proteção do Sistema."
+    },
+    {
+      "OriginalNumber": 63,
+      "Title": "Reparar arquivos do Windows",
+      "OriginalKey": "tool:repair",
+      "OriginalMechanism": "Dism.exe /Online /Cleanup-Image /RestoreHealth /NoRestart; guarda código DISM; depois sfc.exe /scannow. Reporta erro se DISM falhou e aviso final se não. Timeout 3600000 ms (60 min). O código de saída do SFC não é avaliado explicitamente nesse script.",
+      "Area": "windows",
+      "ConfigurationId": null,
+      "VLImplementation": "RepairWindows: DISM/SFC, códigos e saída por etapa; exit code não prova saúde."
+    },
+    {
+      "OriginalNumber": 64,
+      "Title": "Reiniciar a barra de tarefas",
+      "OriginalKey": "once:Explorer Mínimo",
+      "OriginalMechanism": "Stop-Process explorer -Force; espera 600 ms; Start-Process explorer. Não substitui o shell.",
+      "Area": "windows",
+      "ConfigurationId": null,
+      "VLImplementation": "RestartExplorer: valida caminho, usuário e sessão do shell e verifica o novo processo."
+    },
+    {
+      "OriginalNumber": 65,
+      "Title": "Limpar ajustes antigos do GDZ",
+      "OriginalKey": "once:Padrões Restaurados",
+      "OriginalMechanism": "LEGACY_DEFAULTS remove TdrDelay, IRQ8Priority, PollInterval100us, MaxFrameLatency, ajustes NVTweak, TcpAckFrequency/TCPNoDelay/TcpMaxDataRetransmissions e opções BCD useplatformtick/useplatformclock; restaura Win32PrioritySeparation=2, MouseDataQueueSize=100, SystemResponsiveness=20, autotuning TCP normal, DoubleClickSpeed=500 e suavização de fontes.",
+      "Area": "windows",
+      "ConfigurationId": null,
+      "VLImplementation": "Substituição deliberada: recuperar snapshots próprios no histórico. Não impõe padrões universais de BCD/rede/HID de outro produto."
+    },
+    {
+      "OriginalNumber": 66,
+      "Title": "Religar o Windows Defender",
+      "OriginalKey": "fix:Defender Off",
+      "OriginalMechanism": "Set-MpPreference -DisableRealtimeMonitoring $false e Remove-ItemProperty DisableAntiSpyware da política Windows Defender. Exceções/erros são suprimidos nesse fallback, portanto a declaração não garante que Tamper Protection/políticas permitam religar.",
+      "Area": "windows",
+      "ConfigurationId": null,
+      "VLImplementation": "EnableDefender: solicita proteção e verifica estado; não remove políticas nem contorna Tamper Protection."
+    },
+    {
+      "OriginalNumber": 67,
+      "Title": "Religar o Windows Update",
+      "OriginalKey": "fix:Desativar Atualizações Windows",
+      "OriginalMechanism": "Set-Service wuauserv -StartupType Manual e Start-Service wuauserv. Erros são silenciosos nesse fallback.",
+      "Area": "windows",
+      "ConfigurationId": "windows-update-services",
+      "VLImplementation": "Configura wuauserv e BITS para início manual e solicita sua execução. O tipo e o estado anteriores ficam no histórico. ID: windows-update-services"
+    },
+    {
+      "OriginalNumber": 68,
+      "Title": "Religar a Restauração do Sistema",
+      "OriginalKey": "fix:System Restore Off",
+      "OriginalMechanism": "Enable-ComputerRestore -Drive $env:SystemDrive com ErrorAction SilentlyContinue. Não cria por si só um novo ponto neste reparo.",
+      "Area": "windows",
+      "ConfigurationId": null,
+      "VLImplementation": "EnableSystemRestore: solicita ativação na unidade Windows. Confirmação de ponto é outra etapa."
+    },
+    {
+      "OriginalNumber": 69,
+      "Title": "Consertar a escala da tela",
+      "OriginalKey": "fix:DPI Scaling Off",
+      "OriginalMechanism": "Remove-ItemProperty Win8DpiScaling de HKCU\\Control Panel\\Desktop. Não define explicitamente uma escala percentual nova nem corrige toda incompatibilidade DPI.",
+      "Area": "windows",
+      "ConfigurationId": null,
+      "VLImplementation": "Abre Escala e monitores no Windows, em vez de impor 96 DPI para todo monitor."
+    },
+    {
+      "OriginalNumber": 70,
+      "Title": "Verificar Ryzen",
+      "OriginalKey": "check:amd",
+      "OriginalMechanism": "Lê nome CPU, procura dispositivos PnP AMD 3D V-Cache/PPM/GPIO/PSP/SMBus/I2C. Para 7900X3D/7950X3D/9900X3D/9950X3D/7945HX3D confere amd3dvcacheSvc, pacote XboxGamingOverlay, política AllowGameDVR e GUID Equilibrado ativo. Fora desses modelos só orienta EXPO/PBO; não altera BIOS.",
+      "Area": "hardware",
+      "ConfigurationId": null,
+      "VLImplementation": "Inventário com fonte WMI e orientação manual de firmware/driver. Não comprova correções, XMP/EXPO ou suporte por heurísticas de nome. Guias GPU em DLSS / FSR."
+    },
+    {
+      "OriginalNumber": 71,
+      "Title": "Verificar processador Intel",
+      "OriginalKey": "check:intel",
+      "OriginalMechanism": "Lê Update Revision no Registro e extrai UInt32 a partir do byte 4. Para desktop Core i5/i7/i9 13ª/14ª gerações avisa se microcode conhecido<0x12B; para Core Ultra 200 confere build>=26100.2314 e microcode conhecido>=0x114. Em híbridos olha AutoGameModeEnabled. Não consulta versão mais recente online.",
+      "Area": "hardware",
+      "ConfigurationId": null,
+      "VLImplementation": "Inventário com fonte WMI e orientação manual de firmware/driver. Não comprova correções, XMP/EXPO ou suporte por heurísticas de nome. Guias GPU em DLSS / FSR."
+    },
+    {
+      "OriginalNumber": 72,
+      "Title": "Dica: o maior ganho do Ryzen está na BIOS",
+      "OriginalKey": "tip:Dica: o maior ganho do Ryzen está na BIOS",
+      "OriginalMechanism": "Apresenta a recomendação escrita pelo produto; desempenho e compatibilidade não foram confirmados nesta análise.",
+      "Area": "hardware",
+      "ConfigurationId": null,
+      "VLImplementation": "Inventário com fonte WMI e orientação manual de firmware/driver. Não comprova correções, XMP/EXPO ou suporte por heurísticas de nome. Guias GPU em DLSS / FSR."
+    },
+    {
+      "OriginalNumber": 73,
+      "Title": "Dica: Intel com P-cores e E-cores",
+      "OriginalKey": "tip:Dica: Intel com P-cores e E-cores",
+      "OriginalMechanism": "Apresenta a recomendação escrita pelo produto; desempenho e compatibilidade não foram confirmados nesta análise.",
+      "Area": "hardware",
+      "ConfigurationId": null,
+      "VLImplementation": "Inventário com fonte WMI e orientação manual de firmware/driver. Não comprova correções, XMP/EXPO ou suporte por heurísticas de nome. Guias GPU em DLSS / FSR."
+    },
+    {
+      "OriginalNumber": 74,
+      "Title": "Verificar placa de vídeo",
+      "OriginalKey": "check:gpu",
+      "OriginalMechanism": "Lê Win32_VideoController de VEN_10DE/1002/8086. Marca driver NVIDIA/AMD não integrado com data>180 dias; lê HwSchMode. Se encontra nvidia-smi, usa -q -d MEMORY e heurística BAR1 Total>256 MiB como ReBAR ligado. Não muda driver/BIOS.",
+      "Area": "hardware",
+      "ConfigurationId": null,
+      "VLImplementation": "Inventário com fonte WMI e orientação manual de firmware/driver. Não comprova correções, XMP/EXPO ou suporte por heurísticas de nome. Guias GPU em DLSS / FSR."
+    },
+    {
+      "OriginalNumber": 75,
+      "Title": "Dica NVIDIA RTX: mais FPS com o DLSS 4.5",
+      "OriginalKey": "tip:Dica NVIDIA RTX: mais FPS com o DLSS 4.5",
+      "OriginalMechanism": "Apresenta a recomendação escrita pelo produto; desempenho e compatibilidade não foram confirmados nesta análise.",
+      "Area": "hardware",
+      "ConfigurationId": null,
+      "VLImplementation": "Inventário com fonte WMI e orientação manual de firmware/driver. Não comprova correções, XMP/EXPO ou suporte por heurísticas de nome. Guias GPU em DLSS / FSR."
+    },
+    {
+      "OriginalNumber": 76,
+      "Title": "Dica NVIDIA: menor atraso sem cortes na imagem",
+      "OriginalKey": "tip:Dica NVIDIA: menor atraso sem cortes na imagem",
+      "OriginalMechanism": "Apresenta a recomendação escrita pelo produto; desempenho e compatibilidade não foram confirmados nesta análise.",
+      "Area": "hardware",
+      "ConfigurationId": null,
+      "VLImplementation": "Inventário com fonte WMI e orientação manual de firmware/driver. Não comprova correções, XMP/EXPO ou suporte por heurísticas de nome. Guias GPU em DLSS / FSR."
+    },
+    {
+      "OriginalNumber": 77,
+      "Title": "Dica AMD Radeon: menor atraso",
+      "OriginalKey": "tip:Dica AMD Radeon: menor atraso",
+      "OriginalMechanism": "Apresenta a recomendação escrita pelo produto; desempenho e compatibilidade não foram confirmados nesta análise.",
+      "Area": "hardware",
+      "ConfigurationId": null,
+      "VLImplementation": "Inventário com fonte WMI e orientação manual de firmware/driver. Não comprova correções, XMP/EXPO ou suporte por heurísticas de nome. Guias GPU em DLSS / FSR."
+    },
+    {
+      "OriginalNumber": 78,
+      "Title": "Verificar memória (XMP/EXPO)",
+      "OriginalKey": "check:ram",
+      "OriginalMechanism": "Lê Win32_PhysicalMemory, maior ConfiguredClockSpeed, tipo SMBIOS, capacidade e PartNumber. Extrai números de quatro dígitos 2400..9000 do modelo como velocidade presumida do kit. Avisa se kit>config+100; ou DDR4<=2666/DDR5<=4800; ou só um módulo. Menos de 16 GB acrescenta orientação. Não lê diretamente XMP/EXPO na BIOS.",
+      "Area": "hardware",
+      "ConfigurationId": null,
+      "VLImplementation": "Inventário com fonte WMI e orientação manual de firmware/driver. Não comprova correções, XMP/EXPO ou suporte por heurísticas de nome. Guias GPU em DLSS / FSR."
+    }
+  ]
+}

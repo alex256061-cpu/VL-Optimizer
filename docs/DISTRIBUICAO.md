@@ -1,3 +1,5 @@
+> Revisão 0.4.0: veja [funções do menu](FUNCOES-DO-MENU-0.4.0.md). São 13 entradas principais, três atalhos inferiores e quatro páginas auxiliares preservadas. Os detalhes históricos 0.3.0 estão em `historico/0.3.0`.
+
 # Distribuição e evolução comercial
 
 Implementação e plano de evolução registrados em 08/11/2026. Os scripts de publicação, instalação e desinstalação estão presentes no repositório. A execução real da instalação/desinstalação não foi validada nesta revisão. A existência de um executável ou instalador não representa assinatura, homologação comercial ou compatibilidade já validada. Resultados concretos de empacotamento e instalação ficam em [VALIDACAO.md](VALIDACAO.md).
@@ -6,10 +8,12 @@ Implementação e plano de evolução registrados em 08/11/2026. Os scripts de p
 
 O alvo de publicação é Windows 10/11 cliente x64, build >=19041 e limites por recurso, com .NET 10. `scripts/publish.ps1` publica Release para `win-x64`, autocontido, com `PublishSingleFile` e extração das bibliotecas nativas necessárias. A mesma publicação alimenta os seguintes artefatos em `release`:
 
-- `VL-Optimizer-0.3.0.exe`: aplicativo portátil.
-- `VL-Optimizer-0.3.0-portatil.zip`: aplicativo e `LEIA-ME.txt`.
-- `Instalar-VL-Optimizer-0.3.0.exe`: pacote autoextraível IExpress, salvo quando a publicação não recebe `-SkipInstaller`.
+- `VL-Optimizer-0.4.0.exe`: aplicativo portátil.
+- `VL-Optimizer-0.4.0-portatil.zip`: aplicativo e `LEIA-ME.txt`.
+- `Instalar-VL-Optimizer-0.4.0.exe`: pacote autoextraível IExpress, salvo quando a publicação não recebe `-SkipInstaller`.
 - `SHA256SUMS.txt`: hashes SHA-256 dos EXEs e ZIPs existentes na pasta de release.
+
+O Release público 0.4.0 inclui o arquivo específico `SHA256SUMS-0.4.0.txt`, o guia `COMECE-AQUI-0.4.0.txt`, o código-fonte e `VERIFICACAO-0.4.0.json`. O portátil final passou pelo smoke; o CAB do instalador foi extraído e seu manifesto conferido, sem executar instalação. Consulte os números em artifacts/release-validation-0.4.0.json.
 
 O script existe e define esses formatos; a presença e os hashes efetivos dos artefatos gerados precisam ser registrados pela execução do build. O pacote autocontido inclui o runtime .NET necessário, mas não dispensa recursos nativos compatíveis do Windows. [Publicação .NET](https://learn.microsoft.com/en-us/dotnet/core/deploying/).
 

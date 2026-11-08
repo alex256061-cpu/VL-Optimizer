@@ -13,13 +13,15 @@ public sealed partial class MainWindow
     private string _configurationCategory = "Todas";
     private Button? _reviewConfigurations;
     private readonly Dictionary<string, Button> _configurationCategoryButtons = [];
+    private HashSet<string>? _activeConfigurationScope;
 
-    private UIElement BuildConfigurationCatalog()
+    private UIElement BuildConfigurationCatalog(IReadOnlyList<string>? scope = null)
     {
         var root = Stack();
         root.Children.Add(InlineNote("Uma mudança por motivo.", "A seleção prepara uma revisão. O estado atual, os efeitos, as permissões e a reversão são conferidos antes de escrever. Uma opção de ajuste não representa um ganho de FPS medido.", "\uE8F1"));
         if (_snapshot?.IsAdministrator == false) root.Children.Add(FeatureButton("Reabrir como administrador", RelaunchAsAdministrator));
-        var definitions = OptimizationCatalog.All;
+        var definitions = OptimizationCatalog.All.Where(d => scope == null || scope.Contains(d.Id)).ToArray();
+        _activeConfigurationScope = scope?.ToHashSet(StringComparer.Ordinal);
         var toolbar = new WrapPanel { Margin = new Thickness(0, 0, 0, 12) };
         _configurationCategoryButtons.Clear();
         foreach (var category in new[] { "Todas" }.Concat(definitions.Select(d => d.Category).Distinct().OrderBy(x => x)))
@@ -33,10 +35,10 @@ public sealed partial class MainWindow
             toolbar.Children.Add(button);
             _configurationCategoryButtons[category] = button;
         }
-        root.Children.Add(toolbar);
-        var visible = definitions.Where(d => (_configurationCategory == "Todas" || d.Category == _configurationCategory) && Matches(d.Title + " " + d.Description + " " + d.Category + " " + d.Id)).ToArray();
+        if (scope == null) root.Children.Add(toolbar);
+        var visible = definitions.Where(d => (scope != null || _configurationCategory == "Todas" || d.Category == _configurationCategory) && Matches(d.Title + " " + d.Description + " " + d.Category + " " + d.Id)).ToArray();
         var selection = new Grid { Margin = new Thickness(0, 0, 0, 14) }; selection.ColumnDefinitions.Add(new ColumnDefinition()); selection.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-        selection.Children.Add(Text($"{visible.Length} ajustes encontrados · {definitions.Count} no catálogo", 12, Muted, margin: new Thickness(0, 12, 15, 0)));
+        selection.Children.Add(Text($"{visible.Length} ajustes encontrados · {definitions.Length} nesta área", 12, Muted, margin: new Thickness(0, 12, 15, 0)));
         _reviewConfigurations = Button("Revisar seleção", () => _ = ReviewConfigurationSelectionAsync(), true);
         UpdateConfigurationSelection(); Grid.SetColumn(_reviewConfigurations, 1); selection.Children.Add(_reviewConfigurations); root.Children.Add(selection);
         if (visible.Length == 0) root.Children.Add(Empty("\uE721", "Nenhum ajuste para esta busca.", "Experimente outro termo ou escolha Todas. A busca considera título, categoria e descrição."));
@@ -74,14 +76,16 @@ public sealed partial class MainWindow
     private void UpdateConfigurationSelection()
     {
         if (_reviewConfigurations == null) return;
-        _reviewConfigurations.Content = $"Revisar seleção ({_selectedConfigurations.Count})";
-        _reviewConfigurations.IsEnabled = _selectedConfigurations.Count > 0 && !_busy;
+        int count = _selectedConfigurations.Count(id => _activeConfigurationScope == null || _activeConfigurationScope.Contains(id));
+        _reviewConfigurations.Content = $"Revisar seleção ({count})";
+        _reviewConfigurations.IsEnabled = count > 0 && !_busy;
     }
 
     private async Task ReviewConfigurationSelectionAsync()
     {
-        await ReviewRequestsAsync(_selectedConfigurations.Select(id => new OperationRequest(OperationKind.Configure, id, true)).ToArray());
-        _selectedConfigurations.Clear();
+        var selected = _selectedConfigurations.Where(id => _activeConfigurationScope == null || _activeConfigurationScope.Contains(id)).ToArray();
+        await ReviewRequestsAsync(selected.Select(id => new OperationRequest(OperationKind.Configure, id, true)).ToArray());
+        foreach (string id in selected) _selectedConfigurations.Remove(id);
     }
 
     private async Task InspectConfigurationAsync(string id)
@@ -133,10 +137,11 @@ public sealed partial class MainWindow
             ("processes", "Memória e processos", "ram consumo pid aplicativos"),
             ("history", "Histórico e restauração", "operações desfazer reversão recuperar backup"),
             ("settings", "Preferências", "movimento tema animação privacidade versão licença") };
-        foreach (var (page, title, terms) in pages.Where(p => Contains(p.Item2 + " " + p.Item3, query)))
+        var navigation = ProductPages.All.Select(p => (p.Id, p.Title, p.Description)).Concat(pages.Where(p => ProductPages.Find(p.Item1) == null));
+        foreach (var (page, title, terms) in navigation.Where(p => Contains(p.Item2 + " " + p.Item3, query)))
         { root.Children.Add(SearchResult("PÁGINA", title, terms, () => Navigate(page))); results++; }
         foreach (var definition in OptimizationCatalog.All.Where(d => Contains(d.Id + " " + d.Title + " " + d.Category + " " + d.Description, query)))
-        { root.Children.Add(SearchResult("AJUSTE · " + definition.Category.ToUpperInvariant(), definition.Title, definition.Description, () => { _configurationCategory = "Todas"; Navigate("catalog"); })); results++; }
+        { root.Children.Add(SearchResult("AJUSTE · " + definition.Category.ToUpperInvariant(), definition.Title, definition.Description, () => NavigateToConfiguration(definition.Id))); results++; }
         foreach (var definition in Maintenance.GetDefinitions().Where(d => Contains(d.Title + " " + d.Description, query)))
         { root.Children.Add(SearchResult("MANUTENÇÃO", definition.Title, definition.Description, () => { _measurementTab = "Manutenção"; Navigate("measurements"); })); results++; }
         foreach (var (tab, title, terms) in new[] { ("Hardware", "Inventário de hardware", "BIOS placa mãe memória slots GPU driver processador vídeo"), ("Memória", "Memória e standby", "ram cache standby purga comprometida"), ("Disco", "Tamanho das pastas", "varredura arquivos grandes tamanhos"), ("Programas", "Programas e desinstalação", "aplicativos uninstall desinstalar sobras") }.Where(t => Contains(t.Item2 + " " + t.Item3, query)))

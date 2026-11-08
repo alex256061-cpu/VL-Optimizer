@@ -30,6 +30,7 @@ public sealed partial class MainWindow
     {
         var root = Stack(); root.Children.Add(InlineNote("FPS precisa de quadros capturados.", "Importe um CSV do PresentMon ou selecione uma cópia local do capturador. Média e lows usam os frametimes aceitos; medições só são comparáveis com jogo, cena e condições equivalentes.", "\uE9D9"));
         AddLiveFpsPanel(root);
+        AddFpsOverlayControls(root);
         var actions = new WrapPanel(); actions.Children.Add(FeatureButton("Importar CSV de frames…", () => _ = ImportFpsAsync(), true)); actions.Children.Add(FeatureButton("Selecionar PresentMon…", PickPresentMon)); actions.Children.Add(FeatureButton("Atualizar processos", () => _ = RefreshObservedProcessesAsync())); root.Children.Add(actions);
         var capture = Stack(); capture.Children.Add(Text("Captura por processo", 17, weight: FontWeights.SemiBold));
         capture.Children.Add(Text(_presentMonPath.Length == 0 ? "PresentMon não selecionado. A importação CSV funciona sem esse executável." : _presentMonPath, 12, Muted, margin: new Thickness(0, 9, 0, 12)));
@@ -113,16 +114,17 @@ public sealed partial class MainWindow
         if (!ConfirmFeature("Iniciar captura de FPS?", $"O PresentMon selecionado será executado para observar o PID {_capturePid} por {_captureSeconds} segundos. A coleta é local. Prepare a cena do jogo antes de continuar.\n\nExecutável: {_presentMonPath}", "Iniciar captura")) return;
         var pid = _capturePid; var seconds = _captureSeconds;
         _capturingFps = true; _liveFpsSample = null; _fpsReport = null;
+        UpdateFpsOverlay();
         await RunFeatureAsync("Capturando frames…", async token =>
         {
             try
             {
-                var progress = new Progress<ToolkitFpsLiveSample>(sample => { _liveFpsSample = sample; if (_liveFpsText != null) _liveFpsText.Text = DescribeLiveFps(sample); _analysisStatus.Text = $"◌  Capturando frames · {sample.ElapsedSeconds:0.0}/{seconds} s"; });
+                var progress = new Progress<ToolkitFpsLiveSample>(sample => { _liveFpsSample = sample; if (_liveFpsText != null) _liveFpsText.Text = DescribeLiveFps(sample); UpdateFpsOverlay(); _analysisStatus.Text = $"◌  Capturando frames · {sample.ElapsedSeconds:0.0}/{seconds} s"; });
                 var result = await Toolkit.Fps.CaptureAsync(_presentMonPath, pid, seconds, progress, token); _fpsReport = result.Report;
                 await RecordFeatureActivityAsync("fps-capture", "Captura FPS · PID " + pid, result.CompletedDuration ? "Captura concluída" : "Captura parcial", $"Código de saída {result.ExitCode}. {_fpsReport.Processes.Count} processos com frames válidos. {result.StandardError}", result.ExitCode == 0 && result.CompletedDuration ? OperationStatus.Completed : OperationStatus.PartiallyCompleted);
                 Notice(result.CompletedDuration ? "Captura finalizada. Consulte frames aceitos, linhas rejeitadas e observações." : "A captura terminou antes do prazo. Consulte os dados parciais e as observações.");
             }
-            finally { _capturingFps = false; }
+            finally { _capturingFps = false; UpdateFpsOverlay(); }
         });
     }
 

@@ -1,4 +1,6 @@
-# Arquitetura — VL Optimizer 0.3.0
+> Revisão 0.4.0: veja [funções do menu](FUNCOES-DO-MENU-0.4.0.md). São 13 entradas principais, três atalhos inferiores e quatro páginas auxiliares preservadas. Os detalhes históricos 0.3.0 estão em `historico/0.3.0`.
+
+# Arquitetura — VL Optimizer 0.4.0
 
 Implementação independente em .NET 10/WPF, mantendo a UI e os componentes de movimento do projeto 0.2.0. A especificação extraída do GDZ orienta comportamentos; seus binários, shaders, JavaScript e assemblies não são dependências do produto.
 
@@ -13,7 +15,7 @@ Implementação independente em .NET 10/WPF, mantendo a UI e os componentes de m
 | OptimizerToolkit | Limpeza, disco, bibliotecas, FiveM, FPS, RAM, diagnóstico, processos, sessões e desinstalação. Construção dos serviços não ativa coletores nem agendamentos. |
 | GameGraphicsService | GPU por executável: mescla tokens, verifica hash PE, journal antes da escrita e restaura valor/ausência exatos. |
 | HardwareInventoryService | Sete consultas WMI fixas e inventário com origem e falhas isoladas. Não deduz XMP/EXPO, temperatura ou atualidade de driver. |
-| MaintenanceService | Seis ações fechadas com etapas fixas, pré-condições, prazo, saída e resultado parcial/não verificado. Não transforma exit code em prova de saúde. |
+| MaintenanceService | Oito ações fechadas com etapas fixas, pré-condições, prazo, saída e resultado parcial/não verificado. Não transforma exit code em prova de saúde. |
 | UwpManagementService | Inventário e remoção explícita de pacotes permitidos do usuário atual; não oferece restauração fictícia dos arquivos do pacote. |
 | ScalingProfileService / OptiScalerService | Perfis locais validados e integração manual externa; instalação local de bibliotecas com manifesto/hash/backup. Sem motor gráfico próprio. |
 
@@ -46,3 +48,8 @@ O WMI detalhado usa resultados bidirecionais: o smoke nativo detectou falha COM 
 Há coordenação por arquivo/semáforo nas persistências que exigem exclusão mútua e gravação temporária + flush + rename. Isso não constitui defesa contra outro processo malicioso com os mesmos privilégios nem backup integral do sistema.
 
 A composição atual usa parciais WPF, sem reescrever a base em MVVM. Os serviços são testáveis sem UI. Uma evolução estrutural útil é separar viewmodels por área após estabilizar os fluxos; a revisão não afirma que o número de linhas ou a escolha WPF comprovam menor consumo que Electron.
+## Organização 0.4.0
+
+ProductPages centraliza as 16 rotas e o escopo explícito das configurações. A UI reaproveita o motor transacional sem duplicar efeitos Windows. A revisão filtra a seleção para a área atual, e a busca abre a aba responsável pelo ajuste.
+
+OptiScalerSettingsService edita dez chaves existentes do INI, preserva encoding/comentários e usa backups ordenados por sequência, com hash do jogo/arquivo e conflitos. FpsOverlayWindow é uma janela externa sem ativação e com passagem de cliques; recebe exclusivamente os dados reais da captura própria, fecha ao término e não injeta código. A manutenção passou a oito ações; UpdateServices é uma configuração reversível separada.

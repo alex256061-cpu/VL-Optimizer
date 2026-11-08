@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression
 $workspace = Split-Path $PSScriptRoot -Parent
 $release = Join-Path $workspace 'release'
@@ -7,11 +7,11 @@ $files = @()
 foreach ($folder in @('src','tests','docs','scripts','installer','.github')) {
     $files += Get-ChildItem -LiteralPath (Join-Path $workspace $folder) -File -Recurse | Where-Object { $_.FullName -notmatch '[\\/](bin|obj|__pycache__)[\\/]' -and $_.Extension -notin '.pyc','.pyo' }
 }
-foreach ($name in @('README.md','TESTAR.md','VLOptimizer.sln','Directory.Build.props','global.json','.gitignore','artifacts\test-results.json','artifacts\smoke-summary.json','artifacts\catalogo-0.3.0.json','artifacts\release-validation-0.3.0.json','artifacts\VL-Optimizer-preview.png')) {
+foreach ($name in @('README.md','TESTAR.md','VLOptimizer.sln','Directory.Build.props','global.json','.gitignore','artifacts\test-results.json','artifacts\smoke-summary.json','artifacts\catalogo-0.4.0.json','artifacts\menu-functions-0.4.0.json','artifacts\release-validation-0.4.0.json','artifacts\VL-Optimizer-preview.png')) {
     $path = Join-Path $workspace $name
     if (Test-Path -LiteralPath $path) { $files += Get-Item -LiteralPath $path }
 }
-$destination = Join-Path $release 'VL-Optimizer-0.3.0-codigo-fonte.zip'
+$destination = Join-Path $release 'VL-Optimizer-0.4.0-codigo-fonte.zip'
 $stream = [IO.File]::Open($destination,[IO.FileMode]::Create,[IO.FileAccess]::Write,[IO.FileShare]::None)
 $archive = New-Object IO.Compression.ZipArchive($stream,[IO.Compression.ZipArchiveMode]::Create)
 try {

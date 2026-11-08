@@ -9,6 +9,29 @@ public sealed partial class MainWindow
     private ToolkitFpsLiveSample? _liveFpsSample;
     private TextBlock? _liveFpsText;
     private bool _capturingFps;
+    private bool _fpsOverlayEnabled;
+    private int _fpsOverlayCorner;
+    private FpsOverlayWindow? _fpsOverlayWindow;
+
+    private void AddFpsOverlayControls(StackPanel root)
+    {
+        var panel = Stack(); var toggle = new CheckBox { Content = "Mostrar sobreposição durante a captura", IsChecked = _fpsOverlayEnabled, Margin = new Thickness(0, 5, 0, 10) };
+        toggle.Checked += (_, _) => { _fpsOverlayEnabled = true; UpdateFpsOverlay(); };
+        toggle.Unchecked += (_, _) => { _fpsOverlayEnabled = false; UpdateFpsOverlay(); }; panel.Children.Add(toggle);
+        panel.Children.Add(NewChoice("Canto da tela principal", new[] { ("0", "Superior esquerdo"), ("1", "Superior direito"), ("2", "Inferior esquerdo"), ("3", "Inferior direito") }, _fpsOverlayCorner.ToString(), value => { _fpsOverlayCorner = int.Parse(value); _fpsOverlayWindow?.Place(_fpsOverlayCorner); }));
+        panel.Children.Add(Text("Janela externa que deixa os cliques passarem. Use jogo em janela ou sem bordas; tela cheia exclusiva pode ocultá-la. Exibe só frames reais da captura própria, com média acumulada. Lows ficam no relatório final.", 12, Muted));
+        root.Children.Add(new Expander { Header = "FPS na tela · opcional", Content = panel, Foreground = Muted, Margin = new Thickness(0, 9, 0, 16) });
+    }
+    private void UpdateFpsOverlay()
+    {
+        if (_smoke || !_fpsOverlayEnabled || !_capturingFps) { _fpsOverlayWindow?.Close(); _fpsOverlayWindow = null; return; }
+        if (_fpsOverlayWindow == null)
+        {
+            _fpsOverlayWindow = new FpsOverlayWindow(); _fpsOverlayWindow.Place(_fpsOverlayCorner); _fpsOverlayWindow.Show();
+            if (!_fpsOverlayWindow.ClickThroughVerified) { _fpsOverlayWindow.Close(); _fpsOverlayWindow = null; _fpsOverlayEnabled = false; Notice("A sobreposição não confirmou o modo que deixa os cliques passarem; ela foi fechada.", true); return; }
+        }
+        if (_liveFpsSample != null) _fpsOverlayWindow.Update(_liveFpsSample);
+    }
 
     private void AddLiveFpsPanel(StackPanel root)
     {

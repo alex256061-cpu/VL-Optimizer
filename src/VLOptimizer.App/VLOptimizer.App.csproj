@@ -8,7 +8,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>VLOptimizer</AssemblyName>
     <ApplicationIcon Condition="Exists('Assets/app.ico')">Assets/app.ico</ApplicationIcon>
-    <Version>0.3.0</Version>
+    <Version>0.4.0</Version>
     <Company>VL</Company>
     <Product>VL Optimizer</Product>
     <Description>Diagnóstico local e ajustes verificáveis para Windows.</Description>

@@ -250,7 +250,7 @@ public sealed class OptiScalerService
         string full = Path.GetFullPath(Path.Combine(root, relative)); if (!Within(full, root)) throw new InvalidDataException("Destino fora da pasta do jogo."); return full;
     }
     private static bool IsSystemLocation(string path) => Within(path, Environment.GetFolderPath(Environment.SpecialFolder.Windows)) || Within(path, Environment.SystemDirectory);
-    private static void EnsureNoLinks(string path)
+    internal static void EnsureNoLinks(string path)
     {
         for (string? p = Path.GetFullPath(path); p is not null; p = Path.GetDirectoryName(p))
         {
@@ -270,6 +270,12 @@ public sealed class OptiScalerService
                 throw new InvalidOperationException("Feche o jogo antes de instalar ou restaurar bibliotecas.");
             }
         }
+    }
+    internal static string ValidateConfigurationGame(string executable)
+    {
+        string game = LocalPath(executable), root = Path.GetDirectoryName(game)!;
+        if (IsSystemLocation(root) || !Path.GetExtension(game).Equals(".exe", StringComparison.OrdinalIgnoreCase)) throw new ArgumentException("Escolha o executável local do jogo.");
+        EnsureNoLinks(game); EnsureX64Pe(game); EnsureGameStopped(game); EnsureNoAntiCheat(root); return game;
     }
     private static void EnsureNoAntiCheat(string directory)
     {

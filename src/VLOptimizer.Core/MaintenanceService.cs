@@ -7,8 +7,8 @@ using Microsoft.Win32.SafeHandles;
 
 namespace VLOptimizer.Core;
 
-public enum MaintenanceKind { FlushDns, ResetNetwork, RepairWindows, CleanupWindowsUpdate, CreateRestorePoint, RestartExplorer }
-public enum MaintenanceStageKind { FlushDns, ResetWinsock, ResetIp, DismRepair, SfcScan, DismCleanup, RestorePoint, RestartExplorer }
+public enum MaintenanceKind { FlushDns, ResetNetwork, RepairWindows, CleanupWindowsUpdate, CreateRestorePoint, RestartExplorer, EnableDefender, EnableSystemRestore }
+public enum MaintenanceStageKind { FlushDns, ResetWinsock, ResetIp, DismRepair, SfcScan, DismCleanup, RestorePoint, RestartExplorer, EnableDefender, EnableSystemRestore }
 public record MaintenanceDefinition(MaintenanceKind Kind, string Title, string Description, bool RequiresAdmin, bool RequiresRestart, string Warning, string SourceUrl);
 public record MaintenanceEnvironment(bool SupportedOS, bool Administrator);
 public sealed record MaintenancePreview(Guid Id, MaintenanceDefinition Definition, DateTimeOffset CreatedAt, bool CanApply, string? BlockReason, IReadOnlyList<MaintenanceStageKind> Stages);
@@ -36,7 +36,9 @@ public sealed class MaintenanceService
         new MaintenanceDefinition(MaintenanceKind.RepairWindows, "Verificar e reparar Windows", "Executa DISM RestoreHealth e, se a etapa for aceita, SFC scannow. O laudo completo fica no resultado.", true, false, "Pode demorar e usar o Windows Update. Cancelar é atendido entre ferramentas; uma manutenção iniciada não é encerrada à força. O código de saída não prova ausência de corrupção.", "https://support.microsoft.com/windows/using-system-file-checker-in-windows-365e0031-36b1-6031-f804-8fd86e0ef4ca"),
         new MaintenanceDefinition(MaintenanceKind.CleanupWindowsUpdate, "Limpar componentes do Windows", "Solicita DISM StartComponentCleanup para remover componentes substituídos conforme as regras do Windows.", true, false, "Manutenção do repositório de componentes, sem apagar pastas do Windows manualmente. Não usa ResetBase. Pode demorar; não possui desfazer no VL.", "https://learn.microsoft.com/windows-hardware/manufacture/desktop/clean-up-the-winsxs-folder"),
         new MaintenanceDefinition(MaintenanceKind.CreateRestorePoint, "Criar ponto de restauração", "Solicita um ponto de restauração e confere a presença de uma nova sequência com o rótulo VL Optimizer.", true, false, "Depende da Proteção do Sistema e das regras de frequência do Windows. Não ativa a proteção nem altera seus limites. Não substitui backup de arquivos.", "https://learn.microsoft.com/powershell/module/microsoft.powershell.management/checkpoint-computer?view=powershell-5.1"),
-        new MaintenanceDefinition(MaintenanceKind.RestartExplorer, "Reiniciar Explorer", "Reinicia apenas o processo do shell associado à janela do usuário atual e verifica o novo shell.", false, false, "A área de trabalho, a barra de tarefas e janelas do Explorer podem desaparecer brevemente. Termine transferências e salve seu trabalho antes de continuar.", "https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getshellwindow") });
+        new MaintenanceDefinition(MaintenanceKind.RestartExplorer, "Reiniciar Explorer", "Reinicia apenas o processo do shell associado à janela do usuário atual e verifica o novo shell.", false, false, "A área de trabalho, a barra de tarefas e janelas do Explorer podem desaparecer brevemente. Termine transferências e salve seu trabalho antes de continuar.", "https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getshellwindow"),
+        new MaintenanceDefinition(MaintenanceKind.EnableDefender, "Solicitar proteção em tempo real", "Solicita a ativação pelo cmdlet Defender e confere AntivirusEnabled e RealTimeProtectionEnabled. Não remove políticas nem tenta contornar proteção contra adulteração.", true, false, "Outro antivírus, modo passivo ou política da organização podem impedir a ativação. O resultado é relido e não há opção de desligar a proteção pelo VL.", "https://learn.microsoft.com/powershell/module/defender/set-mppreference"),
+        new MaintenanceDefinition(MaintenanceKind.EnableSystemRestore, "Ativar Proteção do Sistema", "Solicita Enable-ComputerRestore somente para a unidade do Windows. A solicitação não cria um ponto nem altera o limite de espaço.", true, false, "Confira depois a Proteção do Sistema. Uma solicitação aceita não é prova independente de recuperação disponível; crie e verifique um ponto antes de depender dele.", "https://learn.microsoft.com/powershell/module/microsoft.powershell.management/enable-computerrestore?view=powershell-5.1") });
 
     public MaintenanceService(IMaintenanceSystemAccess? system = null, Func<DateTimeOffset>? clock = null)
     { this.system = system ?? new MaintenanceWindowsAccess(); this.clock = clock ?? (() => DateTimeOffset.UtcNow); }
@@ -44,7 +46,8 @@ public sealed class MaintenanceService
     private static MaintenanceStageKind[] Plan(MaintenanceKind kind) => kind switch {
         MaintenanceKind.FlushDns => [MaintenanceStageKind.FlushDns], MaintenanceKind.ResetNetwork => [MaintenanceStageKind.ResetWinsock, MaintenanceStageKind.ResetIp],
         MaintenanceKind.RepairWindows => [MaintenanceStageKind.DismRepair, MaintenanceStageKind.SfcScan], MaintenanceKind.CleanupWindowsUpdate => [MaintenanceStageKind.DismCleanup],
-        MaintenanceKind.CreateRestorePoint => [MaintenanceStageKind.RestorePoint], MaintenanceKind.RestartExplorer => [MaintenanceStageKind.RestartExplorer], _ => throw new ArgumentOutOfRangeException(nameof(kind)) };
+        MaintenanceKind.CreateRestorePoint => [MaintenanceStageKind.RestorePoint], MaintenanceKind.RestartExplorer => [MaintenanceStageKind.RestartExplorer],
+        MaintenanceKind.EnableDefender => [MaintenanceStageKind.EnableDefender], MaintenanceKind.EnableSystemRestore => [MaintenanceStageKind.EnableSystemRestore], _ => throw new ArgumentOutOfRangeException(nameof(kind)) };
     public async Task<MaintenancePreview> PreviewAsync(MaintenanceKind kind, CancellationToken token = default)
     {
         await gate.WaitAsync(token).ConfigureAwait(false);
@@ -113,6 +116,8 @@ public sealed class MaintenanceWindowsAccess : IMaintenanceSystemAccess
     private static async Task<MaintenanceStage> RunCommandAsync(MaintenanceStageKind stage, IProgress<string>? progress, CancellationToken token)
     {
         var (name, arguments, minutes) = stage switch {
+            MaintenanceStageKind.EnableDefender => ("WindowsPowerShell\\v1.0\\powershell.exe", new[] { "-NoProfile", "-NonInteractive", "-Command", "$ErrorActionPreference='Stop'; Set-MpPreference -DisableRealtimeMonitoring $false -ErrorAction Stop; $status=Get-MpComputerStatus -ErrorAction Stop; if(-not $status.AntivirusEnabled -or -not $status.RealTimeProtectionEnabled){throw 'A proteção em tempo real não foi confirmada. Confira a Segurança do Windows e as políticas.'}; Write-Output 'VL_DEFENDER_ENABLED_VERIFIED'" }, 5),
+            MaintenanceStageKind.EnableSystemRestore => ("WindowsPowerShell\\v1.0\\powershell.exe", new[] { "-NoProfile", "-NonInteractive", "-Command", "$ErrorActionPreference='Stop'; Enable-ComputerRestore -Drive ($env:SystemDrive + '\\') -ErrorAction Stop; Write-Output 'Solicitacao aceita. Confira a Protecao do Sistema e crie um ponto separado.'" }, 5),
             MaintenanceStageKind.ResetWinsock => ("netsh.exe", new[] { "winsock", "reset" }, 5),
             MaintenanceStageKind.ResetIp => ("netsh.exe", new[] { "int", "ip", "reset" }, 5),
             MaintenanceStageKind.DismRepair => ("Dism.exe", new[] { "/Online", "/Cleanup-Image", "/RestoreHealth", "/NoRestart" }, 90),
@@ -143,7 +148,7 @@ public sealed class MaintenanceWindowsAccess : IMaintenanceSystemAccess
             progress?.Report("Ferramenta finalizada · código " + process.ExitCode);
             string text = (output + "\n" + error).Trim();
             if (output.Length >= 65536 || error.Length >= 65536) text += "\n[Saída limitada; consulte os logs oficiais para o conteúdo integral.]";
-            return new(stage, process.ExitCode, text, stage == MaintenanceStageKind.RestorePoint && process.ExitCode == 0);
+            return new(stage, process.ExitCode, text, process.ExitCode == 0 && (stage == MaintenanceStageKind.RestorePoint || stage == MaintenanceStageKind.EnableDefender && text.Contains("VL_DEFENDER_ENABLED_VERIFIED", StringComparison.Ordinal)));
         }
         finally { if (!handedOff) process.Dispose(); }
     }

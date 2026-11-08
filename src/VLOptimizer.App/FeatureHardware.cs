@@ -34,6 +34,9 @@ public sealed partial class MainWindow
         var actions = new WrapPanel(); actions.Children.Add(FeatureButton("Ler hardware detalhado", () => _ = ReadDetailedHardwareAsync(), true));
         var export = FeatureButton("Exportar inventário…", ExportDetailedHardware); export.IsEnabled = _hardwareInventory is not null && !_busy; actions.Children.Add(export);
         actions.Children.Add(FeatureButton("Estimar eventos do mouse", OpenMouseEventEstimate)); root.Children.Add(actions);
+        var firmware = Stack(); firmware.Children.Add(Text("O inventário mostra modelo e versão, não comprova correção de microcódigo, XMP/EXPO ou compatibilidade de um novo firmware. Identifique a placa-mãe e confira o suporte do fabricante. Instalação de BIOS, chipset e perfil de memória é uma decisão manual.", 13, Muted));
+        var sources = new WrapPanel(); sources.Children.Add(FeatureButton("Suporte AMD", () => OpenExternal("https://www.amd.com/en/support/download/drivers.html"))); sources.Children.Add(FeatureButton("Suporte Intel", () => OpenExternal("https://www.intel.com/content/www/us/en/support.html"))); firmware.Children.Add(sources);
+        root.Children.Add(new Expander { Header = "Ryzen, Intel, GPU e memória · interpretar o inventário", Content = firmware, Foreground = Muted, Margin = new Thickness(0, 6, 0, 16) });
         if (_hardwareInventory is null) root.Children.Add(Empty("\uE950", "Faça uma leitura detalhada.", "A consulta só começa ao escolher Ler hardware. Ela não aplica configurações nem envia dados."));
         else
         {

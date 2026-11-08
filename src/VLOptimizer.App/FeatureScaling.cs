@@ -33,7 +33,7 @@ public sealed partial class MainWindow
             content.Children.Add(Text("Preferências armazenadas · aplicação no motor externo é manual", 11, AccentSoft, margin: new Thickness(0, 8, 0, 14)));
             var actions = new WrapPanel(); actions.Children.Add(FeatureButton("Editar opções", () => _ = EditScalingProfileAsync(profile))); actions.Children.Add(FeatureButton("Exportar perfil…", () => _ = ExportScalingProfileAsync(profile))); actions.Children.Add(FeatureButton("Excluir perfil…", () => _ = DeleteScalingProfileAsync(profile))); content.Children.Add(actions); root.Children.Add(Card(content));
         }
-        AddOptiScalerSection(root);
+        root.Children.Add(FeatureButton("Instalar ou configurar OptiScaler", () => Navigate("graphics")));
         return root;
     }
 

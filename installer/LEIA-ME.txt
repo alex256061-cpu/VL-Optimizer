@@ -1,11 +1,14 @@
-VL OPTIMIZER 0.3.0 - CANDIDATO DE VALIDACAO
+VL OPTIMIZER 0.4.0 - CANDIDATO DE VALIDACAO
 
 Aplicativo nativo C# / .NET 10 / WPF. Funcionamento local sem conta.
 Alvo: Windows 10/11 cliente x64, build 19041+, com limites por recurso.
 Abra VLOptimizer.exe ou o instalador por usuario.
 O diagnostico inicial e somente leitura. Nenhum ajuste e automatico.
 
-Inclui catalogo de 56 ajustes, previa e restauracao, limpeza com
+Menu em 13 areas, tres atalhos de ferramentas e overlay FPS opcional
+em janela/sem bordas, na tela principal. Editor INI OptiScaler com backup.
+
+Inclui catalogo de 57 ajustes, previa e restauracao, limpeza com
 manifesto por arquivo, jogos Steam/Epic/FiveM, sessoes opt-in,
 preferencia GPU por executavel, FPS CSV/PresentMon, hardware detalhado,
 RAM/standby, scanner de disco, programas Win32/Store e manutencao.
@@ -16,7 +19,7 @@ Recursos administrativos exigem reabrir elevado por escolha explicita.
 PresentMon e OptiScaler nao acompanham o aplicativo: selecione copias
 locais opcionais. O editor Scaling guarda 40 propriedades editaveis,
 mas nao aplica graficos nem inclui motor LSFG/upscaling do GDZ.
-Nao ha temperaturas, prova XMP/EXPO, overlay de jogo ou ganho FPS medido.
+Nao ha temperaturas, prova XMP/EXPO, motor grafico proprio ou ganho FPS medido.
 
 Historico/backups: %LOCALAPPDATA%\VLOptimizer. Nao apague enquanto
 quiser restaurar. Desinstalar o VL nao desfaz ajustes do Windows.

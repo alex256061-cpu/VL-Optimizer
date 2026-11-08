@@ -1,8 +1,10 @@
-# Catálogo e evidências — VL Optimizer 0.3.0
+> Revisão 0.4.0: veja [funções do menu](FUNCOES-DO-MENU-0.4.0.md). São 13 entradas principais, três atalhos inferiores e quatro páginas auxiliares preservadas. Os detalhes históricos 0.3.0 estão em `historico/0.3.0`.
 
-O catálogo abaixo vem das definições compiladas do Core. Ele contém 56 opções, incluindo os 33 tweaks recuperados. A ausência de uma dependência pode bloquear uma opção nesta máquina; estar listado não significa estar aplicado ou recomendado.
+# Catálogo e evidências — VL Optimizer 0.4.0
 
-A prévia explica antes/depois, privilégio, riscos e reinício. Desativar usa os valores declarados; Restaurar recupera o snapshot real. Recursos não restauráveis, como limpeza e ferramentas de manutenção, têm fluxos separados. A matriz GDZ → VL está em [EVOLUCAO-0.3.0.md](EVOLUCAO-0.3.0.md).
+O catálogo abaixo vem das definições compiladas do Core. Ele contém 57 opções, incluindo os 33 tweaks recuperados. A ausência de uma dependência pode bloquear uma opção nesta máquina; estar listado não significa estar aplicado ou recomendado.
+
+A prévia explica antes/depois, privilégio, riscos e reinício. Desativar usa os valores declarados; Restaurar recupera o snapshot real. Recursos não restauráveis, como limpeza e ferramentas de manutenção, têm fluxos separados. A matriz GDZ → VL está em [funções do menu](FUNCOES-DO-MENU-0.4.0.md).
 
 | ID | Função | Grupo | Build mínima |
 | --- | --- | --- | ---: |
@@ -53,6 +55,7 @@ A prévia explica antes/depois, privilégio, riscos e reinício. Desativar usa o
 | `power-high` | Plano Alto Desempenho | desempenho | 19041 |
 | `power-ultimate` | Plano Desempenho Máximo | desempenho | 19041 |
 | `x3d-mode` | Configuração para X3D com dois CCDs | jogo | 19041 |
+| `windows-update-services` | Reativar serviços do Windows Update | sistema | 19041 |
 | `pagefile-auto` | Arquivo de paginação automático | memoria | 19041 |
 | `unused-services-off` | Desativar cinco serviços opcionais | sistema | 19041 |
 | `obs-priority` | OBS com elevação e sem power throttling | jogo | 19041 |
@@ -65,7 +68,7 @@ A prévia explica antes/depois, privilégio, riscos e reinício. Desativar usa o
 
 ## Fontes e fronteiras
 
-Os valores/combinações recuperados são descritos em GDZ-OPERACOES-IMPLEMENTAVEIS.md. O código da implementação é próprio. Cada definição contém SourceUrl/SourceEvidence quando disponível; o JSON público `artifacts/catalogo-0.3.0.json` conserva esses campos, riscos e alvos estáticos.
+Os valores/combinações recuperados são descritos em GDZ-OPERACOES-IMPLEMENTAVEIS.md. O código da implementação é próprio. Cada definição contém SourceUrl/SourceEvidence quando disponível; o JSON público `artifacts/catalogo-0.4.0.json` conserva esses campos, riscos e alvos estáticos.
 
 APIs oficiais usadas: Registro Microsoft.Win32; Service Control Manager; PowerGet/SetActiveScheme; SystemParametersInfo; WMI Win32_ComputerSystem; IP Helper Get/SetInterfaceDnsSettings; DEVMODEW/ChangeDisplaySettingsEx; NVAPI DRS. A configuração Steam usa parser próprio KeyValues/VDF. Resolver dispositivos não cria chaves com exemplos sintéticos.
 

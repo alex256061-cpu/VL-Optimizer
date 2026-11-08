@@ -1,39 +1,15 @@
-# Resultados — VL Optimizer 0.3.0
+# Resultados — VL Optimizer 0.4.0
 
-Entrega de 08/11/2026 sobre o projeto fornecido. O ZIP 0.2.0 de referência foi preservado, com SHA-256 `42091a133c2dd63a18f35c1459e286bb98aaca007fb2ad94ebc5f29b06749274`.
+As 13 opções principais solicitadas estão no menu: Painel; Desempenho; Mouse e teclado; Memória; Limpeza; Programas; Internet e live; Windows; Inicialização; Meus jogos; DLSS / FSR; VL Scaling; Medidor de FPS. Hardware, histórico e configurações ficam nos atalhos inferiores. A identidade vermelha/preta do VL foi mantida.
 
-## Implementado
+O [mapa de funções](FUNCOES-DO-MENU-0.4.0.md) cruza as 78 entradas recuperadas com os mecanismos atuais e distingue ajustes, ferramentas, orientações manuais e substituições deliberadas. O [JSON](../artifacts/menu-functions-0.4.0.json) conserva os vínculos e a descrição mecânica da amostra analisada.
 
-O aplicativo passou de duas famílias de alteração para um catálogo de 56 configurações e serviços de limpeza, jogos, sessões, FiveM, GPU por executável, FPS/frametime, memória, disco, programas/Store, hardware e manutenção. A interface VL existente foi mantida e recebeu onze páginas, sete abas de medições e três de jogos. A comparação detalhada com o GDZ e o mapeamento dos nomes recuperados estão em [EVOLUCAO-0.3.0.md](EVOLUCAO-0.3.0.md).
+Foram ligados 57 ajustes às áreas apropriadas; a seleção de uma área não aplica itens ocultos de outra. A busca abre a aba do ajuste. A contagem de Inicialização é real. Navegação larga permanece aberta e telas menores usam expansão/rolagem.
 
-Foram melhorados: busca global, estado vazio/indisponível, seleção para revisão, diferenciação entre selecionar e estar ativo, origem das métricas, progresso real, tratamento parcial e restauração. Uma revisão em lote impede aprovar configurações que compartilham o mesmo recurso, evitando que um snapshot fique obsoleto pela ação anterior do próprio lote.
+Novos caminhos: dez opções do INI OptiScaler com prévia, backup, verificação e restauração; overlay externo FPS; reativação dos serviços Windows Update com snapshot; solicitações de Defender/Proteção do Sistema e confirmação de estado disponível. Dicas BIOS/OBS/driver continuam identificadas como ações manuais, sem alterar políticas ou componentes ocultamente.
 
-O Core guarda estados exatos, verifica depois de escrever e preserva conflitos externos. Snapshots de serviços/pagefile/DNS/vídeo incluem seus estados compostos; falhas intermediárias observadas continuam recuperáveis. Os arquivos FiveM, bibliotecas locais OptiScaler e preferências GPU possuem backups por caminho, integridade e restauração condicional.
+Validação: 218/218 testes isolados e build Release sem avisos/erros. Smoke de leitura: 16 destinos, quatro páginas legadas, 22 subabas novas e abas existentes, 57 PNGs. Estilos Win32 de passagem de cliques/não ativação do overlay foram conferidos no próprio HWND. Foram inspecionados painel, menu, desempenho, rede, DLSS/FSR, OptiScaler e FPS em render real WPF.
 
-## Evidência final
+O motor gráfico GDZ/Lossless não foi reconstruído. VL Scaling guarda/exporta 40 propriedades e abre manualmente um programa externo; não promete aplicar esses perfis nele. O overlay exige janela/sem bordas e fica na tela principal. Nenhuma captura de jogo ou alteração real de Windows/Defender/serviços/Proteção do Sistema foi executada nesta revisão. Mutações e integração gráfica ainda exigem testes em VM/hardware/driver distintos.
 
-| Verificação | Resultado |
-| --- | --- |
-| Build Release | 0 avisos, 0 erros |
-| Testes isolados | 204/204 passaram |
-| Catálogo | 56 definições, incluindo 33 tweaks |
-| Smoke do portátil autocontido | Saída 0, somente leitura, onze páginas |
-| Subpáginas | Sete abas de medições e três de jogos renderizadas |
-| Busca e comparação | Exercitadas pelo smoke |
-| Dimensões de janela | 1366×768, 1536×884, 683×384 DIPs |
-| Interop somente leitura | PDH RAM/CPU/GPU, DNS, vídeo, pagefile, sete fontes WMI e inventário UWP |
-| Scripts PowerShell | Sete scripts, parser Windows PowerShell 5.1 sem erro |
-| Publicação | Portátil autocontido, ZIP e instalador IExpress 0.3.0 |
-| Instalador | CAB extraído sem executar instalação; cinco arquivos e hashes do manifesto conferidos |
-| Correspondência | EXE do instalador idêntico ao portátil por SHA-256 |
-| Alterações reais no PC | Nenhuma configuração, limpeza, purge, kill, desinstalação ou manutenção executada |
-
-Evidências públicas: `artifacts/test-results.json`, `artifacts/smoke-summary.json`, `artifacts/catalogo-0.3.0.json`, `artifacts/release-validation-0.3.0.json` e `release/VERIFICACAO-0.3.0.json`. Capturas completas/fixtures ficam em `artifacts/private`, excluídas do código-fonte distribuído.
-
-## Limites materiais
-
-O editor de scaling e a instalação local OptiScaler não equivalem a reconstruir o motor nativo do GDZ. Seus quarenta campos são armazenados e exportados pelo VL; um programa externo selecionado é configurado manualmente. Não há LSFG/upscaling próprio, overlay sobre jogos nem aplicação automática dos perfis em outro produto.
-
-PresentMon é um coletor externo opcional e não foi executado em um jogo nesta entrega. Drivers NVIDIA DRS e todas as mutações Windows precisam de validação em ambiente descartável. Os resultados não comprovam ganho de FPS nem vantagem de consumo sobre GDZ.
-
-Temperaturas, estado comprovado XMP/EXPO/Resizable BAR, medição física USB, driver próprio, backend remoto, licença/conta, autoatualização e assinatura de código permanecem fora da implementação. Instalar/desinstalar o próprio VL em VM e a matriz de DPI/acessibilidade ainda são pendências de homologação. Consulte [VALIDACAO.md](VALIDACAO.md).
+Evidências públicas: artifacts/test-results.json, artifacts/smoke-summary.json, artifacts/catalogo-0.4.0.json, artifacts/menu-functions-0.4.0.json e artifacts/release-validation-0.4.0.json. Evidências completas e fixtures permanecem em artifacts/private. Relatórios 0.3.0 foram preservados em docs/historico/0.3.0.

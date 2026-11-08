@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Windows.Forms
 function Assert-PlainPath([string]$Path) {
     $cursor = [IO.Path]::GetFullPath($Path)
@@ -59,7 +59,7 @@ try {
     New-Item -Path $uninstallKey | Out-Null
     $keyCreated = $true
     $uninstallCommand = 'powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File "' + (Join-Path $target 'Uninstall.ps1') + '"'
-    $values = @{DisplayName='VL Optimizer';DisplayVersion='0.3.0';Publisher='VL';InstallLocation=$target;DisplayIcon=(Join-Path $target 'VLOptimizer.exe');UninstallString=$uninstallCommand}
+    $values = @{DisplayName='VL Optimizer';DisplayVersion='0.4.0';Publisher='VL';InstallLocation=$target;DisplayIcon=(Join-Path $target 'VLOptimizer.exe');UninstallString=$uninstallCommand}
     foreach ($pair in $values.GetEnumerator()) { New-ItemProperty -Path $uninstallKey -Name $pair.Key -Value $pair.Value -PropertyType String | Out-Null }
     New-ItemProperty -Path $uninstallKey -Name NoModify -Value 1 -PropertyType DWord | Out-Null
     New-ItemProperty -Path $uninstallKey -Name NoRepair -Value 1 -PropertyType DWord | Out-Null

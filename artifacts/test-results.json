@@ -1,8 +1,8 @@
 {
-  "executedAt": "2026-11-08T13:53:58.6934322-03:00",
-  "passed": 204,
+  "executedAt": "2026-11-08T14:52:54.0603048-03:00",
+  "passed": 218,
   "failed": 0,
-  "total": 204,
+  "total": 218,
   "isolatedFakesOnly": true,
   "results": [
     {
@@ -716,6 +716,16 @@
       "error": null
     },
     {
+      "name": "Recupera\u00E7\u00E3o: Defender e Prote\u00E7\u00E3o do Sistema possuem etapas fechadas",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Recupera\u00E7\u00E3o: reativa\u00E7\u00E3o exige administrador antes de executar",
+      "passed": true,
+      "error": null
+    },
+    {
       "name": "Manuten\u00E7\u00E3o pr\u00E9via apenas consulta ambiente",
       "passed": true,
       "error": null
@@ -1022,6 +1032,66 @@
     },
     {
       "name": "OptiScaler: anticheat identificado e pacote inv\u00E1lido ficam bloqueados",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "\u00C1reas: todo ajuste possui uma p\u00E1gina real e nenhum ID fantasma",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Opti INI: edi\u00E7\u00E3o preserva coment\u00E1rios, Unicode e op\u00E7\u00F5es alheias",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Opti INI: preserva UTF16 e rejeita op\u00E7\u00F5es ausentes e duplicadas",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Opti INI: valores fora do cat\u00E1logo n\u00E3o viram comandos ou linhas",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Opti INI: patch n\u00E3o pode editar a mesma chave duas vezes por diferen\u00E7a de caixa",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Windows Update: servi\u00E7os reativados restauram estados exatos anteriores",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Opti INI: pr\u00E9via s\u00F3 l\u00EA e restaura\u00E7\u00E3o sobrevive \u00E0 reabertura",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Opti INI: c\u00F3pia e replay da pr\u00E9via s\u00E3o bloqueados",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Opti INI: mudan\u00E7as ap\u00F3s pr\u00E9via e ap\u00F3s aplica\u00E7\u00E3o s\u00E3o preservadas",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Opti INI: backups sobrepostos exigem ordem inversa",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Opti INI: backup corrompido bloqueia restaura\u00E7\u00E3o antes de escrever",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Opti INI: jogo com anticheat identificado e cancelamento ficam bloqueados",
       "passed": true,
       "error": null
     }

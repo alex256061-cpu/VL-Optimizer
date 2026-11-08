@@ -22,3 +22,7 @@ artifacts/*
 !artifacts/catalogo-0.3.0.json
 !artifacts/release-validation-0.3.0.json
 !artifacts/VL-Optimizer-preview.png
+
+!artifacts/catalogo-0.4.0.json
+!artifacts/menu-functions-0.4.0.json
+!artifacts/release-validation-0.4.0.json

@@ -20,6 +20,10 @@ public sealed partial class MainWindow
     private Button? _exportTitleButton;
     private bool _railExpanded;
     private bool _railKeyboardNavigation;
+    private bool _railPinned;
+    private readonly List<TextBlock> _navSectionLabels = [];
+    private readonly StackPanel _railBrandHost = new();
+    private TextBlock? _startupNavCount;
     private const double RailWidth = 72;
     private const double ExpandedRailWidth = 264;
     private readonly RectangleGeometry _railClip = new(new Rect(0, 0, RailWidth, 10000));
@@ -69,18 +73,24 @@ public sealed partial class MainWindow
         _sidebar.Background = Brush(Palette.Canvas); _sidebar.BorderBrush = Brush(Palette.Line); _sidebar.BorderThickness = new Thickness(0, 0, 1, 0);
         // The drawer has its own full allocation across the shell. Only its clip changes;
         // allocating 72px to a 264px child makes WPF introduce an unwanted layout clip.
-        _sidebar.Width = ExpandedRailWidth; _sidebar.HorizontalAlignment = HorizontalAlignment.Left; _sidebar.Padding = new Thickness(12, 18, 12, 12); _sidebar.Clip = _railClip;
+        _sidebar.Width = ExpandedRailWidth; _sidebar.HorizontalAlignment = HorizontalAlignment.Left; _sidebar.Padding = new Thickness(12, 12, 12, 8); _sidebar.Clip = _railClip;
         Grid.SetRow(_sidebar, 1); Grid.SetColumnSpan(_sidebar, 2); Panel.SetZIndex(_sidebar, 20);
         var sidebarDock = new DockPanel(); _sidebar.Child = sidebarDock;
-        var brand = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(9, 0, 0, 29), Height = 38 };
+        var brand = _railBrandHost; brand.Orientation = Orientation.Horizontal; brand.Margin = new Thickness(9, 0, 0, 12); brand.Height = 28;
         brand.Children.Add(Logo(28)); _sidebarBrand.Text = Brand.Name; _sidebarBrand.FontSize = 14; _sidebarBrand.FontWeight = FontWeights.SemiBold; _sidebarBrand.Margin = new Thickness(13, 0, 0, 0); _sidebarBrand.VerticalAlignment = VerticalAlignment.Center; _sidebarBrand.Opacity = 0; _sidebarBrand.RenderTransform = new TranslateTransform(-6, 0); brand.Children.Add(_sidebarBrand);
         DockPanel.SetDock(brand, Dock.Top); sidebarDock.Children.Add(brand);
-        var profile = Button(Glyph("\uE77B", 18, Brush(Palette.AccentBright)), () => Navigate("settings")); profile.Width = 48; profile.HorizontalAlignment = HorizontalAlignment.Left; profile.Padding = new Thickness(12); profile.ToolTip = "Preferências"; AutomationProperties.SetName(profile, "Preferências"); _sidebarFooter.Children.Add(profile); _sidebarFooter.Margin = new Thickness(0, 14, 0, 0); DockPanel.SetDock(_sidebarFooter, Dock.Bottom); sidebarDock.Children.Add(_sidebarFooter);
-        AddNav("overview", "\uE80F", "Visão geral");
-        _navigation.Children.Add(RailDivider());
-        AddNav("catalog", "\uE8F1", "Ajustes do Windows"); AddNav("power", "\uE945", "Energia"); AddNav("startup", "\uE7B5", "Inicialização"); AddNav("storage", "\uEDA2", "Limpeza e armazenamento");
-        AddNav("games", "\uE7FC", "Jogos e FiveM"); AddNav("measurements", "\uE9D9", "Medições e diagnóstico"); AddNav("scaling", "\uE7F4", "Scaling e perfis"); AddNav("processes", "\uE964", "Memória e processos");
-        _navigation.Children.Add(RailDivider()); AddNav("history", "\uE81C", "Histórico e restauração"); AddNav("settings", "\uE713", "Configurações e sobre");
+        _sidebarFooter.Orientation = Orientation.Horizontal;
+        foreach (var item in ProductPages.All.Where(p => p.Id is "settings" or "history" or "hardware"))
+        {
+            var button = Button(Glyph(item.Glyph, 18, Muted), () => Navigate(item.Id)); button.Width = 48; button.Height = 44; button.Padding = new Thickness(10); button.Margin = new Thickness(0, 0, 8, 0); button.ToolTip = item.Title; AutomationProperties.SetName(button, item.Title); _sidebarFooter.Children.Add(button); _navButtons[item.Id] = button;
+        }
+        _sidebarFooter.Margin = new Thickness(0, 8, 0, 0); DockPanel.SetDock(_sidebarFooter, Dock.Bottom); sidebarDock.Children.Add(_sidebarFooter);
+        foreach (var group in ProductPages.All.Where(p => p.Section != "FERRAMENTAS" && p.Id != "hardware").GroupBy(p => p.Section))
+        {
+            var heading = Text(group.Key, 9, Muted, FontWeights.SemiBold, new Thickness(8, 5, 0, 2));
+            heading.TextWrapping = TextWrapping.NoWrap; heading.Opacity = 0; _navSectionLabels.Add(heading); _navigation.Children.Add(heading);
+            foreach (var page in group) AddNav(page.Id, page.Glyph, page.Title);
+        }
         sidebarDock.Children.Add(new ScrollViewer { Content = _navigation, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, Focusable = false });
         _sidebar.MouseEnter += (_, _) => ExpandRail(true); _sidebar.MouseLeave += (_, _) => { if (!_railKeyboardNavigation || !_sidebar.IsKeyboardFocusWithin) ExpandRail(false); };
         _sidebar.PreviewMouseDown += (_, _) => _railKeyboardNavigation = false;
@@ -134,7 +144,7 @@ public sealed partial class MainWindow
         Grid.SetColumn(_searchPanel, 1); _searchPanel.VerticalAlignment = VerticalAlignment.Center;
         var searchBox = new Grid(); _search.MinHeight = 40; _search.Height = 40; _search.Padding = new Thickness(37, 8, 57, 8); _search.Background = Brush(Palette.Panel); _search.BorderBrush = Brush(Palette.Line); _search.FontSize = 12; _search.ToolTip = "Pesquisar ajuste, página ou problema · Ctrl K"; AutomationProperties.SetName(_search, "Pesquisar ajustes, páginas e recomendações");
         var placeholder = Text("Buscar ajuste, página ou problema...", 12, Brush(Palette.Muted), margin: new Thickness(38, 0, 40, 0)); placeholder.VerticalAlignment = VerticalAlignment.Center; placeholder.IsHitTestVisible = false;
-        _search.TextChanged += (_, _) => { placeholder.Visibility = _search.Text.Length == 0 ? Visibility.Visible : Visibility.Collapsed; if (!_building && (_page is "search" or "overview" or "startup" or "catalog" or "measurements")) RenderPage(false); };
+        _search.TextChanged += (_, _) => { placeholder.Visibility = _search.Text.Length == 0 ? Visibility.Visible : Visibility.Collapsed; if (!_building && (_page is "search" or "overview" or "startup" or "catalog" or "measurements" || ProductPages.Find(_page) != null)) RenderPage(false); };
         _search.KeyDown += (_, e) => { if (e.Key == Key.Enter) { SearchNavigate(); e.Handled = true; } }; searchBox.Children.Add(_search); searchBox.Children.Add(placeholder);
         var searchGlyph = Glyph("\uE721", 13, Brush(Palette.Muted)); searchGlyph.Margin = new Thickness(15, 0, 0, 0); searchGlyph.HorizontalAlignment = HorizontalAlignment.Left; searchGlyph.IsHitTestVisible = false; searchBox.Children.Add(searchGlyph);
         var key = Text("Ctrl K", 9, Brush(Palette.Muted)); key.HorizontalAlignment = HorizontalAlignment.Right; key.VerticalAlignment = VerticalAlignment.Center; key.Margin = new Thickness(0, 0, 12, 0); key.IsHitTestVisible = false; searchBox.Children.Add(key); _searchPanel.Children.Add(searchBox); _header.Children.Add(_searchPanel);
@@ -146,17 +156,23 @@ public sealed partial class MainWindow
     {
         var row = new StackPanel { Orientation = Orientation.Horizontal }; row.Children.Add(Glyph(glyph, 18, Muted));
         var text = Text(label, 12, Muted, FontWeights.SemiBold, new Thickness(15, 0, 0, 0)); text.VerticalAlignment = VerticalAlignment.Center; text.TextWrapping = TextWrapping.NoWrap; text.Opacity = 0; text.RenderTransform = new TranslateTransform(-6, 0); row.Children.Add(text); _navLabels.Add(text);
-        var button = Button(row, () => Navigate(key)); button.Width = 48; button.HorizontalAlignment = HorizontalAlignment.Left; button.HorizontalContentAlignment = HorizontalAlignment.Left; button.Padding = new Thickness(12, 10, 8, 10); button.Margin = new Thickness(0, 0, 0, 5); button.Background = Brushes.Transparent; button.BorderBrush = Brushes.Transparent; button.ToolTip = label; AutomationProperties.SetName(button, label);
+        if (key == "startup")
+        {
+            _startupNavCount = Text("", 11, AccentSoft, FontWeights.Bold, new Thickness(9, 0, 0, 0)); _startupNavCount.Opacity = 0; _startupNavCount.VerticalAlignment = VerticalAlignment.Center; _startupNavCount.ToolTip = "Entradas identificadas; não comprova execução no logon"; row.Children.Add(_startupNavCount); _navLabels.Add(_startupNavCount);
+        }
+        var button = Button(row, () => Navigate(key)); button.Width = 48; button.HorizontalAlignment = HorizontalAlignment.Left; button.HorizontalContentAlignment = HorizontalAlignment.Left; button.Padding = new Thickness(12, 10, 8, 10); button.Margin = new Thickness(0); button.MinHeight = 44; button.Height = 44; button.Background = Brushes.Transparent; button.BorderBrush = Brushes.Transparent; button.ToolTip = label; AutomationProperties.SetName(button, label);
         var grid = new Grid(); grid.Children.Add(button); var marker = new Border { Width = 2, Height = 18, Background = Brush(Palette.Accent), HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Center, Visibility = Visibility.Collapsed, IsHitTestVisible = false }; grid.Children.Add(marker); _navMarkers[key] = marker;
         _navButtons[key] = button; _navigation.Children.Add(grid);
     }
 
     private void ExpandRail(bool expanded)
     {
+        expanded |= _railPinned;
         if (_railExpanded == expanded) return; _railExpanded = expanded;
         var target = new Rect(0, 0, expanded ? ExpandedRailWidth : RailWidth, 10000);
-        foreach (var button in _navButtons.Values) button.Width = expanded ? ExpandedRailWidth - 24 : 48;
+        foreach (var button in _navButtons.Values) button.Width = expanded ? ExpandedRailWidth - 40 : 48;
         var current = _railClip.Rect;
+        foreach (var button in _sidebarFooter.Children.OfType<Button>()) button.Width = 48;
         _railClip.BeginAnimation(RectangleGeometry.RectProperty, null); _railClip.Rect = target;
         // Keyboard focus reveals navigation immediately. Pointer transitions are short,
         // interruptible and preserve the fixed content position beneath the overlay.
@@ -168,7 +184,7 @@ public sealed partial class MainWindow
             transition.KeyFrames.Add(new SplineRectKeyFrame(target, KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)), new KeySpline(.23, 1, .32, 1)));
             _railClip.BeginAnimation(RectangleGeometry.RectProperty, transition, HandoffBehavior.SnapshotAndReplace);
         }
-        foreach (var label in _navLabels.Prepend(_sidebarBrand))
+        foreach (var label in _navLabels.Concat(_navSectionLabels).Prepend(_sidebarBrand))
         {
             var opacity = label.Opacity;
             label.BeginAnimation(OpacityProperty, null); label.Opacity = expanded ? 1 : 0;
@@ -183,6 +199,7 @@ public sealed partial class MainWindow
 
     private void UpdateDesignState()
     {
+        if (_startupNavCount != null) _startupNavCount.Text = _snapshot?.StartupItems.Count > 0 ? _snapshot.StartupItems.Count.ToString() : "";
         foreach (var marker in _navMarkers) marker.Value.Visibility = marker.Key == _page ? Visibility.Visible : Visibility.Collapsed;
         if (_exportTitleButton != null) _exportTitleButton.IsEnabled = _snapshot != null && !_busy;
         _compatibility.Text = _snapshot == null ? "" : _snapshot.SupportedOS ? "●  Diagnóstico local" : "●  Somente diagnóstico";
@@ -192,6 +209,8 @@ public sealed partial class MainWindow
     private void AdaptLayout()
     {
         if (_header.ColumnDefinitions.Count < 2) return;
+        bool pinned = ActualWidth >= 1180 && !_motionSmoke;
+        if (_railPinned != pinned) { _railPinned = pinned; _railBrandHost.Visibility = pinned ? Visibility.Collapsed : Visibility.Visible; _sidebarColumn.Width = new GridLength(pinned ? ExpandedRailWidth : RailWidth); ExpandRail(pinned); }
         var narrow = ActualWidth < 950;
         _header.ColumnDefinitions[1].Width = new GridLength(narrow ? 0 : ActualWidth < 1200 ? 330 : 420);
         _header.RowDefinitions[1].Height = narrow ? GridLength.Auto : new GridLength(0);
@@ -212,12 +231,12 @@ public sealed partial class MainWindow
         root.Children.Add(dashboard);
         root.Children.Add(SmallSection("OTIMIZAÇÕES", "Escolha uma área para explorar"));
         var categories = new UniformGrid { Columns = wide ? 5 : ActualWidth >= 780 ? 3 : 2, Margin = new Thickness(-5, 0, -5, 0) };
-        categories.Children.Add(DashboardCategory("\uE8F1", "Ajustes", "Desempenho, entrada, rede e Windows.", "Catálogo com prévia e reversão", "catalog", false));
-        categories.Children.Add(DashboardCategory("\uE7B5", "Inicialização", "Controle o que abre junto com o Windows.", _snapshot == null ? "Aguardando análise" : _snapshot.StartupItems.Count + " itens identificados", "startup", false));
-        categories.Children.Add(DashboardCategory("\uE7FC", "Jogos", "Instalações locais e presets FiveM.", "Perfis com cópia de segurança", "games", true));
-        var free = _snapshot?.Disks.Sum(d => d.FreeBytes) ?? 0;
-        categories.Children.Add(DashboardCategory("\uEDA2", "Limpeza", "Verifique categorias antes de excluir.", _snapshot?.Disks.Count > 0 ? Bytes(free) + " livres em disco" : "Varredura sob demanda", "storage", true));
-        categories.Children.Add(DashboardCategory("\uE9D9", "Medições", "FPS, frametime e consumo observado.", "Dados reais e dependências visíveis", "measurements", false)); root.Children.Add(categories);
+        foreach (var id in new[] { "performance", "input", "memory", "network", "windows" })
+        {
+            var area = ProductPages.Find(id)!; string count = area.ConfigurationIds.Count == 1 ? "1 opção com revisão" : area.ConfigurationIds.Count + " opções com revisão";
+            categories.Children.Add(DashboardCategory(area.Glyph, area.Title, area.Description, count, area.Id, false));
+        }
+        root.Children.Add(categories);
         root.Children.Add(BuildRecommendations());
         if (!wide) { root.Children.Add(SmallSection("SEU HARDWARE", "Dados observados")); root.Children.Add(BuildHardware()); }
         if (_previousSnapshot != null && _snapshot != null)

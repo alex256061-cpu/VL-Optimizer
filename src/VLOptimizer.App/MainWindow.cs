@@ -82,6 +82,7 @@ public sealed partial class MainWindow : Window
         Closing += (_, e) => { if (_maintenanceRunning) { e.Cancel = true; Notice("Uma ferramenta de manutenção do Windows está em andamento. O cancelamento será atendido entre etapas; aguarde a conclusão da ferramenta antes de fechar."); } };
         Closing += OnClosingSessionMonitor;
         Closed += (_, _) => StopSceneMotion();
+        Closed += (_, _) => { _fpsOverlayWindow?.Close(); _fpsOverlayWindow = null; };
         IsVisibleChanged += (_, _) => UpdateSceneMotion();
         SystemParameters.StaticPropertyChanged += OnMotionSystemPreferenceChanged;
         Loaded += async (_, _) =>
@@ -137,12 +138,14 @@ public sealed partial class MainWindow : Window
             "settings" => ("Do seu jeito", "Preferências de interface, privacidade e informações do aplicativo."),
             _ => (Greeting(), "O que já está no ponto e o que faz sentido ajustar no seu PC.")
         };
+        if (ProductPages.Find(_page) is { } productPage && _page != "overview") { title = productPage.Title; subtitle = productPage.Description; }
         _pageTitle.Text = title; _pageSubtitle.Text = subtitle; UpdateDesignState();
         _pageHost.Content = _page switch
         {
             "catalog" => BuildConfigurationCatalog(), "games" => BuildGamesPage(), "measurements" => BuildMeasurementsPage(),
             "scaling" => BuildScalingPage(), "search" => BuildSearchResults(),
-            "startup" => BuildStartup(), "power" => BuildPower(), "storage" => BuildCleanupPage(),
+            "performance" or "input" or "memory" or "network" or "windows" or "applications" or "graphics" or "fps" or "hardware" => BuildProductArea(_page),
+            "startup" => BuildStartupArea(), "power" => BuildPower(), "storage" => BuildProductArea("storage"),
             "processes" => BuildProcesses(), "history" => BuildHistory(), "settings" => BuildSettings(), _ => BuildOverview()
         };
         _building = false;
@@ -416,7 +419,7 @@ public sealed partial class MainWindow : Window
     }
 
     private bool Matches(string value) => string.IsNullOrWhiteSpace(_search.Text) || Contains(value, _search.Text.Trim());
-    private static bool Contains(string value, string query) => CultureInfo.GetCultureInfo("pt-BR").CompareInfo.IndexOf(value, query, CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace) >= 0;
+    private static bool Contains(string value, string query) => query.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).All(term => CultureInfo.GetCultureInfo("pt-BR").CompareInfo.IndexOf(value, term, CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace) >= 0);
     private void ScrollToRecommendations()
     {
         if (_page != "overview") Navigate("overview");
@@ -499,7 +502,7 @@ public sealed partial class MainWindow : Window
             Navigate("overview", false); await CaptureAsync(Path.Combine(directory, "01-overview-before-analysis.png"));
             await AnalyzeAsync();
             await RefreshScalingAsync();
-            foreach (var page in new[] { "overview", "catalog", "startup", "power", "storage", "games", "measurements", "scaling", "processes", "history", "settings" })
+            foreach (var page in ProductPages.All.Select(p => p.Id).Concat(new[] { "catalog", "power", "measurements", "processes" }))
             {
                 Navigate(page, false); await CaptureAsync(Path.Combine(directory, "02-" + page + "-1366.png"));
             }
@@ -515,6 +518,22 @@ public sealed partial class MainWindow : Window
                 _gamesTab = tab; RenderPage(); await CaptureAsync(Path.Combine(directory, "02-games-" + tab + ".png"));
             }
             _gamesTab = "Bibliotecas";
+            foreach (var (area, tabs) in new[] {
+                ("performance", new[] { "Ajustes", "Energia", "Apps em segundo plano", "Orientações" }),
+                ("input", new[] { "Ajustes", "Eventos do mouse" }),
+                ("memory", new[] { "RAM e standby", "Processos", "Memória virtual" }),
+                ("storage", new[] { "Arquivos e Lixeira", "Componentes e hibernação", "Ocupação de pastas" }),
+                ("network", new[] { "DNS e placa de rede", "Reparos de rede", "OBS e transmissão" }),
+                ("windows", new[] { "Preferências", "Reparos e proteção", "Histórico e backups" }),
+                ("graphics", new[] { "DLSS e tecnologias", "OptiScaler" }),
+                ("fps", new[] { "FPS e frametimes", "Diagnóstico da sessão" }) })
+            {
+                Navigate(area, false);
+                foreach (string tab in tabs) { _areaTabs[area] = tab; RenderPage(); await CaptureAsync(Path.Combine(directory, "area-" + area + "-" + tab + ".png")); }
+                _areaTabs[area] = tabs[0];
+            }
+            var overlayProbe = new FpsOverlayWindow { Opacity = 0 }; overlayProbe.Show(); bool overlayStylesVerified = overlayProbe.ClickThroughVerified; overlayProbe.Close();
+            if (!overlayStylesVerified) throw new InvalidOperationException("Overlay não confirmou seus estilos de entrada.");
             Width = 683; Height = 384; Navigate("overview", false); await CaptureAsync(Path.Combine(directory, "03-overview-compact.png"));
             Width = 1536; Height = 884; Navigate("overview", false); await CaptureAsync(Path.Combine(directory, "04-overview-wide.png"));
             _search.Text = "energia"; SearchNavigate(); await CaptureAsync(Path.Combine(directory, "05-search.png")); _search.Clear();
@@ -525,7 +544,7 @@ public sealed partial class MainWindow : Window
             WindowState = WindowState.Minimized;
             var minimizedProfile = await MeasureIdleAsync();
             WindowState = WindowState.Normal;
-            File.WriteAllText(Path.Combine(directory, "smoke-result.json"), JsonSerializer.Serialize(new { Success = _snapshot != null, ReadOnly = true, NavigationSucceeded = true, Pages = _navButtons.Keys.ToArray(), Snapshot = _snapshot, PreviousSnapshot = _previousSnapshot, HistoryCount = _history.Count, MotionReduced = true, VisibleIdle = visibleProfile, MinimizedIdle = minimizedProfile, ProfilingNote = "Amostra de repouso de 3 segundos por estado; não valida fluidez, FPS ou consumo em outras máquinas." }, new JsonSerializerOptions { WriteIndented = true }));
+            File.WriteAllText(Path.Combine(directory, "smoke-result.json"), JsonSerializer.Serialize(new { Success = _snapshot != null, ReadOnly = true, NavigationSucceeded = true, Pages = _navButtons.Keys.ToArray(), OverlayStylesVerified = overlayStylesVerified, Snapshot = _snapshot, PreviousSnapshot = _previousSnapshot, HistoryCount = _history.Count, MotionReduced = true, VisibleIdle = visibleProfile, MinimizedIdle = minimizedProfile, ProfilingNote = "Amostra de repouso de 3 segundos por estado; não valida fluidez, FPS ou consumo em outras máquinas." }, new JsonSerializerOptions { WriteIndented = true }));
             Application.Current.Shutdown(_snapshot == null ? 2 : 0);
         }
         catch (Exception ex)
@@ -649,7 +668,7 @@ public sealed partial class MainWindow : Window
         }
         return Card(grid);
     }
-    private static string NormalizePage(string value) => value.ToLowerInvariant() switch { "energy" or "energia" => "power", "inicializacao" or "inicialização" or "initialization" => "startup", "armazenamento" or "cleanup" => "storage", "processos" => "processes", "historico" or "histórico" => "history", "configurações" or "configuracoes" => "settings", "ajustes" => "catalog", "fps" or "diagnostics" => "measurements", "power" or "startup" or "storage" or "processes" or "history" or "settings" or "catalog" or "games" or "scaling" or "measurements" => value.ToLowerInvariant(), _ => "overview" };
+    private static string NormalizePage(string value) => ProductPages.Find(value.ToLowerInvariant())?.Id ?? (value.ToLowerInvariant() switch { "energy" or "energia" => "power", "inicializacao" or "inicialização" or "initialization" => "startup", "armazenamento" or "cleanup" => "storage", "processos" => "processes", "historico" or "histórico" => "history", "configurações" or "configuracoes" => "settings", "ajustes" => "catalog", "fps" or "diagnostics" => "measurements", "power" or "startup" or "storage" or "processes" or "history" or "settings" or "catalog" or "games" or "scaling" or "measurements" => value.ToLowerInvariant(), _ => "overview" });
     private UIElement ActionFooter(string label, string target)
     {
         var panel = Stack(); var button = Button(label + "  ↗", () => OpenExternal(target)); button.HorizontalAlignment = HorizontalAlignment.Left; button.Margin = new Thickness(0, 8, 0, 6); panel.Children.Add(button);

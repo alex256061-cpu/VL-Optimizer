@@ -4,6 +4,6 @@ namespace VLOptimizer.App;
 internal static class Brand
 {
     public const string Name = "VL Optimizer";
-    public const string Version = "0.3.0 · Prévia técnica";
+    public const string Version = "0.4.0 · Prévia técnica";
     public const string Tagline = "Seu PC. Com clareza.";
 }

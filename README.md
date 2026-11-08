@@ -1,8 +1,8 @@
-# VL Optimizer 0.3.0
+# VL Optimizer 0.4.0
 
-[**Baixar versão de teste para Windows**](https://github.com/alex256061-cpu/VL-Optimizer/releases/tag/v0.3.0) · [Guia para testar](TESTAR.md) · [Relatar problema](https://github.com/alex256061-cpu/VL-Optimizer/issues/new/choose)
+[**Baixar versão de teste para Windows**](https://github.com/alex256061-cpu/VL-Optimizer/releases/tag/v0.4.0) · [Guia para testar](TESTAR.md) · [Relatar problema](https://github.com/alex256061-cpu/VL-Optimizer/issues/new/choose)
 
-Para testar sem compilar: baixe **VL-Optimizer-0.3.0-portatil.zip** no link acima, extraia e abra **VLOptimizer.exe**. O diagnóstico inicial não altera configurações. Os executáveis ficam nos Releases; o botão **Code → Download ZIP** baixa somente o código-fonte.
+Para testar sem compilar: baixe **VL-Optimizer-0.4.0-portatil.zip** no link acima, extraia e abra **VLOptimizer.exe**. O diagnóstico inicial não altera configurações. Os executáveis ficam nos Releases; o botão **Code → Download ZIP** baixa somente o código-fonte.
 
 Aplicativo desktop C# / .NET 10 / WPF para diagnóstico, configurações, jogos e manutenção local. Esta evolução integra os comportamentos recuperados na análise do GDZ à interface vermelha/preta existente, com implementação própria e sem incluir código, bibliotecas gráficas ou shaders do produto analisado.
 
@@ -10,20 +10,26 @@ Aplicativo desktop C# / .NET 10 / WPF para diagnóstico, configurações, jogos 
 
 ## Abrir
 
-- `release/VL-Optimizer-0.3.0.exe`: portátil autocontido, dispensa instalar .NET.
-- `release/VL-Optimizer-0.3.0-portatil.zip`: portátil com instruções.
-- `release/Instalar-VL-Optimizer-0.3.0.exe`: instalação por usuário, com atalho e desinstalação.
-- `release/VL-Optimizer-0.3.0-codigo-fonte.zip`: código, testes, relatórios e scripts.
-- `release/SHA256SUMS.txt`: hashes dos arquivos distribuídos.
+- `release/VL-Optimizer-0.4.0.exe`: portátil autocontido, dispensa instalar .NET.
+- `release/VL-Optimizer-0.4.0-portatil.zip`: portátil com instruções.
+- `release/Instalar-VL-Optimizer-0.4.0.exe`: instalação por usuário, com atalho e desinstalação.
+- `release/VL-Optimizer-0.4.0-codigo-fonte.zip`: código, testes, relatórios e scripts.
+- `SHA256SUMS-0.4.0.txt` no Release: hashes dos arquivos distribuídos.
 
 O instalador não abre o aplicativo nem aplica ajustes. Ele recusa sobrepor uma instalação anterior: desinstale a versão instalada antes de reinstalar. O histórico permanece em `%LOCALAPPDATA%\VLOptimizer`. Desinstalar não desfaz configurações do Windows; revise as restaurações antes. O ZIP 0.2.0 fornecido como referência foi preservado.
+
+## Menu solicitado
+
+Painel; Desempenho; Mouse e teclado; Memória; Limpeza; Programas; Internet e live; Windows; Inicialização; Meus jogos; DLSS / FSR; VL Scaling; Medidor de FPS. Hardware, histórico e configurações ficam nos atalhos inferiores. O menu permanece aberto em janelas largas. [Explicação de cada função e comparação com a referência](docs/FUNCOES-DO-MENU-0.4.0.md).
+
+Novidades: editor do INI OptiScaler com dez opções, backup e restauração; sobreposição externa de FPS nos quatro cantos da tela principal; recuperação explícita Defender/Proteção do Sistema; serviços Windows Update com snapshot. O overlay usa a captura PresentMon escolhida e exige janela/sem bordas; o motor gráfico próprio de scaling continua ausente.
 
 ## Funcionalidades
 
 | Área | Implementação |
 | --- | --- |
 | Visão geral | Diagnóstico real, origem dos dados, recomendações contextuais, busca global e comparação entre análises. |
-| Catálogo | 56 configurações: os 33 tweaks identificados e 23 operações adicionais; prévia, revalidação, snapshot tipado, verificação e restauração. Compatibilidade e dependências são conferidas antes de escrever. |
+| Catálogo | 57 configurações: os 33 tweaks identificados e 24 operações adicionais; prévia, revalidação, snapshot tipado, verificação e restauração. Compatibilidade e dependências são conferidas antes de escrever. |
 | Sistema e entrada | Modo Jogo, DVR/Game Bar, políticas de segundo plano/atualizações/privacidade, serviços, mouse/teclado, aparência e opções por versão do Windows. |
 | Energia e rede | Planos existentes, hibernação, X3D com dois CCDs, propriedades anunciadas pelo driver da NIC, DNS IPv4 por interface física, DHCP e restauração do estado original. |
 | GPU e vídeo | HAGS, MPO, MSI/IRQ onde compatível, DLSS por NVAPI/DRS oficial, preferência GPU por executável preservando tokens alheios e modo 1280×720 testado pelo driver. |
@@ -34,11 +40,11 @@ O instalador não abre o aplicativo nem aplica ajustes. Ele recusa sobrepor uma 
 | Diagnóstico | CPU total/núcleo, GPU 3D e RAM com amostragem e fontes indisponíveis identificadas. Inventário detalhado de sete grupos WMI e estimativa de eventos do mouse na janela. |
 | Memória e disco | RAM/commit/standby reais, purga explícita, agendamento temporário opt-in e scanner de diretórios/maiores arquivos somente leitura. |
 | Programas | Inventário Win32, prévia de desinstalação EXE/MSI, verificação posterior e revisão de sobras específicas após conclusão comprovada. Encerramento de processo exige PID, início e caminho conferidos. Apps Store possuem fluxo separado. |
-| Manutenção | Limpar cache DNS, reset de rede, DISM/SFC, limpeza de componentes Windows Update, ponto de restauração e reinício explícito do Explorer. Resultados por etapa; não há desfazer universal dessas ferramentas. |
-| Scaling | Armazenar, validar, editar e exportar perfis com 40 propriedades editáveis. Lançamento manual de programa externo selecionado. Instalação local de OptiScaler com lista de arquivos, backup e restauração. |
+| Manutenção | Oito ações: cache DNS, reset de rede, DISM/SFC, componentes Windows, ponto de restauração, reinício do Explorer, solicitação Defender e Proteção do Sistema. Resultados por etapa; não há desfazer universal dessas ferramentas. |
+| Scaling | Armazenar, validar, editar e exportar perfis com 40 propriedades editáveis. Lançamento manual de programa externo selecionado. Instalação local de OptiScaler e editor de dez opções existentes do INI, com prévia, backup e restauração. |
 | Histórico | Journal antes das configurações, estados de falha parcial/interrupção, conflitos preservados e restauração em ordem. Backups de XML, GPU por jogo e bibliotecas possuem revisão própria em Jogos/Scaling. |
 
-As quantidades não devem ser somadas como recursos independentes: ações compostas, aliases, abas, campos e métodos internos se sobrepõem. A matriz detalhada está em [EVOLUCAO-0.3.0.md](docs/EVOLUCAO-0.3.0.md).
+As quantidades não devem ser somadas como recursos independentes: ações compostas, aliases, abas, campos e métodos internos se sobrepõem. A matriz atual está em [funções do menu](docs/FUNCOES-DO-MENU-0.4.0.md); a integração anterior está em [evolução 0.3.0](docs/EVOLUCAO-0.3.0.md).
 
 ## Uso e dependências
 
@@ -46,9 +52,9 @@ F5 analisa; Esc pede cancelamento entre etapas seguras. Operações que alteram 
 
 PresentMon e OptiScaler são dependências locais opcionais selecionadas pelo usuário. Não são baixados, incluídos ou executados na abertura. A instalação OptiScaler recusa anticheat identificado, exige jogo fechado e pacote PE x64 e não executa scripts do pacote. Drivers NVIDIA compatíveis precisam expor os ajustes DRS usados.
 
-O editor Scaling **não implementa o motor de geração de quadros/upscaling do GDZ**. Não contém LosslessScaling.dll/Lossless.dll, injeção ou hotkey global que prometa ativar seus perfis. O programa externo é aberto manualmente e precisa receber suas configurações pela própria interface. Exportar um perfil VL não prova compatibilidade com o formato de outro produto.
+O editor VL Scaling **não implementa o motor de geração de quadros/upscaling do GDZ**. Não contém LosslessScaling.dll/Lossless.dll, injeção ou hotkey global que prometa ativar seus perfis. O programa externo é aberto manualmente e precisa receber suas configurações pela própria interface. Exportar um perfil VL não prova compatibilidade com o formato de outro produto.
 
-Não há autenticação, assinatura, servidor de licenças, telemetria, download de pacotes remotos ou autoatualizador. Sensores de temperatura, estado comprovado XMP/EXPO/Resizable BAR, captura de FPS sem PresentMon e overlay sobre o jogo permanecem fora da implementação. Dados ausentes nunca viram zero ou promessa de ganho.
+Não há autenticação, assinatura, servidor de licenças, telemetria, download de pacotes remotos ou autoatualizador. Sensores de temperatura, estado comprovado XMP/EXPO/Resizable BAR, captura de FPS sem PresentMon permanecem fora da implementação. Dados ausentes nunca viram zero ou promessa de ganho.
 
 ## Compilar e verificar
 
@@ -67,7 +73,7 @@ O build executa testes com fronteiras falsas e arquivos de fixture. Nenhum teste
 & .\.tools\dotnet\dotnet.exe .\src\VLOptimizer.App\bin\Release\net10.0-windows\VLOptimizer.dll --smoke-test --screenshot-dir .\artifacts\private\ui-smoke
 ```
 
-Esse modo analisa e renderiza as 11 páginas, sete abas de medições e três de jogos, busca e comparação. Mutação e abertura de recursos externos são bloqueadas. As capturas completas contêm dados da máquina e ficam em `artifacts/private`.
+Esse modo analisa e renderiza os 16 destinos, quatro páginas auxiliares, 22 subabas das áreas, sete de medições e três de jogos, busca e comparação. Mutação e abertura de recursos externos são bloqueadas. As capturas completas contêm dados da máquina e ficam em `artifacts/private`.
 
 ## Estrutura e evidências
 
@@ -76,7 +82,7 @@ Esse modo analisa e renderiza as 11 páginas, sete abas de medições e três de
 - `tests/VLOptimizer.Tests`: cenários executáveis sem framework externo.
 - `scripts` e `installer`: build, publicação, empacotamento e instalação por usuário.
 - [Arquitetura](docs/ARQUITETURA.md), [validação](docs/VALIDACAO.md), [resultados](docs/RESULTADOS.md) e [distribuição](docs/DISTRIBUICAO.md).
-- [Comparação GDZ → VL e limites](docs/EVOLUCAO-0.3.0.md), [serviços detalhados](docs/VL-TOOLKIT-IMPLEMENTADO.md).
+- [Comparação GDZ → VL e limites atuais](docs/FUNCOES-DO-MENU-0.4.0.md), [integração 0.3.0](docs/EVOLUCAO-0.3.0.md), [serviços detalhados](docs/VL-TOOLKIT-IMPLEMENTADO.md).
 - [Especificação recuperada do GDZ](docs/GDZ-ESPECIFICACAO-PARA-IMPLEMENTACAO.md); relatórios descrevem a amostra analisada, não certificam a execução do VL.
 - `docs/historico/0.2.0`: relatórios da versão anterior, preservados como histórico.
 

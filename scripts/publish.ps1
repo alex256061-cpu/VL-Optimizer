@@ -1,4 +1,4 @@
-param([switch]$SkipInstaller)
+﻿param([switch]$SkipInstaller)
 $ErrorActionPreference = 'Stop'
 $workspace = Split-Path $PSScriptRoot -Parent
 $env:DOTNET_CLI_TELEMETRY_OPTOUT = '1'
@@ -10,8 +10,8 @@ New-Item -ItemType Directory -Force -Path $release | Out-Null
 if ($LASTEXITCODE -ne 0) { throw 'Publicação falhou' }
 $exe = Join-Path $publish 'VLOptimizer.exe'
 Copy-Item -LiteralPath (Join-Path $workspace 'installer\LEIA-ME.txt') -Destination (Join-Path $publish 'LEIA-ME.txt') -Force
-Copy-Item -LiteralPath $exe -Destination (Join-Path $release 'VL-Optimizer-0.3.0.exe') -Force
-$zip = Join-Path $release 'VL-Optimizer-0.3.0-portatil.zip'
+Copy-Item -LiteralPath $exe -Destination (Join-Path $release 'VL-Optimizer-0.4.0.exe') -Force
+$zip = Join-Path $release 'VL-Optimizer-0.4.0-portatil.zip'
 Compress-Archive -LiteralPath @($exe, (Join-Path $publish 'LEIA-ME.txt')) -DestinationPath $zip -Force
 if (-not $SkipInstaller) {
     $stage = Join-Path $workspace '.tools\pacote-instalação'
@@ -21,7 +21,7 @@ if (-not $SkipInstaller) {
     $hashes = [ordered]@{}
     foreach ($name in @('VLOptimizer.exe','Uninstall.ps1','LEIA-ME.txt')) { $hashes[$name] = (Get-FileHash -LiteralPath (Join-Path $stage $name) -Algorithm SHA256).Hash }
     $hashes | ConvertTo-Json | Set-Content -Encoding utf8 (Join-Path $stage 'payload.json')
-    $installer = Join-Path $release 'Instalar-VL-Optimizer-0.3.0.exe'
+    $installer = Join-Path $release 'Instalar-VL-Optimizer-0.4.0.exe'
     $sed = Join-Path $workspace '.tools\installer.sed'
     $configuration = @"
 [Version]
@@ -51,7 +51,7 @@ InstallPrompt=Instalar VL Optimizer no seu usuario? Nenhuma otimizacao sera apli
 DisplayLicense=
 FinishMessage=
 TargetName=$installer
-FriendlyName=VL Optimizer 0.3.0
+FriendlyName=VL Optimizer 0.4.0
 AppLaunched=powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File Install.ps1
 PostInstallCmd=<None>
 AdminQuietInstCmd=
