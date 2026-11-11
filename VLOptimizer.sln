@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VLOptimizer.Tests", "tests\VLOptimizer.Tests\VLOptimizer.Tests.csproj", "{719612A1-D456-4A53-867D-A936D646C4E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VLOptimizer.App", "src\VLOptimizer.App\VLOptimizer.App.csproj", "{070439C7-0F49-4A66-B00B-02D365EEB134}"
+EndProject
+Project("{66A26720-8FB5-11D2-AA7E-00C04F688DDE}") = "VLOptimizer.Engine.Stub", "src\VLOptimizer.Engine.Stub\VLOptimizer.Engine.Stub.csproj", "{AA3FF2C0-520C-4261-A212-1B964B141F9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,18 @@ Global
 		{070439C7-0F49-4A66-B00B-02D365EEB134}.Release|x64.Build.0 = Release|Any CPU
 		{070439C7-0F49-4A66-B00B-02D365EEB134}.Release|x86.ActiveCfg = Release|Any CPU
 		{070439C7-0F49-4A66-B00B-02D365EEB134}.Release|x86.Build.0 = Release|Any CPU
+		{AA3FF2C0-520C-4261-A212-1B964B141F9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA3FF2C0-520C-4261-A212-1B964B141F9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA3FF2C0-520C-4261-A212-1B964B141F9B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AA3FF2C0-520C-4261-A212-1B964B141F9B}.Debug|x64.Build.0 = Debug|Any CPU
+		{AA3FF2C0-520C-4261-A212-1B964B141F9B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AA3FF2C0-520C-4261-A212-1B964B141F9B}.Debug|x86.Build.0 = Debug|Any CPU
+		{AA3FF2C0-520C-4261-A212-1B964B141F9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3FF2C0-520C-4261-A212-1B964B141F9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA3FF2C0-520C-4261-A212-1B964B141F9B}.Release|x64.ActiveCfg = Release|Any CPU
+		{AA3FF2C0-520C-4261-A212-1B964B141F9B}.Release|x64.Build.0 = Release|Any CPU
+		{AA3FF2C0-520C-4261-A212-1B964B141F9B}.Release|x86.ActiveCfg = Release|Any CPU
+		{AA3FF2C0-520C-4261-A212-1B964B141F9B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,5 +81,6 @@ Global
 		{64B873AB-C004-4699-A553-09179B47602D} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{719612A1-D456-4A53-867D-A936D646C4E1} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{070439C7-0F49-4A66-B00B-02D365EEB134} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{AA3FF2C0-520C-4261-A212-1B964B141F9B} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 EndGlobal

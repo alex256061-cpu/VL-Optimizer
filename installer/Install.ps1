@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Windows.Forms
 function Assert-PlainPath([string]$Path) {
     $cursor = [IO.Path]::GetFullPath($Path)
@@ -18,6 +18,9 @@ $keyCreated = $false
 $target = $null
 $shortcutPath = $null
 $menuCreated = $false
+# Preenchido depois de validar o manifesto; o rollback usa esta lista e ela pode estar vazia se a
+# falha acontecer antes da validação.
+$script:installedFiles = @()
 try {
     $localRoot = [Environment]::GetFolderPath('LocalApplicationData')
     $programs = [IO.Path]::GetFullPath((Join-Path $localRoot 'Programs'))
@@ -33,6 +36,12 @@ try {
     if (Test-Path -LiteralPath $shortcutPath) { throw 'Já existe um atalho do VL Optimizer. Remova a instalação anterior primeiro.' }
     $files = @('VLOptimizer.exe','Uninstall.ps1','LEIA-ME.txt')
     $manifest = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'payload.json') -Raw | ConvertFrom-Json
+    # O motor acompanha o pacote quando presente; o manifesto decide, então um pacote sem motor
+    # continua válido e o app apenas reporta que o escalonamento não está disponível.
+    if ($manifest.PSObject.Properties['Lossless.dll']) { $files += 'Lossless.dll' }
+    if ($manifest.PSObject.Properties['PresentMon.exe']) { $files += 'PresentMon.exe' }
+    # Referência para o rollback do catch, que pode correr antes desta linha.
+    $script:installedFiles = $files
     foreach ($name in $files) {
         $source = Join-Path $PSScriptRoot $name
         if (-not (Test-Path -LiteralPath $source -PathType Leaf)) { throw "Arquivo ausente no pacote: $name" }
@@ -74,7 +83,7 @@ try {
         $rollback = if ($installed) { $target } else { $stage }
         if ($rollback -and (Test-Path -LiteralPath $rollback)) {
             Assert-PlainPath $rollback
-            foreach ($name in @('VLOptimizer.exe','Uninstall.ps1','LEIA-ME.txt')) {
+            foreach ($name in $script:installedFiles) {
                 $file = Join-Path $rollback $name
                 Assert-PlainPath $file
                 if (Test-Path -LiteralPath $file) { Remove-Item -LiteralPath $file -Force }

@@ -193,6 +193,9 @@ HardwareInventoryTests.Register(Test);
 GameGraphicsTests.Register(Test, Path.Combine(root, "graphics"));
 ProductIntegrationTests.Register(Test, Path.Combine(root, "integration"));
 ProductAreasTests.Register(Test, Path.Combine(root, "areas"));
+ScalingEngineTests.Register(Test, Path.Combine(root, "scaling-engine"));
+ScalingAbiTests.Register(Test, Path.Combine(root, "scaling-abi"));
+EnginePayloadTests.Register(Test, Path.Combine(root, "engine-payload"));
 
 var failed = 0; var results = new List<object>();
 foreach (var (name, run) in tests) {

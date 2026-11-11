@@ -126,7 +126,8 @@ public sealed class ToolkitFpsService
         {
             var start = new ProcessStartInfo(presentMonExe) { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true, WorkingDirectory = Path.GetDirectoryName(presentMonExe)! };
             foreach (var argument in new[] { "--process_id", processId.ToString(CultureInfo.InvariantCulture), "--output_file", csvPath,
-                "--timed", seconds.ToString(CultureInfo.InvariantCulture), "--terminate_after_timed", "--no_console_stats", "--session_name", session, "--no_track_input", "--no_track_gpu" }) start.ArgumentList.Add(argument);
+                "--timed", seconds.ToString(CultureInfo.InvariantCulture), "--terminate_after_timed", "--no_console_stats", "--session_name", session,
+                "--no_track_input", "--no_track_gpu", "--output_stdout" }) start.ArgumentList.Add(argument);
             using var process = new Process { StartInfo = start };
             if (!process.Start()) throw new IOException("Não foi possível iniciar PresentMon.");
             var stderr = ReadBoundedAsync(process.StandardError, 64 * 1024); var stdout = ReadBoundedAsync(process.StandardOutput, 64 * 1024);
@@ -158,8 +159,16 @@ public sealed class ToolkitFpsService
                 await monitorCancel.CancelAsync().ConfigureAwait(false);
                 await monitor.ConfigureAwait(false);
             }
-            string error = await stderr.ConfigureAwait(false); await stdout.ConfigureAwait(false);
+            string error = await stderr.ConfigureAwait(false); var output = await stdout.ConfigureAwait(false);
             if (process.ExitCode != 0) throw new IOException($"PresentMon encerrou com código {process.ExitCode}: {error}");
+            // PresentMon 2.5.1 registra "Started/Stopped recording" e retorna 0 sem criar o arquivo de
+            // --output_file quando a máquina já tem muitas sessões ETW ativas. --output_stdout continua
+            // entregando as linhas, então a mesma captura é lida do stdout em vez de falhar.
+            if (!File.Exists(csvPath) && LooksLikeCsv(output))
+            {
+                csvPath = Path.Combine(Path.GetTempPath(), session + ".stdout.csv");
+                await File.WriteAllTextAsync(csvPath, output, token).ConfigureAwait(false);
+            }
             if (!File.Exists(csvPath)) throw new IOException("PresentMon não produziu CSV; confira a versão, permissões e atividade gráfica do processo.");
             var report = await ImportCsvAsync(csvPath, token).ConfigureAwait(false);
             if (report.Processes.Count == 0) throw new InvalidDataException("Não houve frames válidos na captura. Nenhum FPS foi estimado.");
@@ -175,8 +184,20 @@ public sealed class ToolkitFpsService
             _capture.Release();
         }
     }
-    private static async Task StopOwnedSessionAsync(string executable, string session)
+    /// <summary>True when the captured stdout contains a PresentMon CSV header with the columns the
+    /// importer requires. Guards against treating an error message as data.</summary>
+    private static bool LooksLikeCsv(string output)
     {
+        if (string.IsNullOrWhiteSpace(output)) return false;
+        int newline = output.IndexOf('\n');
+        if (newline <= 0) return false;
+        var header = output[..newline];
+        return header.Contains("Application", StringComparison.OrdinalIgnoreCase)
+            && header.Contains("ProcessID", StringComparison.OrdinalIgnoreCase)
+            && (header.Contains("MsBetweenPresents", StringComparison.OrdinalIgnoreCase) || header.Contains("CPUFrameTime", StringComparison.OrdinalIgnoreCase));
+    }
+
+    private static async Task StopOwnedSessionAsync(string executable, string session)    {
         try
         {
             var info = new ProcessStartInfo(executable) { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true, RedirectStandardError = true };

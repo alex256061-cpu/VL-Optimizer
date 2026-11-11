@@ -1,9 +1,9 @@
-Ôªø$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Windows.Forms
 function Assert-PlainPath([string]$Path) {
     $cursor = [IO.Path]::GetFullPath($Path)
     while ($cursor) {
-        if ((Test-Path -LiteralPath $cursor) -and ((Get-Item -LiteralPath $cursor -Force).Attributes -band [IO.FileAttributes]::ReparsePoint)) { throw 'A instala√ß√£o cont√©m um link. Desinstala√ß√£o autom√°tica interrompida.' }
+        if ((Test-Path -LiteralPath $cursor) -and ((Get-Item -LiteralPath $cursor -Force).Attributes -band [IO.FileAttributes]::ReparsePoint)) { throw 'A instalaÁ„o contÈm um link. DesinstalaÁ„o autom·tica interrompida.' }
         $parent = Split-Path $cursor -Parent
         if ($parent -eq $cursor) { break }
         $cursor = $parent
@@ -15,12 +15,12 @@ try {
     if ($target -ne $expected) { throw 'Execute este desinstalador apenas na pasta instalada do VL Optimizer.' }
     $cursor = $target
     while ($cursor) {
-        if ((Test-Path -LiteralPath $cursor) -and ((Get-Item -LiteralPath $cursor -Force).Attributes -band [IO.FileAttributes]::ReparsePoint)) { throw 'Pasta de instala√ß√£o cont√©m um link. Desinstala√ß√£o autom√°tica interrompida.' }
+        if ((Test-Path -LiteralPath $cursor) -and ((Get-Item -LiteralPath $cursor -Force).Attributes -band [IO.FileAttributes]::ReparsePoint)) { throw 'Pasta de instalaÁ„o contÈm um link. DesinstalaÁ„o autom·tica interrompida.' }
         $parent = Split-Path $cursor -Parent
         if ($parent -eq $cursor) { break }
         $cursor = $parent
     }
-    $answer = [Windows.Forms.MessageBox]::Show('Remover o VL Optimizer? O hist√≥rico ser√° preservado. Desinstalar n√£o desfaz ajustes; use o hist√≥rico do aplicativo antes de continuar.','Desinstalar VL Optimizer',[Windows.Forms.MessageBoxButtons]::YesNo,[Windows.Forms.MessageBoxIcon]::Question)
+    $answer = [Windows.Forms.MessageBox]::Show('Remover o VL Optimizer? O histÛrico ser· preservado. Desinstalar n„o desfaz ajustes; use o histÛrico do aplicativo antes de continuar.','Desinstalar VL Optimizer',[Windows.Forms.MessageBoxButtons]::YesNo,[Windows.Forms.MessageBoxIcon]::Question)
     if ($answer -ne [Windows.Forms.DialogResult]::Yes) { exit 0 }
     foreach ($running in (Get-Process VLOptimizer -ErrorAction SilentlyContinue)) { if ($running.Path -eq (Join-Path $target 'VLOptimizer.exe')) { throw 'Feche o VL Optimizer antes de desinstalar.' } }
     $menu = Join-Path ([Environment]::GetFolderPath('Programs')) 'VL Optimizer'
@@ -30,20 +30,20 @@ try {
     }
     if (Test-Path -LiteralPath $shortcut) { Remove-Item -LiteralPath $shortcut -Force }
     if ((Test-Path -LiteralPath $menu) -and -not (Get-ChildItem -LiteralPath $menu -Force)) { Remove-Item -LiteralPath $menu }
-    foreach ($name in @('VLOptimizer.exe','LEIA-ME.txt')) {
+    foreach ($name in @('VLOptimizer.exe','LEIA-ME.txt','Lossless.dll','PresentMon.exe')) {
         $file = Join-Path $target $name
         if (Test-Path -LiteralPath $file) { Remove-Item -LiteralPath $file -Force }
     }
     $uninstallKey = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\VLOptimizer'
     if (Test-Path -LiteralPath $uninstallKey) {
         Remove-Item -LiteralPath $uninstallKey -ErrorAction Stop
-        if (Test-Path -LiteralPath $uninstallKey) { throw 'N√£o foi poss√≠vel remover o registro de instala√ß√£o. O desinstalador foi preservado para nova tentativa.' }
+        if (Test-Path -LiteralPath $uninstallKey) { throw 'N„o foi possÌvel remover o registro de instalaÁ„o. O desinstalador foi preservado para nova tentativa.' }
     }
-    # O processo do PowerShell j√° carregou o script; remover somente este arquivo conhecido.
+    # O processo do PowerShell j· carregou o script; remover somente este arquivo conhecido.
     Remove-Item -LiteralPath (Join-Path $target 'Uninstall.ps1') -Force
     if (-not (Get-ChildItem -LiteralPath $target -Force)) { Remove-Item -LiteralPath $target }
-    [Windows.Forms.MessageBox]::Show('Aplicativo removido. O hist√≥rico local foi preservado.','VL Optimizer') | Out-Null
+    [Windows.Forms.MessageBox]::Show('Aplicativo removido. O histÛrico local foi preservado.','VL Optimizer') | Out-Null
 } catch {
-    [Windows.Forms.MessageBox]::Show($_.Exception.Message,'Desinstala√ß√£o n√£o conclu√≠da',[Windows.Forms.MessageBoxButtons]::OK,[Windows.Forms.MessageBoxIcon]::Error) | Out-Null
+    [Windows.Forms.MessageBox]::Show($_.Exception.Message,'DesinstalaÁ„o n„o concluÌda',[Windows.Forms.MessageBoxButtons]::OK,[Windows.Forms.MessageBoxIcon]::Error) | Out-Null
     exit 1
 }

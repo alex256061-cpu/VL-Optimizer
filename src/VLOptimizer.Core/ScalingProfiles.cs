@@ -48,14 +48,16 @@ public sealed record ScalingProfile
     public int FpsLimit { get; init; }
 }
 
-public sealed record ScalingCapabilities(bool IsEngineAvailable, string? EnginePath, string Message, bool CanApplyProfiles = false);
+public sealed record ScalingCapabilities(bool IsEngineAvailable, string? EnginePath, string Message, bool CanReportEngineInfo = false);
 
-/// <summary>Own profile storage and explicit launcher. It never loads the GDZ graphics library.
-/// Profiles describe desired settings; the selected external app remains responsible for rendering.</summary>
+/// <summary>Own profile storage and explicit launcher. Profiles describe desired settings; the selected
+/// external app remains responsible for rendering. When the engine DLL is present the service can also
+/// report what the library sees (adapters, displays, DWM refresh rate) through its read-only exports.</summary>
 public sealed class ScalingProfileService
 {
     private readonly string directory;
     private readonly SemaphoreSlim gate = new(1, 1);
+    private readonly ScalingEngineBridge engine = new();
     private static readonly JsonSerializerOptions Options = new() { WriteIndented = true };
     public static readonly IReadOnlyList<string> Algorithms = new[] { "Off", "LS1", "FSR", "NIS", "SGSR", "BicubicCAS", "Anime4K", "XBR", "SharpBilinear", "Integer", "Nearest" };
 
@@ -93,17 +95,20 @@ public sealed class ScalingProfileService
 
     public async Task<ScalingCapabilities> GetCapabilitiesAsync()
     {
+        string? enginePath;
         await gate.WaitAsync().ConfigureAwait(false);
-        try
-        {
-            var path = ReadStore().EnginePath;
-            bool exists = !string.IsNullOrWhiteSpace(path) && File.Exists(path);
-            return new(exists, path, exists
-                ? "Programa externo selecionado. Abrir o programa não aplica estes perfis automaticamente; ajuste as opções nele. O VL não inclui um motor LSFG/FSR próprio."
-                : "Motor gráfico não incluído. Você pode guardar e exportar perfis e selecionar um programa de scaling que já possua; as opções gráficas não são aplicadas pelo VL.");
-        }
+        try { enginePath = ReadStore().EnginePath; }
         finally { gate.Release(); }
+
+        bool exists = !string.IsNullOrWhiteSpace(enginePath) && File.Exists(enginePath);
+        var info = await engine.ReadInfoAsync().ConfigureAwait(false);
+        if (info.Available) return new(true, info.LibraryPath, info.Message, CanReportEngineInfo: true);
+        return new(exists, info.LibraryPath ?? enginePath, info.Message + (exists ? " Programa externo selecionado como fallback." : " Nenhum programa externo selecionado."));
     }
+
+    /// <summary>Reads adapters, displays and the DWM refresh rate from the engine's information
+    /// exports. This never applies or resets a profile.</summary>
+    public async Task<ScalingEngineInfo> ReadEngineInfoAsync(CancellationToken token) => await engine.ReadInfoAsync(token).ConfigureAwait(false);
 
     public async Task SetEnginePathAsync(string path, CancellationToken token)
     {

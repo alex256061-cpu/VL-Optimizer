@@ -1,0 +1,30 @@
+<Project>
+  <!-- VL scaling compositor: captures a target window and scales it with its own D3D11 pipeline.
+       Plain MSBuild project, same toolchain rule as the other native pieces. -->
+  <PropertyGroup>
+    <VLOptimizerCompositorDir>$(MSBuildThisFileDirectory)</VLOptimizerCompositorDir>
+    <VLOptimizerCompositorOut>$(MSBuildThisFileDirectory)..\..\artifacts\private\engine-compositor</VLOptimizerCompositorOut>
+    <VLOptimizerVcVars Condition="'$(VLOptimizerVcVars)' == '' and Exists('C:\Program\VC\Auxiliary\Build\vcvars64.bat')">C:\Program\VC\Auxiliary\Build\vcvars64.bat</VLOptimizerVcVars>
+    <VLOptimizerCompositorEnabled Condition="'$(VLOptimizerSkipNativeStub)' == 'true'">false</VLOptimizerCompositorEnabled>
+    <VLOptimizerCompositorEnabled Condition="'$(VLOptimizerCompositorEnabled)' == '' and Exists('$(VLOptimizerVcVars)')">true</VLOptimizerCompositorEnabled>
+    <VLOptimizerCompositorEnabled Condition="'$(VLOptimizerCompositorEnabled)' == ''">false</VLOptimizerCompositorEnabled>
+  </PropertyGroup>
+
+  <Target Name="Build" DependsOnTargets="Compositor" />
+  <Target Name="Rebuild" DependsOnTargets="Clean;Compositor" />
+  <Target Name="Clean">
+    <Delete Files="$(VLOptimizerCompositorOut)\VLCompositor.exe" />
+  </Target>
+
+  <Target Name="Compositor">
+    <Message Importance="high" Text="VL compositor skipped: no C++ toolchain found." Condition="'$(VLOptimizerCompositorEnabled)' != 'true'" />
+    <CallTarget Targets="CompileCompositor" Condition="'$(VLOptimizerCompositorEnabled)' == 'true'" />
+  </Target>
+
+  <Target Name="CompileCompositor">
+    <MakeDir Directories="$(VLOptimizerCompositorOut)" />
+    <Message Importance="high" Text="Building VL compositor -&gt; $(VLOptimizerCompositorOut)\VLCompositor.exe" />
+    <Exec Command="&quot;$(VLOptimizerCompositorDir)build-compositor.bat&quot; &quot;$(VLOptimizerCompositorOut)&quot;" WorkingDirectory="$(VLOptimizerCompositorDir)" StandardOutputImportance="high" StandardErrorImportance="high" />
+    <Error Condition="!Exists('$(VLOptimizerCompositorOut)\VLCompositor.exe')" Text="Compositor build produced no EXE." />
+  </Target>
+</Project>

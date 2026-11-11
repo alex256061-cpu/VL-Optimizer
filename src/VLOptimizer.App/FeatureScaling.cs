@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.IO;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -16,25 +17,128 @@ public sealed partial class MainWindow
     private ScalingProfileService Scaling => _scalingService ??= new(_backend.DataDirectory);
     private IReadOnlyList<ScalingProfile> _scalingProfiles = [];
     private ScalingCapabilities? _scalingCapabilities;
+    private ScalingEngineHost? _engineHost;
+    private EnginePayloadStatus? _enginePayload;
+    private ToolkitProcessIdentity? _engineTarget;
+    private string _engineStatus = "Motor desligado.";
 
     private UIElement BuildScalingPage()
     {
         var root = Stack();
-        root.Children.Add(InlineNote("Perfis locais, motor gráfico separado.", _scalingCapabilities?.Message ?? "O VL guarda e exporta opções de scaling. Um programa externo precisa ser selecionado para renderizar; os perfis não são aplicados automaticamente ao programa externo.", "\uE7F4"));
-        var controls = new WrapPanel(); controls.Children.Add(FeatureButton("Novo perfil", () => _ = EditScalingProfileAsync(new ScalingProfile()), true)); controls.Children.Add(FeatureButton("Atualizar perfis", () => _ = RefreshScalingAsync())); controls.Children.Add(FeatureButton("Selecionar programa externo…", () => _ = SelectScalingEngineAsync()));
-        if (_scalingCapabilities?.IsEngineAvailable == true) controls.Children.Add(FeatureButton("Abrir programa externo", () => _ = LaunchScalingEngineAsync())); root.Children.Add(controls);
-        if (_scalingCapabilities?.EnginePath != null) root.Children.Add(Text("Programa selecionado: " + _scalingCapabilities.EnginePath, 12, Muted, margin: new Thickness(0, 0, 0, 16)));
-        if (_scalingProfiles.Count == 0) root.Children.Add(Empty("\uE7F4", "Organize as opções de cada jogo.", "Crie um perfil com algoritmo, escala, captura, cursor e limites. Salvar apenas registra suas preferências locais; não ativa interpolação nem muda o jogo."));
+        root.Children.Add(InlineNote("Motor embutido.", _scalingCapabilities?.Message ?? "O VL carrega o motor que acompanha esta instalação. Nenhum programa externo é necessário.", "\uE7F4"));
+
+        // Motor embutido: estado, alvo e acoes numa linha so, porque e isto que o usuario liga.
+        var enginePanel = Stack(); enginePanel.Children.Add(Text("Motor embutido", 17, weight: FontWeights.Bold));
+        enginePanel.Children.Add(Text(_engineStatus, 13, AccentSoft, margin: new Thickness(0, 6, 0, 12)));
+        if (_engineTarget is { } target) enginePanel.Children.Add(Text("Alvo: " + Path.GetFileName(target.ExecutablePath) + " (PID " + target.Id + ")", 12, Muted, margin: new Thickness(0, 0, 0, 12)));
+        var engineActions = new WrapPanel();
+        engineActions.Children.Add(FeatureButton(_engineHost?.IsRunning == true ? "Parar motor" : "Iniciar motor", () => _ = ToggleEngineAsync(), true));
+        engineActions.Children.Add(FeatureButton("Escolher jogo…", () => _ = SelectEngineTargetAsync()));
+        if (_engineHost?.IsRunning == true && _scalingProfiles.Count > 0) engineActions.Children.Add(FeatureButton("Aplicar perfil ao jogo", () => _ = ApplyProfileToRunningEngineAsync()));
+        enginePanel.Children.Add(engineActions);
+        root.Children.Add(Card(enginePanel));
+
+        var controls = new WrapPanel();
+        controls.Children.Add(FeatureButton("Novo perfil", () => _ = EditScalingProfileAsync(new ScalingProfile())));
+        controls.Children.Add(FeatureButton("Atualizar perfis", () => _ = RefreshScalingAsync()));
+        root.Children.Add(controls);
+        if (_scalingProfiles.Count == 0) root.Children.Add(Empty("\uE7F4", "Organize as opções de cada jogo.", "Crie um perfil com algoritmo, escala, geração e nitidez. Quando o motor estiver ligado num jogo, o perfil é enviado a ele."));
         foreach (var profile in _scalingProfiles)
         {
             var content = Stack(); content.Children.Add(Text(profile.Name, 19, weight: FontWeights.Bold));
             content.Children.Add(Text(profile.ExecutablePath.Length == 0 ? "Jogo ainda não vinculado" : profile.ExecutablePath, 12, Muted, margin: new Thickness(0, 7, 0, 12)));
-            content.Children.Add(Text($"Escala {profile.ScalingAlgorithm} · fator {profile.ScaleFactor:0.##} · captura {profile.CaptureApi} · geração {profile.FrameGeneration}", 13));
-            content.Children.Add(Text("Preferências armazenadas · aplicação no motor externo é manual", 11, AccentSoft, margin: new Thickness(0, 8, 0, 14)));
-            var actions = new WrapPanel(); actions.Children.Add(FeatureButton("Editar opções", () => _ = EditScalingProfileAsync(profile))); actions.Children.Add(FeatureButton("Exportar perfil…", () => _ = ExportScalingProfileAsync(profile))); actions.Children.Add(FeatureButton("Excluir perfil…", () => _ = DeleteScalingProfileAsync(profile))); content.Children.Add(actions); root.Children.Add(Card(content));
+            content.Children.Add(Text($"Escala {profile.ScalingAlgorithm} · fator {profile.ScaleFactor:0.##} · geração {profile.FrameGeneration} · captura {profile.CaptureApi}", 13));
+            var actions = new WrapPanel();
+            if (_engineHost?.IsRunning == true) actions.Children.Add(FeatureButton("Aplicar agora", () => _ = ApplyProfileToRunningEngineAsync(profile), true));
+            actions.Children.Add(FeatureButton("Editar opções", () => _ = EditScalingProfileAsync(profile))); actions.Children.Add(FeatureButton("Exportar perfil…", () => _ = ExportScalingProfileAsync(profile))); actions.Children.Add(FeatureButton("Excluir perfil…", () => _ = DeleteScalingProfileAsync(profile))); content.Children.Add(actions); root.Children.Add(Card(content));
         }
         root.Children.Add(FeatureButton("Instalar ou configurar OptiScaler", () => Navigate("graphics")));
         return root;
+    }
+
+    private async Task ToggleEngineAsync()
+    {
+        if (_busy || _smoke) return;
+        if (_engineHost?.IsRunning == true)
+        {
+            await RunFeatureAsync("Parando motor…", _ =>
+            {
+                _engineHost.Stop();
+                _engineStatus = "Motor parado.";
+                Navigate("scaling", false);
+                return Task.CompletedTask;
+            });
+            return;
+        }
+        var payload = _enginePayload ??= new EnginePayloadResolver(_backend.DataDirectory).Probe();
+        if (!payload.Available) { Notice(payload.Message); return; }
+        if (_engineTarget is not { } target) { Notice("Escolha o jogo primeiro."); return; }
+
+        await RunFeatureAsync("Iniciando motor…", _ =>
+        {
+            _engineHost ??= new ScalingEngineHost();
+            var start = _engineHost.Start(payload.Path!);
+            _engineStatus = start.State == ScalingEngineState.Running
+                ? "Motor ativo: captura " + Path.GetFileName(target.ExecutablePath) + " e apresenta escalado."
+                : "Falha ao iniciar: " + start.Message;
+            if (start.State == ScalingEngineState.Running) BringGameToFront(target);
+            Navigate("scaling", false);
+            return Task.CompletedTask;
+        });
+    }
+
+    // O motor captura a janela em primeiro plano; trazer o jogo para frente faz a captura comecar.
+    private static void BringGameToFront(ToolkitProcessIdentity target)
+    {
+        try
+        {
+            using var process = System.Diagnostics.Process.GetProcessById(target.Id);
+            process.Refresh();
+            if (process.MainWindowHandle != IntPtr.Zero) SetForegroundWindow(process.MainWindowHandle);
+        }
+        catch (Exception ex) when (ex is ArgumentException or InvalidOperationException) { }
+    }
+
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+    private static extern bool SetForegroundWindow(IntPtr hwnd);
+
+    private async Task SelectEngineTargetAsync()
+    {
+        if (_busy || _smoke) return;
+        var window = Dialog("Escolher o jogo", out var panel, out var footer);
+        panel.Children.Add(Text("Qual jogo devo escalar?", 25, weight: FontWeights.Bold));
+        panel.Children.Add(Text("O motor captura a janela escolhida. O jogo precisa estar em modo janela ou sem bordas: tela cheia exclusiva bloqueia a captura.", 13, AccentSoft, margin: new Thickness(0, 12, 0, 18)));
+        // Só janelas visíveis com título, porque o motor captura a janela em primeiro plano: um
+        // processo sem janela não teria o que escalar.
+        var processes = System.Diagnostics.Process.GetProcesses()
+            .Where(x => x.Id != Environment.ProcessId && x.MainWindowHandle != IntPtr.Zero && !string.IsNullOrWhiteSpace(x.MainWindowTitle))
+            .OrderBy(x => x.ProcessName, StringComparer.CurrentCultureIgnoreCase)
+            .Select(x => new ToolkitProcessIdentity(x.Id, 0, x.ProcessName + ".exe"))
+            .ToArray();
+        if (processes.Length == 0) { Notice("Nenhuma janela de jogo encontrada. Abra o jogo primeiro.", true); return; }
+        var picker = new ComboBox { ItemsSource = processes.Select(x => Path.GetFileName(x.ExecutablePath) + " · PID " + x.Id).ToArray(), MinHeight = 44 };
+        AutomationProperties.SetName(picker, "Jogo alvo");
+        panel.Children.Add(picker);
+        var cancel = Button("Voltar", () => window.DialogResult = false); cancel.IsCancel = true; cancel.Margin = new Thickness(0, 0, 10, 0);
+        var confirm = Button("Escolher", () => { if (picker.SelectedIndex >= 0) { _engineTarget = processes[picker.SelectedIndex]; window.DialogResult = true; } }, true);
+        footer.Children.Add(cancel); footer.Children.Add(confirm);
+        if (window.ShowDialog() == true) Navigate("scaling", false);
+    }
+
+    private async Task ApplyProfileToRunningEngineAsync(ScalingProfile? only = null)
+    {
+        if (_busy || _smoke) return;
+        var profile = only ?? _scalingProfiles.FirstOrDefault();
+        if (profile is null) { Notice("Nenhum perfil para aplicar."); return; }
+        if (_engineHost?.IsRunning != true) { Notice("Inicie o motor primeiro."); return; }
+        await RunFeatureAsync("Aplicando " + profile.Name + " ao motor…", _ =>
+        {
+            var (ok, message) = _engineHost.Apply(profile);
+            _engineStatus = ok ? message : "Falha: " + message;
+            Navigate("scaling", false);
+            return Task.CompletedTask;
+        });
     }
 
     private async Task RefreshScalingAsync() => await RunFeatureAsync("Lendo perfis e disponibilidade de scaling…", async token => { _scalingProfiles = await Scaling.GetProfilesAsync(token); _scalingCapabilities = await Scaling.GetCapabilitiesAsync(); await LoadOptiScalerBackupsAsync(token); });
@@ -49,6 +153,22 @@ public sealed partial class MainWindow
     {
         if (_busy || _smoke || !ConfirmFeature("Abrir programa externo?", (_scalingCapabilities?.EnginePath ?? "") + "\n\nO programa selecionado será iniciado. As opções dos perfis VL precisam ser ajustadas manualmente nele.", "Abrir programa")) return;
         await RunFeatureAsync("Abrindo programa de scaling…", async token => await Scaling.LaunchEngineAsync(token));
+    }
+
+    private async Task ReadScalingEngineInfoAsync()
+    {
+
+        if (_busy || _smoke) return;
+        await RunFeatureAsync("Consultando o que o motor enxerga…", async token =>
+        {
+            var info = await Scaling.ReadEngineInfoAsync(token);
+            _scalingCapabilities = await Scaling.GetCapabilitiesAsync();
+            if (!info.Available) throw new InvalidOperationException(info.Message);
+            var lines = new List<string> { "Adaptadores: " + (info.Adapters.Count == 0 ? "nenhum reportado" : string.Join(" · ", info.Adapters)) };
+            lines.Add("Monitores: " + (info.Displays.Count == 0 ? "nenhum reportado" : string.Join(" · ", info.Displays)));
+            lines.Add("Taxa DWM: " + (info.DwmRefreshRate > 0 ? info.DwmRefreshRate + " Hz" : "não reportada"));
+            Notice(string.Join("\n", lines));
+        });
     }
 
     private static readonly Dictionary<string, string> ScalingLabels = new()

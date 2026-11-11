@@ -96,7 +96,7 @@ public static class ProductIntegrationTests
             string path = Case(); var service = new ScalingProfileService(path); var profile = new ScalingProfile { Name = "Jogo fixture", ScalingAlgorithm = "FSR", ScaleFactor = 1.8, HdrSupport = true, CropLeft = 12 };
             await service.SaveProfileAsync(profile, default);
             var reopened = new ScalingProfileService(path); var loaded = (await reopened.GetProfilesAsync()).Single();
-            Check(loaded == profile && !(await reopened.GetCapabilitiesAsync()).CanApplyProfiles, "Perfil alterado ou motor inventado.");
+            Check(loaded == profile && !(await reopened.GetCapabilitiesAsync()).CanReportEngineInfo, "Perfil alterado ou motor inventado.");
             string export = Path.Combine(path, "export.json"); await reopened.ExportProfileAsync(profile.Id, export, default);
             Check(JsonDocument.Parse(File.ReadAllText(export)).RootElement.GetProperty("Format").GetString() == "VL-Scaling-Profile", "Exportação sem formato identificado.");
             await reopened.DeleteProfileAsync(profile.Id, default); Check((await service.GetProfilesAsync()).Count == 0, "Exclusão não persistida.");

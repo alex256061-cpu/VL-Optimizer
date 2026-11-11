@@ -82,6 +82,9 @@ public sealed partial class MainWindow : Window
         Closing += (_, e) => { if (_maintenanceRunning) { e.Cancel = true; Notice("Uma ferramenta de manutenção do Windows está em andamento. O cancelamento será atendido entre etapas; aguarde a conclusão da ferramenta antes de fechar."); } };
         Closing += OnClosingSessionMonitor;
         Closed += (_, _) => StopSceneMotion();
+        // Encerra o medidor ao vivo: sem isto o PresentMon fica rodando e deixa uma sessão ETW órfã,
+        // que bloqueia as próximas medições até reiniciar o PC. O atalho global é liberado junto.
+        Closed += (_, _) => { StopLiveFpsPolling(); ReleaseFpsHotkey(); _ = StopLiveFpsAsync(); };
         Closed += (_, _) => { _fpsOverlayWindow?.Close(); _fpsOverlayWindow = null; };
         IsVisibleChanged += (_, _) => UpdateSceneMotion();
         SystemParameters.StaticPropertyChanged += OnMotionSystemPreferenceChanged;

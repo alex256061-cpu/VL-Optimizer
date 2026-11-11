@@ -1,8 +1,8 @@
 {
-  "executedAt": "2026-11-08T14:52:54.0603048-03:00",
-  "passed": 218,
+  "executedAt": "2026-11-11T17:35:17.0474222-03:00",
+  "passed": 240,
   "failed": 0,
-  "total": 218,
+  "total": 240,
   "isolatedFakesOnly": true,
   "results": [
     {
@@ -1092,6 +1092,116 @@
     },
     {
       "name": "Opti INI: jogo com anticheat identificado e cancelamento ficam bloqueados",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Motor: aus\u00EAncia da biblioteca \u00E9 reportada, n\u00E3o lan\u00E7a",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Motor: caminho s\u00F3 \u00E9 devolvido se o arquivo existir",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Motor: bridge n\u00E3o exp\u00F5e chamada nativa direta",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Motor: nenhuma P/Invoke est\u00E1tica da biblioteca do motor",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Motor: capacidades sem motor n\u00E3o prometem informa\u00E7\u00E3o",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Motor: perfil continua armazen\u00E1vel e validado sem o motor",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ABI: 32 par\u00E2metros, 4 em registrador \u002B 28 na stack",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ABI: string vazia n\u00E3o arrasta modo Custom",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ABI: valores fora de faixa s\u00E3o presos",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ABI: LS1 performance vira m\u00E9todo e subtipo",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ABI: algoritmo desconhecido cai em Off",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ABI: bundle n\u00E3o carregado n\u00E3o chama o nativo",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "ABI: bin\u00E1rio declarado bate com o disassembly (se presente)",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Motor: sem arquivo o payload n\u00E3o est\u00E1 dispon\u00EDvel",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Motor: importar arquivo com nome errado \u00E9 recusado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Motor: importar arquivo com hash errado \u00E9 recusado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Motor: importar arquivo inexistente falha sem criar diret\u00F3rio",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Motor: hash de refer\u00EAncia tem o tamanho esperado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Motor: arquivo com hash divergente n\u00E3o \u00E9 carregado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o: iniciar sem biblioteca falha com motivo, n\u00E3o lan\u00E7a",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o: aplicar perfil sem motor ativo \u00E9 recusado",
+      "passed": true,
+      "error": null
+    },
+    {
+      "name": "Sess\u00E3o: parar duas vezes n\u00E3o lan\u00E7a",
       "passed": true,
       "error": null
     }
